@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp.Club.ClubSignUpFieldActivity">
+
+    <ImageView
+        android:id="@+id/crewpass_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/crewpass"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="306dp"/>
+
+    <TextView
+        android:id="@+id/text_congratulate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가입을 환영합니다!"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/crewpass_logo"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좋은 동아리를 찾고\n 편하게 지원해보세요!"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_congratulate"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"
+        android:textColor="@color/main_blue"/>
+    <!--다음-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_done"
+        android:layout_width="284dp"
+        android:layout_height="39dp"
+        android:text="로그인으로 가기"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:background="@drawable/round_square_main_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="60dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
