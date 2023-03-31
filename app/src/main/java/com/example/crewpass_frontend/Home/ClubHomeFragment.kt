@@ -1,4 +1,4 @@
-package com.example.crewpass_frontend
+package com.example.crewpass_frontend.Home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,8 @@ class ClubHomeFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentClubHomeBinding.inflate(inflater, container, false)
+        binding = FragmentClubHomeBinding.inflate(inflater,container,false)
+
 
         return binding.root
     }

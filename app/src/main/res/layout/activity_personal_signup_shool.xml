@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp.Club.ClubSignUpEmailActivity">
+    tools:context=".SignUp.Personal.PersonalSignUpSchoolActivity">
+
 
     <ImageButton
         android:layout_width="40dp"
@@ -18,7 +19,7 @@
         android:id="@+id/txt_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="대표 이메일 작성"
+        android:text="선택 입력"
         android:textStyle="bold"
         android:textSize="24sp"
         android:textColor="@color/black"
@@ -30,7 +31,7 @@
         android:id="@+id/txt_email_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호를 찾을 때 사용됩니다."
+        android:text="해당되지 않을 시 다음을 눌러주세요"
         android:textSize="16sp"
         android:textColor="@color/main_blue"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,55 +39,67 @@
         app:layout_constraintTop_toBottomOf="@id/txt_email"
         android:layout_marginTop="5dp"/>
 
-    <!--회장 이메일-->
+    <!--학교-->
     <TextView
-        android:id="@+id/txt_chairman"
+        android:id="@+id/txt_school"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/edittext_chairman"
+        app:layout_constraintStart_toStartOf="@+id/edittext_school"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="316dp"
-        android:text="회장 이메일"
+        android:text="학교"
         android:textSize="15sp"
         android:textColor="@color/black"/>
 
     <EditText
-        android:id="@+id/edittext_chairman"
-        android:layout_width="284dp"
+        android:id="@+id/edittext_school"
+        android:layout_width="185dp"
         android:layout_height="39dp"
         android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_chairman"
+        app:layout_constraintStart_toStartOf="@id/txt_grade"
+        app:layout_constraintTop_toBottomOf="@id/txt_school"
         android:layout_marginTop="5dp"/>
 
-    <!--부회장 이메일-->
+    <!--학교 찾기-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_find_school"
+        android:layout_width="80dp"
+        android:layout_height="39dp"
+        android:text="학교 찾기"
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        android:background="@drawable/round_square_light_blue"
+        app:layout_constraintEnd_toEndOf="@id/edittext_grade"
+        app:layout_constraintTop_toTopOf="@id/edittext_school"
+        />
+
+    <!--학년-->
     <TextView
-        android:id="@+id/txt_vice_chairman"
+        android:id="@+id/txt_grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/edittext_vice_chairman"
-        app:layout_constraintTop_toBottomOf="@id/edittext_chairman"
+        app:layout_constraintStart_toStartOf="@+id/edittext_grade"
+        app:layout_constraintTop_toBottomOf="@id/edittext_school"
         android:layout_marginTop="30dp"
-        android:text="부회장 이메일"
+        android:text="학년"
         android:textSize="15sp"
         android:textColor="@color/black"/>
 
     <EditText
-        android:id="@+id/edittext_vice_chairman"
+        android:id="@+id/edittext_grade"
         android:layout_width="284dp"
         android:layout_height="39dp"
         android:background="@drawable/edit_text_box"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_vice_chairman"
+        app:layout_constraintTop_toBottomOf="@id/txt_grade"
         android:layout_marginTop="5dp"/>
     <!--다음-->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
         android:layout_width="284dp"
         android:layout_height="39dp"
-        android:text="완료"
+        android:text="다음"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:background="@drawable/round_square_main_blue"

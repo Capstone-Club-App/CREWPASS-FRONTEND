@@ -55,8 +55,11 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface {
 
 
         binding.btnLogin.setOnClickListener {
-            val myCustomDialog = MyCustomDialog(this, this)
-            myCustomDialog.show()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("Key", string)
+            startActivity(intent)
+//            val myCustomDialog = MyCustomDialog(this, this)
+//            myCustomDialog.show()
         }
 
     }
