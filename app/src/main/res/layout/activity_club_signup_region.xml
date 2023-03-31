@@ -18,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="활동 지역을 선택해보세요"
+        android:textStyle="bold"
         android:textSize="24sp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"

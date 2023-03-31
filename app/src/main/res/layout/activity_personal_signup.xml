@@ -14,6 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="회원 가입"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:layout_marginTop="40dp"/>

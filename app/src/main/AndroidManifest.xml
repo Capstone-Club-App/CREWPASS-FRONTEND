@@ -25,17 +25,16 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".MainActivity"
-            android:exported="false"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".SignUp.Club.ClubSignUpActivity" />
-        <activity android:name=".SignUp.Club.ClubSignUpDoneActivity"></activity>
-        <activity android:name=".SignUp.Club.ClubSignUpEmailActivity"></activity>
-        <activity android:name=".SignUp.Club.ClubSignUpFieldActivity"></activity>
-        <activity android:name=".SignUp.Club.ClubSignUpRegionActivity"></activity>
-        <activity android:name=".SignUp.Personal.PersonalSignUpActivity"></activity>
-        <activity android:name=".SignUp.Personal.PersonalSignUpDoneActivity"></activity>
-        <activity android:name=".SignUp.Personal.PersonalSignUpFieldActivity"></activity>
-        <activity android:name=".SignUp.Personal.PersonalSignUpRegionActivity"></activity>
+        <activity android:name=".SignUp.Club.ClubSignUpDoneActivity"/>
+        <activity android:name=".SignUp.Club.ClubSignUpEmailActivity"/>
+        <activity android:name=".SignUp.Club.ClubSignUpFieldActivity"/>
+        <activity android:name=".SignUp.Club.ClubSignUpRegionActivity"/>
+        <activity android:name=".SignUp.Personal.PersonalSignUpActivity"/>
+        <activity android:name=".SignUp.Personal.PersonalSignUpDoneActivity"/>
+        <activity android:name=".SignUp.Personal.PersonalSignUpFieldActivity"/>
+        <activity android:name=".SignUp.Personal.PersonalSignUpRegionActivity"/>
     </application>
 
 </manifest>

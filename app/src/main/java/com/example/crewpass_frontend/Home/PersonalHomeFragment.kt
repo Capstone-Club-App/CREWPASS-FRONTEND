@@ -1,4 +1,4 @@
-package com.example.crewpass_frontend
+package com.example.crewpass_frontend.Home
 
 import android.os.Bundle
 import android.view.LayoutInflater
