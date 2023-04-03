@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txt_culture_recent"
+            android:id="@+id/txt_etc_recent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_culture_recent"
+            android:id="@+id/btn_etc_recent"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="15dp"
@@ -36,13 +36,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/music_culture_rv"
+            android:id="@+id/etc_recent_rv"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_culture_recent"
+            app:layout_constraintTop_toBottomOf="@id/txt_etc_recent"
             tools:listitem="@layout/item_announcement" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@id/center_layout">
 
         <TextView
-            android:id="@+id/txt_culture_imminent"
+            android:id="@+id/txt_etc_imminent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
@@ -67,7 +67,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_culture_imminent"
+            android:id="@+id/btn_etc_imminent"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="15dp"
@@ -77,13 +77,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/culture_imminent_rv"
+            android:id="@+id/etc_imminent_rv"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_culture_imminent"
+            app:layout_constraintTop_toBottomOf="@id/txt_etc_imminent"
             tools:listitem="@layout/item_announcement" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

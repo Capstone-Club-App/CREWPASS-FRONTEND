@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.crewpass_frontend.databinding.FragmentMusicBinding
+import com.example.crewpass_frontend.databinding.FragmentLanguageBinding
 import com.example.crewpass_frontend.databinding.FragmentPersonalHomeStandardBinding
+import com.example.crewpass_frontend.databinding.FragmentSportsBinding
 
-class FragmentMusic : Fragment() {
-    lateinit var binding: FragmentMusicBinding
+class FragmentLanguage : Fragment() {
+    lateinit var binding: FragmentLanguageBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMusicBinding.inflate(inflater,container,false)
+        binding = FragmentLanguageBinding.inflate(inflater,container,false)
 
 
         return binding.root
