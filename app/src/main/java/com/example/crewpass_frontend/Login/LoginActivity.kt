@@ -3,8 +3,12 @@ package com.example.crewpass_frontend.Login
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.MainActivity
+import com.example.crewpass_frontend.SignUp.Club.ClubSignUpActivity
+import com.example.crewpass_frontend.SignUp.Personal.PersonalSignUpActivity
+import com.example.crewpass_frontend.SignUp.SignUpDialog
 import com.example.crewpass_frontend.databinding.ActivityLoginBinding
 
 class LoginActivity:AppCompatActivity(), MyCustomDialogInterface {
@@ -12,6 +16,7 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface {
     var string = ""
     var club_clicked = false
     var personal_clicked = false
+    var choice_type : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +65,25 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface {
             startActivity(intent)
 //            val myCustomDialog = MyCustomDialog(this, this)
 //            myCustomDialog.show()
+        }
+
+        binding.textSignUp.setOnClickListener {
+            val signUpDialog = SignUpDialog(this)
+            signUpDialog.start()
+            signUpDialog.setOnClickListener(object :
+                SignUpDialog.ButtonClickListener{
+                override fun onClicked(text: String) {
+                    choice_type = text
+                }
+            })
+
+            if(choice_type.equals("동아리")){
+                val intent = Intent(this, ClubSignUpActivity::class.java)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this, PersonalSignUpActivity::class.java)
+                startActivity(intent)
+            }
         }
 
     }

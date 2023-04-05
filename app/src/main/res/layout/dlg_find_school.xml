@@ -7,36 +7,28 @@
 
     <TextView
         android:id="@+id/txt_School"
-        android:layout_width="wrap_content"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
-        android:text="선택 입력"
+        android:text="학교 선택"
         android:textStyle="bold"
         android:textSize="24sp"
         android:textColor="@color/black"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="68dp"/>
 
-    <Spinner
-        android:id="@+id/spinner_btn"
-        android:layout_width="284dp"
-        android:layout_height="45dp"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="122dp"/>
     
     <EditText
-        android:id="@+id/edittext_school"
+        android:id="@+id/dlg_edittext_school"
         android:layout_width="185dp"
         android:layout_height="45dp"
         android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="@id/spinner_btn"
+        app:layout_constraintStart_toStartOf="@id/txt_School"
         app:layout_constraintEnd_toStartOf="@id/btn_find_school"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="185dp"/>
+        android:layout_marginTop="150dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_find_school"
@@ -46,9 +38,9 @@
         android:text="학교 찾기"
         android:textSize="13sp"
         android:textColor="@color/black"
-        app:layout_constraintTop_toTopOf="@id/edittext_school"
-        app:layout_constraintStart_toEndOf="@id/edittext_school"
-        app:layout_constraintEnd_toEndOf="@id/spinner_btn"
+        app:layout_constraintTop_toTopOf="@id/dlg_edittext_school"
+        app:layout_constraintStart_toEndOf="@id/dlg_edittext_school"
+        app:layout_constraintEnd_toEndOf="@id/txt_School"
         />
     
     <TableLayout
@@ -58,7 +50,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="251dp"
+        android:layout_marginTop="220dp"
         android:background="@drawable/text_stroke_box"
         android:stretchColumns="*">
         <TableRow
@@ -85,6 +77,7 @@
     </TableLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/school_list_rv"
         android:layout_width="284dp"
         android:layout_height="100dp"
         app:layout_constraintTop_toBottomOf="@id/tableLayout"
@@ -102,9 +95,9 @@
         android:textSize="20dp"
         android:background="@drawable/round_square_main_blue"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/spinner_btn"
+        app:layout_constraintStart_toStartOf="@id/txt_School"
         app:layout_constraintEnd_toStartOf="@id/dlg_btn_cancel"
-        android:layout_marginTop="398dp"
+        android:layout_marginTop="368dp"
         app:layout_constraintHorizontal_chainStyle="spread"/>
 
     <!--다음-->
@@ -117,8 +110,8 @@
         android:textSize="20dp"
         android:background="@drawable/round_square_main_blue"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/spinner_btn"
+        app:layout_constraintEnd_toEndOf="@id/txt_School"
         app:layout_constraintStart_toEndOf="@id/dlg_btn_ok"
-        android:layout_marginTop="398dp" />
+        android:layout_marginTop="368dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

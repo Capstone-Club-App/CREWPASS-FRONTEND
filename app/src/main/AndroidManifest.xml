@@ -34,9 +34,9 @@
         <activity android:name=".SignUp.Club.ClubSignUpFieldActivity"/>
         <activity android:name=".SignUp.Club.ClubSignUpRegionActivity"/>
         <activity android:name=".SignUp.Personal.PersonalSignUpActivity"/>
+        <activity android:name=".SignUp.Personal.PersonalSignUpChooseActivity"/>
+        <activity android:name=".SignUp.Personal.PersonalSignUpSchoolActivity"/>
         <activity android:name=".SignUp.Personal.PersonalSignUpDoneActivity"/>
-        <activity android:name=".SignUp.Personal.PersonalSignUpFieldActivity"/>
-        <activity android:name=".SignUp.Personal.PersonalSignUpRegionActivity"/>
     </application>
 
 </manifest>
