@@ -1,5 +1,6 @@
 package com.example.crewpass_frontend.SignUp.Personal
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,12 @@ class PersonalSignUpSchoolActivity : AppCompatActivity(), FindSchoolDialog.Custo
         binding.btnFindSchool.setOnClickListener {
             val findSchoolDialog = FindSchoolDialog(this, this, gubun!!)
             findSchoolDialog.show()
+        }
+
+        binding.btnNext.setOnClickListener {
+            val intent = Intent(this, PersonalSignUpDoneActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0,0)
         }
 
 

@@ -9,15 +9,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.crewpass_frontend.Login.MyCustomDialogInterface
 import com.example.crewpass_frontend.R
+import com.example.crewpass_frontend.SignUp.Personal.FindSchool.FindSchoolDialog
 
-class SignUpDialog(context : Context) {
-    private val context = context
+class SignUpDialog(context: Context, Interface: SignUpDialogInterface) : Dialog(context) {
+    private val signUpDialogInterface : SignUpDialogInterface = Interface
     private val dlg = Dialog(context)
     private lateinit var btn_personal_dlg : AppCompatButton
     private lateinit var btn_club_dlg : AppCompatButton
@@ -35,12 +37,12 @@ class SignUpDialog(context : Context) {
 
         btn_personal_dlg.setOnClickListener {
             // 정보 보내주기
-            onClickListener.onClicked("일반")
+            signUpDialogInterface.onPersonalButtonClicked()
         }
 
         btn_club_dlg.setOnClickListener {
             // 정보 보내주기
-            onClickListener.onClicked("동아리")
+            signUpDialogInterface.onClubButtonClicked()
         }
 
 
@@ -50,13 +52,8 @@ class SignUpDialog(context : Context) {
 
 
 
-    interface ButtonClickListener{
-        fun onClicked(text: String)
-    }
-
-    private lateinit var onClickListener: ButtonClickListener
-
-    fun setOnClickListener(listener: ButtonClickListener){
-        onClickListener = listener
+    interface SignUpDialogInterface {
+        fun onPersonalButtonClicked()
+        fun onClubButtonClicked()
     }
 }

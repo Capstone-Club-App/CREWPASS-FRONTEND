@@ -5,13 +5,14 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.crewpass_frontend.IDPW_Find.IDPWFindActivity
 import com.example.crewpass_frontend.MainActivity
 import com.example.crewpass_frontend.SignUp.Club.ClubSignUpActivity
 import com.example.crewpass_frontend.SignUp.Personal.PersonalSignUpActivity
 import com.example.crewpass_frontend.SignUp.SignUpDialog
 import com.example.crewpass_frontend.databinding.ActivityLoginBinding
 
-class LoginActivity:AppCompatActivity(), MyCustomDialogInterface {
+class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.SignUpDialogInterface {
     lateinit var binding: ActivityLoginBinding
     var string = ""
     var club_clicked = false
@@ -58,32 +59,23 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface {
         }
 
 
-
+        // 로그인 버튼
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Key", string)
             startActivity(intent)
-//            val myCustomDialog = MyCustomDialog(this, this)
-//            myCustomDialog.show()
         }
 
-        binding.textSignUp.setOnClickListener {
-            val signUpDialog = SignUpDialog(this)
-            signUpDialog.start()
-            signUpDialog.setOnClickListener(object :
-                SignUpDialog.ButtonClickListener{
-                override fun onClicked(text: String) {
-                    choice_type = text
-                }
-            })
 
-            if(choice_type.equals("동아리")){
-                val intent = Intent(this, ClubSignUpActivity::class.java)
-                startActivity(intent)
-            }else{
-                val intent = Intent(this, PersonalSignUpActivity::class.java)
-                startActivity(intent)
-            }
+        // 회원가입 클릭
+        binding.textSignUp.setOnClickListener {
+            val signUpDialog = SignUpDialog(this, this)
+            signUpDialog.start()
+        }
+
+        binding.textFind.setOnClickListener{
+            val intent = Intent(this, IDPWFindActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -91,6 +83,16 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface {
     override fun onbtnGotoMainClicked() {
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("Key", string)
+        startActivity(intent)
+    }
+
+    override fun onPersonalButtonClicked() {
+        val intent = Intent(this, PersonalSignUpActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onClubButtonClicked() {
+        val intent = Intent(this, ClubSignUpActivity::class.java)
         startActivity(intent)
     }
 }
