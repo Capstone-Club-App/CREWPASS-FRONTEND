@@ -43,7 +43,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_sports_recent"
-            tools:listitem="@layout/item_announcement" />
+            tools:listitem="@layout/item_announcement_personal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -84,7 +84,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_sports_imminent"
-            tools:listitem="@layout/item_announcement" />
+            tools:listitem="@layout/item_announcement_personal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
