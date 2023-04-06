@@ -37,6 +37,10 @@
         <activity android:name=".SignUp.Personal.PersonalSignUpChooseActivity"/>
         <activity android:name=".SignUp.Personal.PersonalSignUpSchoolActivity"/>
         <activity android:name=".SignUp.Personal.PersonalSignUpDoneActivity"/>
+
+        <activity android:name=".IDPW_Find.IDPWFindActivity"/>
+
+        <activity android:name=".Home.Personal.List.AnnouncementListActivity"/>
     </application>
 
 </manifest>
