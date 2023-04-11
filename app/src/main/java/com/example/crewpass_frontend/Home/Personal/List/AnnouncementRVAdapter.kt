@@ -4,9 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crewpass_frontend.Retrofit.FindSchool.Data
+import com.example.crewpass_frontend.Data.Announcement
 import com.example.crewpass_frontend.databinding.ItemAnnouncementPersonalBinding
-import com.example.crewpass_frontend.databinding.ItemFindSchoolBinding
 
 class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announcement>) : RecyclerView.Adapter<AnnouncementRVAdapter.ViewHolder>() {
 
