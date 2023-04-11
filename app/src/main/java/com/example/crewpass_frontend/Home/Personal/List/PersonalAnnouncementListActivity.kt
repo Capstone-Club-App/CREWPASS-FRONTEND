@@ -6,17 +6,17 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.crewpass_frontend.databinding.ActivityAnnouncementListBinding
+import com.example.crewpass_frontend.databinding.ActivityPersonalAnnouncementListBinding
 
-class AnnouncementListActivity : AppCompatActivity(){
-    lateinit var binding : ActivityAnnouncementListBinding
-    lateinit var announcementRVAdapter : AnnouncementRVAdapter
+class PersonalAnnouncementListActivity : AppCompatActivity() {
+    lateinit var binding: ActivityPersonalAnnouncementListBinding
+    lateinit var announcementRVAdapter: AnnouncementRVAdapter
     var recent_list = ArrayList<Announcement>()
     var imminent_list = ArrayList<Announcement>()
-    lateinit var context : Context
+    lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAnnouncementListBinding.inflate(layoutInflater)
+        binding = ActivityPersonalAnnouncementListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         context = this
@@ -29,19 +29,18 @@ class AnnouncementListActivity : AppCompatActivity(){
 
     }
 
-    fun initActionBar(list_state : String){
-        if(list_state.equals("recent")){
+    fun initActionBar(list_state: String) {
+        if (list_state.equals("recent")) {
             binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
             binding.innerPageTop.appbarPageNameLeftTv.text = "최신순"
-        }
-        else{
+        } else {
             binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
             binding.innerPageTop.appbarPageNameLeftTv.text = "마감임박순"
         }
     }
 
-    fun initRecyclerView(list_state: String){
-        if(list_state.equals("recent")){
+    fun initRecyclerView(list_state: String) {
+        if (list_state.equals("recent")) {
             // 최신순 데이터 가져오기
             //임의값
             recent_list.apply {
@@ -57,8 +56,7 @@ class AnnouncementListActivity : AppCompatActivity(){
                 binding.announcementListRv.adapter = announcementRVAdapter
                 binding.announcementListRv.layoutManager = LinearLayoutManager(context)
             }
-        }
-        else{
+        } else {
             // 마감임박순 데이터 가져오기
             // 임의값
             imminent_list.apply {
@@ -73,6 +71,12 @@ class AnnouncementListActivity : AppCompatActivity(){
                 announcementRVAdapter = AnnouncementRVAdapter(imminent_list)
                 binding.announcementListRv.adapter = announcementRVAdapter
                 binding.announcementListRv.layoutManager = LinearLayoutManager(context)
+                announcementRVAdapter.setItemClickListener(object :
+                    AnnouncementRVAdapter.OnItemClickListener {
+                    override fun onItemClick(announcement: Announcement) {
+
+                    }
+                })
             }
         }
     }
