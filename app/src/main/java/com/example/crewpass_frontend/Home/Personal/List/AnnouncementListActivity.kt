@@ -1,5 +1,6 @@
 package com.example.crewpass_frontend.Home.Personal.List
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,21 +10,21 @@ import com.example.crewpass_frontend.databinding.ActivityAnnouncementListBinding
 
 class AnnouncementListActivity : AppCompatActivity(){
     lateinit var binding : ActivityAnnouncementListBinding
+    lateinit var announcementRVAdapter : AnnouncementRVAdapter
     var recent_list = ArrayList<Announcement>()
     var imminent_list = ArrayList<Announcement>()
+    lateinit var context : Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAnnouncementListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        context = this
         var list_state = intent.getStringExtra("list_state")
+        Log.d("list_state  : ", list_state!!)
 
 
-
-
-
-
-        initActionBar(list_state!!)
+        initActionBar(list_state)
         initRecyclerView(list_state)
 
     }
@@ -35,7 +36,7 @@ class AnnouncementListActivity : AppCompatActivity(){
         }
         else{
             binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
-            binding.innerPageTop.appbarPageNameLeftTv.text = "최신순"
+            binding.innerPageTop.appbarPageNameLeftTv.text = "마감임박순"
         }
     }
 
@@ -43,31 +44,36 @@ class AnnouncementListActivity : AppCompatActivity(){
         if(list_state.equals("recent")){
             // 최신순 데이터 가져오기
             //임의값
-            recent_list.add(Announcement("최신 동아리1", "제목1", "내용1"))
-            recent_list.add(Announcement("최신 동아리2", "제목2", "내용2"))
-            recent_list.add(Announcement("최신 동아리3", "제목3", "내용3"))
-            recent_list.add(Announcement("최신 동아리4", "제목4", "내용4"))
-            recent_list.add(Announcement("최신 동아리5", "제목5", "내용5"))
-            recent_list.add(Announcement("최신 동아리6", "제목6", "내용6"))
-            recent_list.add(Announcement("최신 동아리7", "제목7", "내용7"))
+            recent_list.apply {
+                add(Announcement("최신 동아리1", "제목1", "내용1"))
+                add(Announcement("최신 동아리2", "제목2", "내용2"))
+                add(Announcement("최신 동아리3", "제목3", "내용3"))
+                add(Announcement("최신 동아리4", "제목4", "내용4"))
+                add(Announcement("최신 동아리5", "제목5", "내용5"))
+                add(Announcement("최신 동아리6", "제목6", "내용6"))
+                add(Announcement("최신 동아리7", "제목7", "내용7"))
 
-            val announcementRVAdapter = AnnouncementRVAdapter(recent_list)
-            binding.announcementListRv.adapter = announcementRVAdapter
-            binding.announcementListRv.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                announcementRVAdapter = AnnouncementRVAdapter(recent_list)
+                binding.announcementListRv.adapter = announcementRVAdapter
+                binding.announcementListRv.layoutManager = LinearLayoutManager(context)
+            }
         }
         else{
             // 마감임박순 데이터 가져오기
             // 임의값
-            imminent_list.add(Announcement("임박 동아리1", "제목1", "내용1"))
-            imminent_list.add(Announcement("임박 동아리2", "제목2", "내용2"))
-            imminent_list.add(Announcement("임박 동아리3", "제목3", "내용3"))
-            imminent_list.add(Announcement("임박 동아리4", "제목4", "내용4"))
-            imminent_list.add(Announcement("임박 동아리5", "제목5", "내용5"))
-            val announcementRVAdapter = AnnouncementRVAdapter(imminent_list)
-            binding.announcementListRv.adapter = announcementRVAdapter
-            binding.announcementListRv.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            imminent_list.apply {
+                add(Announcement("임박 동아리1", "제목1", "내용1"))
+                add(Announcement("임박 동아리2", "제목2", "내용2"))
+                add(Announcement("임박 동아리3", "제목3", "내용3"))
+                add(Announcement("임박 동아리4", "제목4", "내용4"))
+                add(Announcement("임박 동아리5", "제목5", "내용5"))
+                add(Announcement("임박 동아리6", "제목6", "내용6"))
+                add(Announcement("임박 동아리7", "제목7", "내용7"))
+
+                announcementRVAdapter = AnnouncementRVAdapter(imminent_list)
+                binding.announcementListRv.adapter = announcementRVAdapter
+                binding.announcementListRv.layoutManager = LinearLayoutManager(context)
+            }
         }
     }
 }

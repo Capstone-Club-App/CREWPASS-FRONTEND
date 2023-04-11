@@ -12,7 +12,6 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
 
     lateinit var context: Context
 
-    private val checkList = arrayListOf<CheckStatus>()
 
     // 아이템 레이아웃 결합
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +28,7 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
 
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(announcement_list[position], checkList[position])
+        holder.bind(announcement_list[position])
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(announcement_list[position])
             notifyItemChanged(position)
@@ -39,12 +38,12 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemAnnouncementPersonalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(announcement: Announcement, checkList : CheckStatus) {
-            binding.btnHeart.isSelected = checkList.isSelected
-            binding.btnHeart.setOnClickListener {
-                checkList.isSelected = binding.btnHeart.isSelected
-                notifyItemChanged(adapterPosition)
-            }
+        fun bind(announcement: Announcement) {
+//            binding.btnHeart.isSelected = checkList.isSelected
+//            binding.btnHeart.setOnClickListener {
+//                checkList.isSelected = binding.btnHeart.isSelected
+//                notifyItemChanged(adapterPosition)
+//            }
 
             binding.itemAnnounceDetail.text = announcement.content
             binding.itemAnnounceTitle.text = announcement.title
