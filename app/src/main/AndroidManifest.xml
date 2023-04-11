@@ -40,7 +40,8 @@
 
         <activity android:name=".IDPW_Find.IDPWFindActivity"/>
 
-        <activity android:name=".Home.Personal.List.AnnouncementListActivity"/>
+        <activity android:name=".Home.Personal.List.PersonalAnnouncementListActivity"/>
+        <activity android:name=".Home.Club.WriteAnnouncementActivity"/>
     </application>
 
 </manifest>
