@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.crewpass_frontend.Data.Announcement
 import com.example.crewpass_frontend.databinding.ActivityPersonalAnnouncementListBinding
 
 class PersonalAnnouncementListActivity : AppCompatActivity() {
