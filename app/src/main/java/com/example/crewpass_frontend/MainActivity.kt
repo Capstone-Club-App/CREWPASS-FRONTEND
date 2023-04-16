@@ -54,10 +54,16 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.menu_ai -> {
-                        supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.fragment_main_container, AIFragment())
-                            .commitAllowingStateLoss()
+                        if (key.equals("Club"))
+                            supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.fragment_main_container, ClubAIFragment())
+                                .commitAllowingStateLoss()
+                        else if (key.equals("Personal"))
+                            supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.fragment_main_container, PersonAIFragment())
+                                .commitAllowingStateLoss()
                     }
 
                     R.id.menu_mypage -> {

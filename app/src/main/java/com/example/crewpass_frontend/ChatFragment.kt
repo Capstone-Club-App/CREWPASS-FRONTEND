@@ -30,6 +30,8 @@ class ChatFragment : Fragment() {
         initRecycler()
         initActionBar()
 
+
+
         return binding.root
     }
 
