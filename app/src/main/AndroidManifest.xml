@@ -53,7 +53,13 @@
 
 
         <!--익명 채팅-->
-        <activity android:name=".Chat.ChattingActivity"></activity>
+        <activity android:name=".Chat.ChattingActivity"/>
+
+
+
+        <!--AI-->
+        <activity android:name=".AI.Personal.PersonalChooseAnnouncementActivity"/>
+        <activity android:name=".AI.Personal.PersonalPrepareInterviewActivity"/>
     </application>
 
 </manifest>
