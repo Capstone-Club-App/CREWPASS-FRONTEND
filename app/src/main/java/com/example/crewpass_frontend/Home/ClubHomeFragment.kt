@@ -19,4 +19,8 @@ class ClubHomeFragment:Fragment() {
 
         return binding.root
     }
+
+    fun initRecycler(){
+
+    }
 }

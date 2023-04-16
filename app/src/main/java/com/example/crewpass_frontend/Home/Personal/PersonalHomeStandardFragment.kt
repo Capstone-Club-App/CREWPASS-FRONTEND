@@ -6,11 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.crewpass_frontend.Data.Announcement
+import com.example.crewpass_frontend.Home.Personal.List.AnnouncementRVAdapter
 import com.example.crewpass_frontend.Home.Personal.List.PersonalAnnouncementListActivity
 import com.example.crewpass_frontend.databinding.FragmentPersonalHomeStandardBinding
 
 class PersonalHomeStandardFragment : Fragment() {
     lateinit var binding: FragmentPersonalHomeStandardBinding
+
+    lateinit var announcementRVAdapter: AnnouncementRVAdapter
+    var recent_list = ArrayList<Announcement>()
+    var imminent_list = ArrayList<Announcement>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +36,30 @@ class PersonalHomeStandardFragment : Fragment() {
             startActivity(intent)
         }
 
+        initRecyclerView()
+
         return binding.root
+    }
+
+
+    fun initRecyclerView(){
+        recent_list.apply {
+            add(Announcement("최신 동아리1", "제목1", "내용1"))
+            add(Announcement("최신 동아리2", "제목2", "내용2"))
+
+            announcementRVAdapter = AnnouncementRVAdapter(recent_list)
+            binding.standardRecentRv.adapter = announcementRVAdapter
+            binding.standardRecentRv.layoutManager = LinearLayoutManager(context)
+        }
+
+        imminent_list.apply {
+            add(Announcement("최신 동아리1", "제목1", "내용1"))
+            add(Announcement("최신 동아리2", "제목2", "내용2"))
+
+            announcementRVAdapter = AnnouncementRVAdapter(recent_list)
+            binding.standardImminentRv.adapter = announcementRVAdapter
+            binding.standardImminentRv.layoutManager = LinearLayoutManager(context)
+        }
     }
 
 
