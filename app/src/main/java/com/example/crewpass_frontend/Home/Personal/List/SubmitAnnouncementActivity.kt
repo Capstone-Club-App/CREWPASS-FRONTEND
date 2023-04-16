@@ -1,14 +1,16 @@
 package com.example.crewpass_frontend.Home.Personal.List
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crewpass_frontend.Data.Question
 import com.example.crewpass_frontend.Home.Personal.List.AnswerList.QuestionRVAdapter
 import com.example.crewpass_frontend.databinding.ActivitySubmitAnnouncementBinding
 
-class SubmitAnnouncementActivity : AppCompatActivity(){
+class SubmitAnnouncementActivity : AppCompatActivity(){ // 지원서 작성
     lateinit var binding: ActivitySubmitAnnouncementBinding
     lateinit var questionRVAdapter: QuestionRVAdapter
     lateinit var context : Context
@@ -22,7 +24,18 @@ class SubmitAnnouncementActivity : AppCompatActivity(){
         setContentView(binding.root)
         context = this
 
+        initActionBar()
         initRecyclerView()
+
+        binding.btnSubmit.setOnClickListener {
+            finish()
+        }
+    }
+
+    fun initActionBar(){
+        binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
+        binding.innerPageTop.appbarPageNameLeftTv.text = "지원서 작성"
+
     }
 
     fun initRecyclerView(){

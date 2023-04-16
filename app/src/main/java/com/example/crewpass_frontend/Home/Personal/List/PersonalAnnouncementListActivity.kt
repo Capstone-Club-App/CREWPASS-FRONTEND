@@ -1,6 +1,7 @@
 package com.example.crewpass_frontend.Home.Personal.List
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -75,7 +76,8 @@ class PersonalAnnouncementListActivity : AppCompatActivity() {
                 announcementRVAdapter.setItemClickListener(object :
                     AnnouncementRVAdapter.OnItemClickListener {
                     override fun onItemClick(announcement: Announcement) {
-
+                        val intent = Intent(context, AnnouncementDetailActivity::class.java)
+                        startActivity(intent) // 지원서 작성으로 이동
                     }
                 })
             }

@@ -28,22 +28,32 @@
                 android:value="" />
         </activity>
         <activity android:name=".MainActivity" />
+
+        <!--동아리 회원가입-->
         <activity android:name=".SignUp.Club.ClubSignUpActivity" />
         <activity android:name=".SignUp.Club.ClubSignUpDoneActivity"/>
         <activity android:name=".SignUp.Club.ClubSignUpEmailActivity"/>
         <activity android:name=".SignUp.Club.ClubSignUpFieldActivity"/>
         <activity android:name=".SignUp.Club.ClubSignUpRegionActivity"/>
+
+        <!--일반 회원가입-->
         <activity android:name=".SignUp.Personal.PersonalSignUpActivity"/>
         <activity android:name=".SignUp.Personal.PersonalSignUpChooseActivity"/>
         <activity android:name=".SignUp.Personal.PersonalSignUpSchoolActivity"/>
         <activity android:name=".SignUp.Personal.PersonalSignUpDoneActivity"/>
         <activity android:name=".Home.Club.WriteAnnouncementActivity"/>
 
+        <!--아이디비번 찾기-->
         <activity android:name=".IDPW_Find.IDPWFindActivity"/>
 
+        <!--일반 홈화면-->
         <activity android:name=".Home.Personal.List.PersonalAnnouncementListActivity"/>
         <activity android:name=".Home.Personal.List.AnnouncementDetailActivity"/>
         <activity android:name=".Home.Personal.List.SubmitAnnouncementActivity"/>
+
+
+        <!--익명 채팅-->
+        <activity android:name=".Chat.ChattingActivity"></activity>
     </application>
 
 </manifest>
