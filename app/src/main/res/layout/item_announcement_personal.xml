@@ -67,7 +67,7 @@
         android:id="@+id/btn_heart"
         android:layout_width="28dp"
         android:layout_height="25dp"
-        android:background="@drawable/selector_heart"
+        android:background="@drawable/img_heart_notfill"
         app:layout_constraintTop_toTopOf="@id/list_item"
         app:layout_constraintEnd_toEndOf="@id/list_item"
         android:layout_marginTop="25dp"

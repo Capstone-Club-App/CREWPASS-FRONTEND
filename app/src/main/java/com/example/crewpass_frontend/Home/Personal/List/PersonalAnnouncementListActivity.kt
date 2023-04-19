@@ -53,6 +53,9 @@ class PersonalAnnouncementListActivity : AppCompatActivity() {
                 add(Announcement("최신 동아리5", "제목5", "내용5"))
                 add(Announcement("최신 동아리6", "제목6", "내용6"))
                 add(Announcement("최신 동아리7", "제목7", "내용7"))
+                add(Announcement("최신 동아리8", "제목8", "내용8"))
+                add(Announcement("최신 동아리9", "제목9", "내용9"))
+                add(Announcement("최신 동아리10", "제목10", "내용10"))
 
                 announcementRVAdapter = AnnouncementRVAdapter(recent_list)
                 binding.announcementListRv.adapter = announcementRVAdapter
@@ -69,6 +72,9 @@ class PersonalAnnouncementListActivity : AppCompatActivity() {
                 add(Announcement("임박 동아리5", "제목5", "내용5"))
                 add(Announcement("임박 동아리6", "제목6", "내용6"))
                 add(Announcement("임박 동아리7", "제목7", "내용7"))
+                add(Announcement("임박 동아리8", "제목8", "내용8"))
+                add(Announcement("임박 동아리9", "제목9", "내용9"))
+                add(Announcement("임박 동아리10", "제목10", "내용10"))
 
                 announcementRVAdapter = AnnouncementRVAdapter(imminent_list)
                 binding.announcementListRv.adapter = announcementRVAdapter

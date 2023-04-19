@@ -60,6 +60,12 @@
         <!--AI-->
         <activity android:name=".AI.Personal.PersonalChooseAnnouncementActivity"/>
         <activity android:name=".AI.Personal.PersonalPrepareInterviewActivity"/>
+
+
+        <!--마이페이지-->
+        <activity android:name=".MyPage.Personal.PersonalEditInfoActivity"/>
+        <activity android:name=".MyPage.Personal.PersonalScrapActivity"/>
+        <activity android:name=".MyPage.Personal.PersonalSubmitPrevActivity"/>
     </application>
 
 </manifest>

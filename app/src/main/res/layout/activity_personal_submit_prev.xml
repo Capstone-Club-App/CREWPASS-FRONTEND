@@ -13,20 +13,20 @@
         android:id="@+id/scrollView"
         android:layout_width="wrap_content"
         android:layout_height="598dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inner_page_top"
         android:layout_marginTop="30dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inner_page_top">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/announcement_list_rv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inner_page_top"
-            tools:listitem="@layout/item_announcement_personal"/>
+            tools:listitem="@layout/item_prev" />
 
     </ScrollView>
 

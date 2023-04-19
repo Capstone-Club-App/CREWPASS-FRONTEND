@@ -67,10 +67,16 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.menu_mypage -> {
-                        supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.fragment_main_container, MyPageFragment())
-                            .commitAllowingStateLoss()
+                        if (key.equals("Club"))
+                            supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.fragment_main_container, ClubMyPageFragment())
+                                .commitAllowingStateLoss()
+                        else if (key.equals("Personal"))
+                            supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.fragment_main_container, PersonalMyPageFragment())
+                                .commitAllowingStateLoss()
                     }
                 }
                 true
@@ -78,8 +84,6 @@ class MainActivity : AppCompatActivity() {
             //처음 실행시 자동으로 home 화면을 가르키게 됨.
             selectedItemId = R.id.menu_home
 
-
         }
-
     }
 }

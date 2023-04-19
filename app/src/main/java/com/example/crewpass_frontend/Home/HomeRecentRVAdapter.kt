@@ -1,4 +1,4 @@
-package com.example.crewpass_frontend.Home.Personal.List
+package com.example.crewpass_frontend.Home
 
 import android.content.Context
 import android.util.Log
@@ -10,12 +10,12 @@ import com.example.crewpass_frontend.Data.Announcement
 import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.databinding.ItemAnnouncementPersonalBinding
 
-class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announcement>) : RecyclerView.Adapter<AnnouncementRVAdapter.ViewHolder>() {
+class HomeRecentRVAdapter (private val announcement_list: ArrayList<Announcement>) : RecyclerView.Adapter<HomeRecentRVAdapter.ViewHolder>() {
 
-    var announceCheck = SparseBooleanArray()
+    var checkList = ArrayList<CheckStatus>()
+    var checkStatus = SparseBooleanArray()
     lateinit var context: Context
 
-    var checkStatus = ArrayList<CheckStatus>()
 
     // 아이템 레이아웃 결합
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -32,49 +32,29 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
 
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        checkStatus.add(CheckStatus(position, false))
-
-        holder.bind(announcement_list[position], checkStatus[position])
+        holder.bind(announcement_list[position])
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(announcement_list[position])
             notifyItemChanged(position)
         }
-
     }
 
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemAnnouncementPersonalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(announcement: Announcement, checkStatus : CheckStatus) {
-//            binding.btnHeart.setOnClickListener {
-//                binding.btnHeart.isSelected = !binding.btnHeart.isSelected
-//                if(!binding.btnHeart.isSelected) {
-//                    Log.d("check false", binding.btnHeart.isSelected.toString())
-//                    Log.d("adapterPosition : ", adapterPosition.toString())
-//                    checkStatus.put(adapterPosition, false)
-//                    binding.btnHeart.setBackgroundResource(R.drawable.img_heart_notfill)
-//                }
-//                else {
-//                    Log.d("check true", binding.btnHeart.isSelected.toString())
-//                    Log.d("adapterPosition : ", adapterPosition.toString())
-//                    checkStatus.put(adapterPosition, true)
-//                    binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
-//                }
-//                notifyDataSetChanged()
-//            }
-
+        fun bind(announcement: Announcement) {
             binding.btnHeart.setOnClickListener {
-                binding.btnHeart.isSelected = !checkStatus.isSelected
+                binding.btnHeart.isSelected = !binding.btnHeart.isSelected
                 if(!binding.btnHeart.isSelected) {
                     Log.d("check false", binding.btnHeart.isSelected.toString())
                     Log.d("adapterPosition : ", adapterPosition.toString())
-                    announceCheck.put(adapterPosition, false)
+                    checkStatus.put(adapterPosition, false)
                     binding.btnHeart.setBackgroundResource(R.drawable.img_heart_notfill)
                 }
                 else {
                     Log.d("check true", binding.btnHeart.isSelected.toString())
                     Log.d("adapterPosition : ", adapterPosition.toString())
-                    announceCheck.put(adapterPosition, true)
+                    checkStatus.put(adapterPosition, true)
                     binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
                 }
                 notifyDataSetChanged()
