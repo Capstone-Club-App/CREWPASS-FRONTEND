@@ -2,6 +2,6 @@
     <string name="app_name">CREWPASS</string>
     <string name="menu_home">홈</string>
     <string name="menu_chat">채팅</string>
-    <string name="menu_mypage">AI</string>
-    <string name="menu_restaurant">마이페이지</string>
+    <string name="menu_ai">AI</string>
+    <string name="menu_mypage">마이페이지</string>
 </resources>
