@@ -15,7 +15,6 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
     var announceCheck = SparseBooleanArray()
     lateinit var context: Context
 
-    var checkStatus = ArrayList<CheckStatus>()
 
     // 아이템 레이아웃 결합
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -30,49 +29,53 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
     // 아이템 개수
     override fun getItemCount(): Int = announcement_list.size
 
+
+    data class heartSelected(val position: Int, var isSelected : Boolean)
+
+    fun isHeartSelected(position: Int) : Boolean{
+        return announceCheck.get(position, false)
+    }
+
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        checkStatus.add(CheckStatus(position, false))
+        holder.bind(announcement_list[position])
 
-        holder.bind(announcement_list[position], checkStatus[position])
+        ////////// ** 이미지 변경해주는 부분 추가
+        if(isHeartSelected(position)){
+            holder.binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
+        }else{
+            holder.binding.btnHeart.setBackgroundResource(R.drawable.img_heart_notfill)
+        }
+        /////////
+
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(announcement_list[position])
             notifyItemChanged(position)
         }
-
     }
 
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemAnnouncementPersonalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(announcement: Announcement, checkStatus : CheckStatus) {
-//            binding.btnHeart.setOnClickListener {
-//                binding.btnHeart.isSelected = !binding.btnHeart.isSelected
-//                if(!binding.btnHeart.isSelected) {
-//                    Log.d("check false", binding.btnHeart.isSelected.toString())
-//                    Log.d("adapterPosition : ", adapterPosition.toString())
-//                    checkStatus.put(adapterPosition, false)
-//                    binding.btnHeart.setBackgroundResource(R.drawable.img_heart_notfill)
-//                }
-//                else {
-//                    Log.d("check true", binding.btnHeart.isSelected.toString())
-//                    Log.d("adapterPosition : ", adapterPosition.toString())
-//                    checkStatus.put(adapterPosition, true)
-//                    binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
-//                }
-//                notifyDataSetChanged()
-//            }
+        fun bind(announcement: Announcement) {
 
+            ////////// ** 처음 상태(sparseBooleanArray 해당 포지션 안에 아무것도 안 넣었을 때)
+            if(announceCheck[adapterPosition] == null){
+                announceCheck.put(adapterPosition, false)
+            }
+            //////////
+
+
+            ////////// ** setOnClickListener 상태 변경
             binding.btnHeart.setOnClickListener {
-                binding.btnHeart.isSelected = !checkStatus.isSelected
-                if(!binding.btnHeart.isSelected) {
-                    Log.d("check false", binding.btnHeart.isSelected.toString())
+                if(announceCheck.get(adapterPosition, false)) {
+                    Log.d("파랑", announceCheck.get(adapterPosition, false).toString())
                     Log.d("adapterPosition : ", adapterPosition.toString())
                     announceCheck.put(adapterPosition, false)
                     binding.btnHeart.setBackgroundResource(R.drawable.img_heart_notfill)
                 }
                 else {
-                    Log.d("check true", binding.btnHeart.isSelected.toString())
+                    Log.d("하양", announceCheck.get(adapterPosition, false).toString())
                     Log.d("adapterPosition : ", adapterPosition.toString())
                     announceCheck.put(adapterPosition, true)
                     binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
@@ -80,11 +83,15 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
                 notifyDataSetChanged()
             }
 
+            //////////
+
+
             binding.itemAnnounceDetail.text = announcement.content
             binding.itemAnnounceTitle.text = announcement.title
             // 날짜 적용도 추가하기
         }
     }
+
 
     interface OnItemClickListener {
         fun onItemClick(announcement: Announcement)
@@ -96,5 +103,5 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
 
     private lateinit var itemClickListener: OnItemClickListener
 
-    data class CheckStatus(val position: Int, var isSelected : Boolean)
+
 }
