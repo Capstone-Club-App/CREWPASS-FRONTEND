@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.databinding.ActivityPersonalChooseAnnouncementBinding
 
-class PersonalChooseAnnouncementActivity:AppCompatActivity() {
+class PersonalChooseRecruitmentActivity:AppCompatActivity() {
     lateinit var binding: ActivityPersonalChooseAnnouncementBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

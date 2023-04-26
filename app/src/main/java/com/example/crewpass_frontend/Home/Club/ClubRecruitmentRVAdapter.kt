@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crewpass_frontend.Data.Announcement
+import com.example.crewpass_frontend.Data.Recruitment
 import com.example.crewpass_frontend.databinding.ItemAnnouncementClubBinding
 
-class ClubAnnouncementRVAdapter (private val announcement_list: ArrayList<Announcement>) : RecyclerView.Adapter<ClubAnnouncementRVAdapter.ViewHolder>() {
+class ClubRecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitment>) : RecyclerView.Adapter<ClubRecruitmentRVAdapter.ViewHolder>() {
 
     lateinit var context: Context
 
@@ -23,13 +23,13 @@ class ClubAnnouncementRVAdapter (private val announcement_list: ArrayList<Announ
     }
 
     // 아이템 개수
-    override fun getItemCount(): Int = announcement_list.size
+    override fun getItemCount(): Int = recruitment_list.size
 
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(announcement_list[position])
+        holder.bind(recruitment_list[position])
         holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(announcement_list[position])
+            itemClickListener.onItemClick(recruitment_list[position])
             notifyItemChanged(position)
         }
     }
@@ -37,15 +37,15 @@ class ClubAnnouncementRVAdapter (private val announcement_list: ArrayList<Announ
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemAnnouncementClubBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(announcement: Announcement) {
-            binding.itemAnnounceDetail.text = announcement.content
-            binding.itemAnnounceTitle.text = announcement.title
+        fun bind(recruitment: Recruitment) {
+            binding.itemAnnounceDetail.text = recruitment.content
+            binding.itemAnnounceTitle.text = recruitment.title
             // 날짜 적용도 추가하기
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(announcement: Announcement)
+        fun onItemClick(recruitment: Recruitment)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
