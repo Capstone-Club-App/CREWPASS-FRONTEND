@@ -33,6 +33,7 @@ class RecruitmentEditActivity: AppCompatActivity() {
         context = this
 
         initActionBar()
+        initRecyclerView()
 
         binding.btnDone.setOnClickListener {
             finish()
