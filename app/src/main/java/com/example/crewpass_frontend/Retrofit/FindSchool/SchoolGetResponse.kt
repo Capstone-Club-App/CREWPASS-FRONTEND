@@ -6,11 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class SchoolGetResponse (
-    @SerializedName("dataSearch") val dataSearch : DataSearch
-)
-
-data class DataSearch(
-    @SerializedName("dataSearach") val content : Content
+    @SerializedName("dataSearch") val dataSearch : Content
 )
 
 data class Content(

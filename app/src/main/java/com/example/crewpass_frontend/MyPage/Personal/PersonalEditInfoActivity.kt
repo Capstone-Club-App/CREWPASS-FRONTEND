@@ -18,5 +18,6 @@ class PersonalEditInfoActivity : AppCompatActivity() {
     fun initActionBar() {
         binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
         binding.innerPageTop.appbarPageNameLeftTv.text = "기본정보 편집"
+        binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
     }
 }

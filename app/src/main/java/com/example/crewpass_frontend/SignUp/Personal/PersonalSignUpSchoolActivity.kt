@@ -28,10 +28,9 @@ class PersonalSignUpSchoolActivity : AppCompatActivity(), FindSchoolDialog.Custo
             overridePendingTransition(0,0)
         }
 
-
     }
 
-    override fun onOkButtonClicked() {
-        TODO("Not yet implemented")
+    override fun onOkButtonClicked(school_name : String) {
+        binding.edittextSchool.text = school_name
     }
 }

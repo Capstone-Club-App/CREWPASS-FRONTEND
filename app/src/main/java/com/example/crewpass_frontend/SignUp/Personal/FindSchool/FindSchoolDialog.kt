@@ -24,6 +24,7 @@ class FindSchoolDialog(context: Context, Interface: CustomDialogInterface, gubun
     private lateinit var school_list_rv : RecyclerView
     var querys = HashMap<String, String>()
     var gubun = gubun
+    var school_name = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class FindSchoolDialog(context: Context, Interface: CustomDialogInterface, gubun
         }
 
         okButton.setOnClickListener {
-            customDialogInterface.onOkButtonClicked()
+            customDialogInterface.onOkButtonClicked(school_name)
             dismiss()
         }
 
@@ -51,7 +52,7 @@ class FindSchoolDialog(context: Context, Interface: CustomDialogInterface, gubun
     }
 
     interface CustomDialogInterface {
-        fun onOkButtonClicked()
+        fun onOkButtonClicked(school_name : String)
 
     }
 
@@ -72,11 +73,12 @@ class FindSchoolDialog(context: Context, Interface: CustomDialogInterface, gubun
 
     }
 
-    override fun getSchoolSuccess(result:DataSearch) {
+    override fun getSchoolSuccess(result:Content) {
         if(result == null){
             Log.d("null 들어옴", "")
         }else {
-            val schoolRVAdapter = SchoolRVAdapter(result.content.dataList)
+            val schoolRVAdapter = SchoolRVAdapter()
+            schoolRVAdapter.setItem(result.dataList)
             school_list_rv.adapter = schoolRVAdapter
             school_list_rv.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

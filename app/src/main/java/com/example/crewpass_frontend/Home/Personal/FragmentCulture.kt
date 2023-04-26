@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crewpass_frontend.Data.Announcement
 import com.example.crewpass_frontend.Home.HomeImminentRVAdapter
 import com.example.crewpass_frontend.Home.HomeRecentRVAdapter
+import com.example.crewpass_frontend.Home.Personal.List.AnnouncementDetailActivity
 import com.example.crewpass_frontend.Home.Personal.List.PersonalAnnouncementListActivity
 import com.example.crewpass_frontend.databinding.FragmentCultureBinding
 import com.example.crewpass_frontend.databinding.FragmentPersonalHomeStandardBinding
@@ -57,6 +58,14 @@ class FragmentCulture : Fragment() {
             homeRecentRVAdapter = HomeRecentRVAdapter(recent_list)
             binding.cultureRecentRv.adapter = homeRecentRVAdapter
             binding.cultureRecentRv.layoutManager = LinearLayoutManager(context)
+            homeRecentRVAdapter.setItemClickListener(object :
+                HomeRecentRVAdapter.OnItemClickListener {
+                override fun onItemClick(announcement: Announcement) {
+                    val intent = Intent(context, AnnouncementDetailActivity::class.java)
+                    intent.putExtra("scrap", true)
+                    startActivity(intent) // 지원서 작성으로 이동
+                }
+            })
         }
 
         imminent_list.apply {
@@ -66,6 +75,14 @@ class FragmentCulture : Fragment() {
             homeImminentRVAdapter = HomeImminentRVAdapter(recent_list)
             binding.cultureImminentRv.adapter = homeImminentRVAdapter
             binding.cultureImminentRv.layoutManager = LinearLayoutManager(context)
+            homeImminentRVAdapter.setItemClickListener(object :
+                HomeImminentRVAdapter.OnItemClickListener {
+                override fun onItemClick(announcement: Announcement) {
+                    val intent = Intent(context, AnnouncementDetailActivity::class.java)
+                    intent.putExtra("scrap", true)
+                    startActivity(intent) // 지원서 작성으로 이동
+                }
+            })
         }
     }
 }

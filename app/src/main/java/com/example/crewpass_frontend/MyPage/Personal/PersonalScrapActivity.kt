@@ -31,7 +31,8 @@ class PersonalScrapActivity : AppCompatActivity() {
 
     fun initActionBar() {
         binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
-        binding.innerPageTop.appbarPageNameLeftTv.text = "기본정보 편집"
+        binding.innerPageTop.appbarPageNameLeftTv.text = "스크랩 목록"
+        binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
     }
 
     fun initRecyclerView() {
@@ -54,6 +55,7 @@ class PersonalScrapActivity : AppCompatActivity() {
                 AnnouncementRVAdapter.OnItemClickListener {
                 override fun onItemClick(announcement: Announcement) {
                     val intent = Intent(context, AnnouncementDetailActivity::class.java)
+                    intent.putExtra("scrap", true)
                     startActivity(intent) // 지원서 작성으로 이동
                 }
             })
