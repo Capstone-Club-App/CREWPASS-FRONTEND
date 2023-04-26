@@ -35,9 +35,11 @@ class PersonalAnnouncementListActivity : AppCompatActivity() {
         if (list_state.equals("recent")) {
             binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
             binding.innerPageTop.appbarPageNameLeftTv.text = "최신순"
+            binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
         } else {
             binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
             binding.innerPageTop.appbarPageNameLeftTv.text = "마감임박순"
+            binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
         }
     }
 
@@ -60,6 +62,13 @@ class PersonalAnnouncementListActivity : AppCompatActivity() {
                 announcementRVAdapter = AnnouncementRVAdapter(recent_list)
                 binding.announcementListRv.adapter = announcementRVAdapter
                 binding.announcementListRv.layoutManager = LinearLayoutManager(context)
+                announcementRVAdapter.setItemClickListener(object :
+                    AnnouncementRVAdapter.OnItemClickListener {
+                    override fun onItemClick(announcement: Announcement) {
+                        val intent = Intent(context, AnnouncementDetailActivity::class.java)
+                        startActivity(intent) // 지원서 작성으로 이동
+                    }
+                })
             }
         } else {
             // 마감임박순 데이터 가져오기

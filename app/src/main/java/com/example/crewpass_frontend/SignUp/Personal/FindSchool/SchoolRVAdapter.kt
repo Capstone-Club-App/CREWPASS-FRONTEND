@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.crewpass_frontend.Retrofit.FindSchool.Data
 import com.example.crewpass_frontend.databinding.ItemFindSchoolBinding
 
-class SchoolRVAdapter (private val joinList: MutableList<Data>) : RecyclerView.Adapter<SchoolRVAdapter.ViewHolder>() {
+class SchoolRVAdapter () : RecyclerView.Adapter<SchoolRVAdapter.ViewHolder>() {
 
     lateinit var context: Context
 
+    private var items : List<Data> = ArrayList()
     private val checkList = arrayListOf<CheckStatus>()
 
     // 아이템 레이아웃 결합
@@ -24,13 +25,21 @@ class SchoolRVAdapter (private val joinList: MutableList<Data>) : RecyclerView.A
     }
 
     // 아이템 개수
-    override fun getItemCount(): Int = joinList.size
+    override fun getItemCount(): Int = items.size
+
+    private var mSelectedItem = -1
+
+    fun setItem(item: List<Data>) {
+        items = item
+        mSelectedItem = -1
+        notifyDataSetChanged()
+    }
 
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(joinList[position], checkList[position])
+        holder.bind(items[position])
         holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(joinList[position])
+            itemClickListener.onItemClick(items[position])
             notifyItemChanged(position)
         }
     }
@@ -38,11 +47,11 @@ class SchoolRVAdapter (private val joinList: MutableList<Data>) : RecyclerView.A
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemFindSchoolBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Data, checkList : CheckStatus) {
-            binding.checkboxSchool.isChecked = checkList.isChecked
+        fun bind(data: Data) {
+            binding.checkboxSchool.isChecked = adapterPosition == mSelectedItem
             binding.checkboxSchool.setOnClickListener {
-                checkList.isChecked = binding.checkboxSchool.isChecked
-                notifyItemChanged(adapterPosition)
+                mSelectedItem = adapterPosition
+                notifyItemRangeChanged(0, items.size)
             }
             binding.txtSchool.text = data.schoolName
         }

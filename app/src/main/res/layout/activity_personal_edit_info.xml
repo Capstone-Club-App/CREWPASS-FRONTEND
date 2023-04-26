@@ -10,182 +10,195 @@
         android:id="@+id/inner_page_top"
         layout="@layout/acttionbar_inner_page_top"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintTop_toTopOf="@id/profile_img"
-        app:layout_constraintEnd_toEndOf="@id/profile_img"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/round_square_main_blue"
-        android:drawableStart="@drawable/icon_edit"
-        android:outlineProvider="none"
-        android:paddingStart="3dp"/>
-
-    <!--프로필 이미지-->
-    <ImageView
-        android:id="@+id/profile_img"
-        android:layout_width="141dp"
-        android:layout_height="141dp"
-        android:background="@drawable/round_image"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inner_page_top"
-        android:layout_marginTop="10dp"
-        />
+        app:layout_constraintTop_toBottomOf="@id/inner_page_top">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <!--회원 이름-->
-    <EditText
-        android:id="@+id/edittext_name"
-        android:layout_width="205dp"
-        android:layout_height="39dp"
-        android:textColor="@color/black"
-        android:hint="회원명"
-        android:textSize="16sp"
-        android:textAlignment="center"
-        android:textColorHint="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_img"
-        android:layout_marginTop="5dp"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="@id/profile_img"
+                app:layout_constraintEnd_toEndOf="@id/profile_img"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/round_square_main_blue"
+                android:drawableStart="@drawable/icon_edit"
+                android:outlineProvider="none"
+                android:paddingStart="3dp"/>
 
+            <!--프로필 이미지-->
+            <ImageView
+                android:id="@+id/profile_img"
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:background="@drawable/round_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="20dp"
+                />
 
-    <!--아이디-->
-    <TextView
-        android:id="@+id/personal_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@id/edittext_name"
-        android:layout_marginTop="8dp"
-        android:text="ID"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:textColor="@color/black"/>
-
-    <EditText
-        android:id="@+id/edittext_id"
-        android:layout_width="284dp"
-        android:layout_height="39dp"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="@id/personal_id"
-        app:layout_constraintTop_toBottomOf="@id/personal_id"
-        android:layout_marginTop="5dp"/>
-
-
-
-    <!--패스워드-->
-    <TextView
-        android:id="@+id/personal_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/edittext_id"
-        app:layout_constraintTop_toBottomOf="@id/edittext_id"
-        android:layout_marginTop="8dp"
-        android:text="PW"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:textColor="@color/black"/>
-
-    <EditText
-        android:id="@+id/edittext_password"
-        android:layout_width="284dp"
-        android:layout_height="39dp"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/personal_password"
-        android:layout_marginTop="5dp"/>
+            <!--회원 이름-->
+            <EditText
+                android:id="@+id/edittext_name"
+                android:layout_width="205dp"
+                android:layout_height="39dp"
+                android:textColor="@color/black"
+                android:hint="회원명"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:textColorHint="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_img"
+                android:layout_marginTop="10dp"/>
 
 
-    <!--이메일-->
-    <TextView
-        android:id="@+id/personal_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password"
-        android:layout_marginTop="8dp"
-        android:text="Email"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:textColor="@color/black"/>
+            <!--아이디-->
+            <TextView
+                android:id="@+id/personal_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/edittext_password"
+                app:layout_constraintTop_toBottomOf="@id/edittext_name"
+                android:layout_marginTop="8dp"
+                android:text="ID"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
 
-    <EditText
-        android:id="@+id/edittext_email"
-        android:layout_width="284dp"
-        android:layout_height="39dp"
-        android:textSize="14sp"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="@id/personal_email"
-        app:layout_constraintTop_toBottomOf="@id/personal_email"
-        android:layout_marginTop="5dp"/>
+            <EditText
+                android:id="@+id/edittext_id"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:background="@drawable/edit_text_box"
+                app:layout_constraintStart_toStartOf="@id/personal_id"
+                app:layout_constraintTop_toBottomOf="@id/personal_id"
+                android:layout_marginTop="5dp"/>
 
 
-    <!--직업-->
-    <TextView
-        android:id="@+id/personal_job"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/edittext_email"
-        app:layout_constraintTop_toBottomOf="@id/edittext_email"
-        android:layout_marginTop="8dp"
-        android:text="직업"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:textColor="@color/black"/>
 
-    <EditText
-        android:id="@+id/edittext_job"
-        android:layout_width="284dp"
-        android:layout_height="39dp"
-        android:textSize="14sp"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="@id/personal_job"
-        app:layout_constraintTop_toBottomOf="@id/personal_job"
-        android:layout_marginTop="5dp"/>
+            <!--패스워드-->
+            <TextView
+                android:id="@+id/personal_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/edittext_id"
+                app:layout_constraintTop_toBottomOf="@id/edittext_id"
+                android:layout_marginTop="8dp"
+                android:text="PW"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
 
-    <!--이메일-->
-    <TextView
-        android:id="@+id/personal_school"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/edittext_job"
-        app:layout_constraintTop_toBottomOf="@id/edittext_job"
-        android:layout_marginTop="8dp"
-        android:text="소속 학교"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:textColor="@color/black"/>
-
-    <EditText
-        android:id="@+id/edittext_school"
-        android:layout_width="284dp"
-        android:layout_height="39dp"
-        android:textSize="14sp"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="@id/personal_school"
-        app:layout_constraintTop_toBottomOf="@id/personal_school"
-        android:layout_marginTop="5dp"/>
+            <EditText
+                android:id="@+id/edittext_password"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:background="@drawable/edit_text_box"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personal_password"
+                android:layout_marginTop="5dp"/>
 
 
-    <!--다음-->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_save"
-        android:layout_width="284dp"
-        android:layout_height="39dp"
-        android:text="저장하기"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:background="@drawable/round_square_main_blue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="40dp"/>
+            <!--이메일-->
+            <TextView
+                android:id="@+id/personal_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/edittext_password"
+                app:layout_constraintTop_toBottomOf="@id/edittext_password"
+                android:layout_marginTop="8dp"
+                android:text="Email"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/edittext_email"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:textSize="14sp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edit_text_box"
+                app:layout_constraintStart_toStartOf="@id/personal_email"
+                app:layout_constraintTop_toBottomOf="@id/personal_email"
+                android:layout_marginTop="5dp"/>
+
+
+            <!--직업-->
+            <TextView
+                android:id="@+id/personal_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/edittext_email"
+                app:layout_constraintTop_toBottomOf="@id/edittext_email"
+                android:layout_marginTop="8dp"
+                android:text="직업"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/edittext_job"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:textSize="14sp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edit_text_box"
+                app:layout_constraintStart_toStartOf="@id/personal_job"
+                app:layout_constraintTop_toBottomOf="@id/personal_job"
+                android:layout_marginTop="5dp"/>
+
+            <!--이메일-->
+            <TextView
+                android:id="@+id/personal_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/edittext_job"
+                app:layout_constraintTop_toBottomOf="@id/edittext_job"
+                android:layout_marginTop="8dp"
+                android:text="소속 학교"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/edittext_school"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:textSize="14sp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edit_text_box"
+                app:layout_constraintStart_toStartOf="@id/personal_school"
+                app:layout_constraintTop_toBottomOf="@id/personal_school"
+                android:layout_marginTop="5dp"/>
+
+
+            <!--다음-->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:text="저장하기"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:background="@drawable/round_square_main_blue"
+                app:layout_constraintTop_toBottomOf="@id/edittext_school"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="30dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 

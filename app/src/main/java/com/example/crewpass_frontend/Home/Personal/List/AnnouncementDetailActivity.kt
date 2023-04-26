@@ -2,7 +2,12 @@ package com.example.crewpass_frontend.Home.Personal.List
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.crewpass_frontend.Home.ClubHomeFragment
+import com.example.crewpass_frontend.Home.PersonalHomeFragment
+import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.databinding.ActivityAnnouncementDetailBinding
 
 class AnnouncementDetailActivity: AppCompatActivity() {
@@ -12,9 +17,21 @@ class AnnouncementDetailActivity: AppCompatActivity() {
         binding = ActivityAnnouncementDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initActionBar()
+
+        val key = intent.getBooleanExtra("scrap", false)
+        Log.d("Key : ", key.toString())
+
+        if (key)
+            binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
+
         binding.btnSubmit.setOnClickListener {
             val intent = Intent(this, SubmitAnnouncementActivity::class.java)
             startActivity(intent) // 지원서 작성으로 이동
         }
+    }
+
+    fun initActionBar() {
+        binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
     }
 }

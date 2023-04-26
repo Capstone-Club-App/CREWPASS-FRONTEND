@@ -81,7 +81,7 @@
             android:id="@+id/btn_submit"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:background="@drawable/round_square_light_gray"
+            android:background="@drawable/icon_send_btn"
 
             android:paddingLeft="12.74dp"
             app:layout_constraintBottom_toBottomOf="@+id/edit_message"
