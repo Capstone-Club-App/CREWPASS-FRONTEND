@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.crewpass_frontend.Data.Announcement
+import com.example.crewpass_frontend.Data.Recruitment
 import com.example.crewpass_frontend.Home.HomeImminentRVAdapter
 import com.example.crewpass_frontend.Home.HomeRecentRVAdapter
-import com.example.crewpass_frontend.Home.Personal.List.AnnouncementDetailActivity
-import com.example.crewpass_frontend.Home.Personal.List.PersonalAnnouncementListActivity
+import com.example.crewpass_frontend.Home.Personal.List.RecruitmentDetailActivity
+import com.example.crewpass_frontend.Home.Personal.List.PersonalRecruitmentListActivity
 import com.example.crewpass_frontend.databinding.FragmentLanguageBinding
-import com.example.crewpass_frontend.databinding.FragmentPersonalHomeStandardBinding
-import com.example.crewpass_frontend.databinding.FragmentSportsBinding
 
 class FragmentLanguage : Fragment() {
     lateinit var binding: FragmentLanguageBinding
@@ -22,8 +20,8 @@ class FragmentLanguage : Fragment() {
     lateinit var homeRecentRVAdapter: HomeRecentRVAdapter
     lateinit var homeImminentRVAdapter: HomeImminentRVAdapter
 
-    var recent_list = ArrayList<Announcement>()
-    var imminent_list = ArrayList<Announcement>()
+    var recent_list = ArrayList<Recruitment>()
+    var imminent_list = ArrayList<Recruitment>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +32,13 @@ class FragmentLanguage : Fragment() {
 
 
         binding.btnLanguageRecent.setOnClickListener {
-            val intent = Intent(activity, PersonalAnnouncementListActivity::class.java)
+            val intent = Intent(activity, PersonalRecruitmentListActivity::class.java)
             intent.putExtra("list_state", "recent")
             startActivity(intent)
         }
 
         binding.btnLanguageImminent.setOnClickListener {
-            val intent = Intent(activity, PersonalAnnouncementListActivity::class.java)
+            val intent = Intent(activity, PersonalRecruitmentListActivity::class.java)
             intent.putExtra("list_state", "imminent")
             startActivity(intent)
         }
@@ -53,16 +51,16 @@ class FragmentLanguage : Fragment() {
 
     fun initRecyclerView(){
         recent_list.apply {
-            add(Announcement("최신 동아리1", "제목1", "내용1"))
-            add(Announcement("최신 동아리2", "제목2", "내용2"))
+            add(Recruitment("최신 동아리1", "제목1", "내용1"))
+            add(Recruitment("최신 동아리2", "제목2", "내용2"))
 
             homeRecentRVAdapter = HomeRecentRVAdapter(recent_list)
             binding.languageRecentRv.adapter = homeRecentRVAdapter
             binding.languageRecentRv.layoutManager = LinearLayoutManager(context)
             homeRecentRVAdapter.setItemClickListener(object :
                 HomeRecentRVAdapter.OnItemClickListener {
-                override fun onItemClick(announcement: Announcement) {
-                    val intent = Intent(context, AnnouncementDetailActivity::class.java)
+                override fun onItemClick(recruitment: Recruitment) {
+                    val intent = Intent(context, RecruitmentDetailActivity::class.java)
                     intent.putExtra("scrap", true)
                     startActivity(intent) // 지원서 작성으로 이동
                 }
@@ -70,16 +68,16 @@ class FragmentLanguage : Fragment() {
         }
 
         imminent_list.apply {
-            add(Announcement("최신 동아리1", "제목1", "내용1"))
-            add(Announcement("최신 동아리2", "제목2", "내용2"))
+            add(Recruitment("최신 동아리1", "제목1", "내용1"))
+            add(Recruitment("최신 동아리2", "제목2", "내용2"))
 
             homeImminentRVAdapter = HomeImminentRVAdapter(recent_list)
             binding.languageImminentRv.adapter = homeImminentRVAdapter
             binding.languageImminentRv.layoutManager = LinearLayoutManager(context)
             homeImminentRVAdapter.setItemClickListener(object :
                 HomeImminentRVAdapter.OnItemClickListener {
-                override fun onItemClick(announcement: Announcement) {
-                    val intent = Intent(context, AnnouncementDetailActivity::class.java)
+                override fun onItemClick(recruitment: Recruitment) {
+                    val intent = Intent(context, RecruitmentDetailActivity::class.java)
                     intent.putExtra("scrap", true)
                     startActivity(intent) // 지원서 작성으로 이동
                 }

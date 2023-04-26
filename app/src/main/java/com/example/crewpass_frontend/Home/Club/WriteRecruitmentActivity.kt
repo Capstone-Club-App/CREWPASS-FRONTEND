@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.databinding.ActivityWriteAnnouncementBinding
 
-class WriteAnnouncementActivity: AppCompatActivity() {
+class WriteRecruitmentActivity: AppCompatActivity() {
     lateinit var binding: ActivityWriteAnnouncementBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

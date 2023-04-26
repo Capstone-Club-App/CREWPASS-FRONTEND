@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crewpass_frontend.databinding.ItemQuestionBinding
 
-class QuestionRVAdapter(private val question_list : ArrayList<String>, private val question_marin_list : ArrayList<Int>) : RecyclerView.Adapter<QuestionRVAdapter.ViewHolder>() {
+class QuestionEditRVAdapter(private val question_list : ArrayList<String>, private val question_marin_list : ArrayList<Int>,
+                            private val answer_list : ArrayList<String>, private val answer_count_list : ArrayList<Int>) : RecyclerView.Adapter<QuestionEditRVAdapter.ViewHolder>() {
 
     lateinit var context: Context
 
@@ -26,9 +27,9 @@ class QuestionRVAdapter(private val question_list : ArrayList<String>, private v
 
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(question_list[position], question_marin_list[position], position)
+        holder.bind(question_list[position], question_marin_list[position], position, answer_list[position], answer_count_list[position])
         holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(question_list[position], question_marin_list[position])
+            itemClickListener.onItemClick(question_list[position], question_marin_list[position], answer_list[position], answer_count_list[position])
             notifyItemChanged(position)
         }
     }
@@ -36,15 +37,18 @@ class QuestionRVAdapter(private val question_list : ArrayList<String>, private v
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemQuestionBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(question: String, question_marin : Int, position: Int) {
+        fun bind(question: String, question_marin : Int, position: Int, answer : String, answer_count : Int) {
             binding.txtItemQuestionNum.text = (position+1).toString() + ". "  // 1. 생성
             binding.txtItemQuestion.text = question
             binding.txtItemMarginTextNum.text = question_marin.toString()
+
+            binding.edittextItemAnswer.setText(answer)
+            binding.txtItemCurrentTextNum.text = answer_count.toString()
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(question: String, question_marin : Int)
+        fun onItemClick(question: String, question_marin : Int, answer : String, answer_count: Int)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {

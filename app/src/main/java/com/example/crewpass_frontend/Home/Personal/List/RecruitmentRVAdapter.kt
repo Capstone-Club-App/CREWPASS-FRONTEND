@@ -6,11 +6,11 @@ import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crewpass_frontend.Data.Announcement
+import com.example.crewpass_frontend.Data.Recruitment
 import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.databinding.ItemAnnouncementPersonalBinding
 
-class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announcement>) : RecyclerView.Adapter<AnnouncementRVAdapter.ViewHolder>() {
+class RecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitment>) : RecyclerView.Adapter<RecruitmentRVAdapter.ViewHolder>() {
 
     var announceCheck = SparseBooleanArray()
     lateinit var context: Context
@@ -27,7 +27,7 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
     }
 
     // 아이템 개수
-    override fun getItemCount(): Int = announcement_list.size
+    override fun getItemCount(): Int = recruitment_list.size
 
 
     data class heartSelected(val position: Int, var isSelected : Boolean)
@@ -38,7 +38,7 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
 
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(announcement_list[position])
+        holder.bind(recruitment_list[position])
 
         ////////// ** 이미지 변경해주는 부분 추가
         if(isHeartSelected(position)){
@@ -49,7 +49,7 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
         /////////
 
         holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(announcement_list[position])
+            itemClickListener.onItemClick(recruitment_list[position])
             notifyItemChanged(position)
         }
     }
@@ -57,7 +57,7 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemAnnouncementPersonalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(announcement: Announcement) {
+        fun bind(recruitment: Recruitment) {
 
             ////////// ** 처음 상태(sparseBooleanArray 해당 포지션 안에 아무것도 안 넣었을 때)
             if(announceCheck[adapterPosition] == null){
@@ -86,15 +86,15 @@ class AnnouncementRVAdapter (private val announcement_list: ArrayList<Announceme
             //////////
 
 
-            binding.itemAnnounceDetail.text = announcement.content
-            binding.itemAnnounceTitle.text = announcement.title
+            binding.itemAnnounceDetail.text = recruitment.content
+            binding.itemAnnounceTitle.text = recruitment.title
             // 날짜 적용도 추가하기
         }
     }
 
 
     interface OnItemClickListener {
-        fun onItemClick(announcement: Announcement)
+        fun onItemClick(recruitment: Recruitment)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {

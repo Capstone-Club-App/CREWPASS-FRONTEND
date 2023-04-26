@@ -9,12 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crewpass_frontend.Chat.ChatRoomRVAdapter
 import com.example.crewpass_frontend.Chat.ChattingActivity
-import com.example.crewpass_frontend.Data.Announcement
 import com.example.crewpass_frontend.Data.ChatRoom
-import com.example.crewpass_frontend.Home.Personal.List.AnnouncementDetailActivity
-import com.example.crewpass_frontend.Home.Personal.List.AnnouncementRVAdapter
 import com.example.crewpass_frontend.databinding.FragmentChatBinding
-import com.example.crewpass_frontend.databinding.FragmentClubHomeBinding
 
 class ChatFragment : Fragment() {
     lateinit var binding : FragmentChatBinding
