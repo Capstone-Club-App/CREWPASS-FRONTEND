@@ -1,34 +1,34 @@
-package com.example.crewpass_frontend.SignUp.Personal.FindSchool
+package com.example.crewpass_frontend.AI.Personal
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.crewpass_frontend.Data.Application
 import com.example.crewpass_frontend.Retrofit.FindSchool.Data
-import com.example.crewpass_frontend.databinding.ItemFindSchoolBinding
+import com.example.crewpass_frontend.Timestamp_to_SDF
+import com.example.crewpass_frontend.databinding.ItemApplicationBinding
 
-class SchoolRVAdapter () : RecyclerView.Adapter<SchoolRVAdapter.ViewHolder>() {
+class AIApplicationRVAdapter (private val application_list: ArrayList<Application>) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
 
-    lateinit var context: Context
-
-    private var items : List<Data> = ArrayList()
+    private var items : List<Application> = ArrayList()
 
     // 아이템 레이아웃 결합
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val binding: ItemFindSchoolBinding = ItemFindSchoolBinding.inflate(
+        val binding: ItemApplicationBinding = ItemApplicationBinding.inflate(
             LayoutInflater.from(viewGroup.context),
             viewGroup, false
         )
-        context = viewGroup.context
         return ViewHolder(binding)
     }
 
     // 아이템 개수
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = application_list.size
 
     private var mSelectedItem = -1
 
-    fun setItem(item: List<Data>) {
+    fun setItem(item: List<Application>) {
         items = item
         mSelectedItem = -1
         notifyDataSetChanged()
@@ -36,7 +36,8 @@ class SchoolRVAdapter () : RecyclerView.Adapter<SchoolRVAdapter.ViewHolder>() {
 
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(application_list[position])
+
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(items[position])
             notifyItemChanged(position)
@@ -44,20 +45,25 @@ class SchoolRVAdapter () : RecyclerView.Adapter<SchoolRVAdapter.ViewHolder>() {
     }
 
     // 레이아웃 내 view 연결
-    inner class ViewHolder(val binding: ItemFindSchoolBinding) :
+    inner class ViewHolder(val binding: ItemApplicationBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Data) {
-            binding.checkboxSchool.isChecked = adapterPosition == mSelectedItem
-            binding.checkboxSchool.setOnClickListener {
+        fun bind(application: Application) {
+            binding.txtClubName.text = "동아리 이름"
+
+            val timestampToSdf = Timestamp_to_SDF()
+            binding.itemDateTxt.text = timestampToSdf.convert(application.submit_time)
+
+            binding.itemCheckBox.setOnClickListener {
                 mSelectedItem = adapterPosition
                 notifyItemRangeChanged(0, items.size)
             }
-            binding.txtSchool.text = data.schoolName
+            // 날짜 적용도 추가하기
         }
     }
 
+
     interface OnItemClickListener {
-        fun onItemClick(data: Data)
+        fun onItemClick(application: Application)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {

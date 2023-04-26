@@ -41,7 +41,6 @@ class ApplicationRVAdapter (private val application_list: ArrayList<Application>
 
             // 날짜 적용도 추가하기
 
-
             binding.btnEditApplication.setOnClickListener {
                 val intent = Intent(context, RecruitmentEditActivity::class.java)
                 itemView.context.startActivity(intent)
