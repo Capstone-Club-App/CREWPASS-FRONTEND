@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crewpass_frontend.Data.Application
 import com.example.crewpass_frontend.Data.Question
 import com.example.crewpass_frontend.Home.Personal.List.AnswerList.QuestionEditRVAdapter
-import com.example.crewpass_frontend.Home.Personal.List.AnswerList.QuestionRVAdapter
-import com.example.crewpass_frontend.databinding.ActivityRecruitmentEditBinding
+import com.example.crewpass_frontend.databinding.ActivityApplicationEditBinding
 import java.sql.Timestamp
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RecruitmentEditActivity: AppCompatActivity() {
-    lateinit var binding : ActivityRecruitmentEditBinding
+class ApplicationEditActivity: AppCompatActivity() {
+    lateinit var binding : ActivityApplicationEditBinding
     lateinit var questionEditRVAdapter: QuestionEditRVAdapter
     lateinit var questions : Question
     lateinit var application: Application
@@ -27,7 +26,7 @@ class RecruitmentEditActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRecruitmentEditBinding.inflate(layoutInflater)
+        binding = ActivityApplicationEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         context = this

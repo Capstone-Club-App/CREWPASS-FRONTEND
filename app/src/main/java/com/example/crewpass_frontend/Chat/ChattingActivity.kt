@@ -1,6 +1,7 @@
 package com.example.crewpass_frontend.Chat
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,13 @@ class ChattingActivity:AppCompatActivity() {
         setContentView(binding.root)
 
         initActionBar()
+
+        binding.btnDrawer.setOnClickListener {
+            binding.drawerUserList.visibility = View.VISIBLE
+            if(!binding.drawerUserList.isDrawerOpen(Gravity.RIGHT)){
+                binding.drawerUserList.openDrawer(Gravity.RIGHT)
+            }
+        }
 
         // dummy data
         var chatDatas = mutableListOf<Chat>()

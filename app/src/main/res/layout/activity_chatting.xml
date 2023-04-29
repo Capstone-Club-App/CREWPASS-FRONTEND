@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/etc_btn"
+            android:id="@+id/btn_drawer"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/icon_menu"
@@ -125,5 +125,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_chat_info_iv"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_user_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txt_users"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="대화상대"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="26dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_list_rv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/txt_users"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_chatting_user"/>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

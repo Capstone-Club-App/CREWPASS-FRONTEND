@@ -41,7 +41,6 @@
         <activity android:name=".SignUp.Personal.PersonalSignUpChooseActivity"/>
         <activity android:name=".SignUp.Personal.PersonalSignUpSchoolActivity"/>
         <activity android:name=".SignUp.Personal.PersonalSignUpDoneActivity"/>
-        <activity android:name=".Home.Club.WriteRecruitmentActivity"/>
 
         <!--아이디비번 찾기-->
         <activity android:name=".IDPW_Find.IDPWFindActivity"/>
@@ -50,6 +49,16 @@
         <activity android:name=".Home.Personal.List.PersonalRecruitmentListActivity"/>
         <activity android:name=".Home.Personal.List.RecruitmentDetailActivity"/>
         <activity android:name=".Home.Personal.List.SubmitApplicationActivity"/>
+
+        <activity android:name=".Home.Club.WriteQuestionActivity"/>
+        <activity android:name=".Home.Club.WriteRecruitmentActivity"/>
+        <activity android:name=".Home.Club.List.ClubRecruitmentListActivity"/>
+        <activity android:name=".Home.Club.List.Check.CheckApplicationActivity"/>
+        <activity android:name=".Home.Club.List.CheckRecruitmentActivity"/>
+        <activity android:name=".Home.Club.List.Check.ClubApplicationDetailActivity"/>
+        <activity android:name=".Home.Club.List.ClubRecruitmentDetailActivity"/>
+        <activity android:name=".Home.Club.Recent.RecentRecruitmentDetailActivity"/>
+        <activity android:name=".Home.Club.Recent.ClubRecentListActivity"/>
 
 
         <!--익명 채팅-->
@@ -66,7 +75,7 @@
         <activity android:name=".MyPage.Personal.PersonalEditInfoActivity"/>
         <activity android:name=".MyPage.Personal.PersonalScrapActivity"/>
         <activity android:name=".MyPage.Personal.PersonalSubmitPrevActivity"/>
-        <activity android:name=".MyPage.Personal.RecruitmentEditActivity"/>
+        <activity android:name=".MyPage.Personal.ApplicationEditActivity"/>
     </application>
 
 </manifest>
