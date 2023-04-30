@@ -65,10 +65,15 @@
         <activity android:name=".Chat.ChattingActivity"/>
 
 
-
         <!--AI-->
-        <activity android:name=".AI.Personal.PersonalChooseRecruitmentActivity"/>
+        <activity android:name=".AI.Personal.PersonalChooseApplicationActivity"/>
         <activity android:name=".AI.Personal.PersonalPrepareInterviewActivity"/>
+
+        <activity android:name=".AI.Club.Question.ChooseIdealActivity"/>
+        <activity android:name=".AI.Club.Question.AnalyzeApplicationActivity"/>
+        <activity android:name=".AI.Club.Interview.AIClubChooseApplicationActivity"/>
+        <activity android:name=".AI.Club.Interview.AIClubChooseRecruitmentActivity"/>
+        <activity android:name=".AI.Club.Interview.AnalyzedApplicationActivity"/>
 
 
         <!--마이페이지-->

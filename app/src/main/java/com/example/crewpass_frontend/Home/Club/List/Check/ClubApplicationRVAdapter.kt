@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crewpass_frontend.Data.Application
 import com.example.crewpass_frontend.Timestamp_to_SDF
-import com.example.crewpass_frontend.databinding.ItemApplicationBinding
+import com.example.crewpass_frontend.databinding.ItemPersonalApplicationCheckboxBinding
 
 class ClubApplicationRVAdapter  (private val application_list: ArrayList<Application>) : RecyclerView.Adapter<ClubApplicationRVAdapter.ViewHolder>() {
 
@@ -13,7 +13,7 @@ class ClubApplicationRVAdapter  (private val application_list: ArrayList<Applica
 
     // 아이템 레이아웃 결합
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val binding: ItemApplicationBinding = ItemApplicationBinding.inflate(
+        val binding: ItemPersonalApplicationCheckboxBinding = ItemPersonalApplicationCheckboxBinding.inflate(
             LayoutInflater.from(viewGroup.context),
             viewGroup, false
         )
@@ -42,7 +42,7 @@ class ClubApplicationRVAdapter  (private val application_list: ArrayList<Applica
     }
 
     // 레이아웃 내 view 연결
-    inner class ViewHolder(val binding: ItemApplicationBinding) :
+    inner class ViewHolder(val binding: ItemPersonalApplicationCheckboxBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(application: Application) {
             binding.txtClubName.text = "지원자 이름"

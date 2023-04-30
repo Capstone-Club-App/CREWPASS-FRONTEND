@@ -1,4 +1,4 @@
-package com.example.crewpass_frontend.AI.Personal
+package com.example.crewpass_frontend.AI.Club.Interview
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.crewpass_frontend.Data.Application
 import com.example.crewpass_frontend.Retrofit.FindSchool.Data
 import com.example.crewpass_frontend.Timestamp_to_SDF
-import com.example.crewpass_frontend.databinding.ItemPersonalApplicationCheckboxBinding
+import com.example.crewpass_frontend.databinding.ItemClubApplicationCheckboxBinding
 
 class AIApplicationRVAdapter (private val application_list: ArrayList<Application>) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
 
@@ -16,7 +16,7 @@ class AIApplicationRVAdapter (private val application_list: ArrayList<Applicatio
 
     // 아이템 레이아웃 결합
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val binding: ItemPersonalApplicationCheckboxBinding = ItemPersonalApplicationCheckboxBinding.inflate(
+        val binding: ItemClubApplicationCheckboxBinding = ItemClubApplicationCheckboxBinding.inflate(
             LayoutInflater.from(viewGroup.context),
             viewGroup, false
         )
@@ -45,7 +45,7 @@ class AIApplicationRVAdapter (private val application_list: ArrayList<Applicatio
     }
 
     // 레이아웃 내 view 연결
-    inner class ViewHolder(val binding: ItemPersonalApplicationCheckboxBinding) :
+    inner class ViewHolder(val binding: ItemClubApplicationCheckboxBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(application: Application) {
             binding.txtClubName.text = "동아리 이름"

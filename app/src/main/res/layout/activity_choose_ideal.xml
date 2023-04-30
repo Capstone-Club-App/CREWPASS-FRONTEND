@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp.Club.ClubSignUpFieldActivity">
+
+    <include
+        android:id="@+id/inner_page_top"
+        layout="@layout/acttionbar_inner_page_top" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="원하는 인재상을 선택해보세요"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="114dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sincerity"
+        android:layout_width="142dp"
+        android:layout_height="54dp"
+        android:text="성실"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/button_selector_gray_to_light_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_lively"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="233dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_lively"
+        android:layout_width="142dp"
+        android:layout_height="54dp"
+        android:text="활기참"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/button_selector_gray_to_light_blue"
+        app:layout_constraintStart_toEndOf="@id/btn_sincerity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="240dp"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_bright"
+        android:layout_width="142dp"
+        android:layout_height="54dp"
+        android:text="밝음"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/button_selector_gray_to_light_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_manner"
+        app:layout_constraintTop_toBottomOf="@id/btn_sincerity"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_manner"
+        android:layout_width="142dp"
+        android:layout_height="54dp"
+        android:text="인사성이 바름"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/button_selector_gray_to_light_blue"
+        app:layout_constraintStart_toEndOf="@id/btn_bright"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_sincerity"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_kind"
+        android:layout_width="142dp"
+        android:layout_height="54dp"
+        android:text="친절함"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/button_selector_gray_to_light_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_patience"
+        app:layout_constraintTop_toBottomOf="@id/btn_bright"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_patience"
+        android:layout_width="142dp"
+        android:layout_height="54dp"
+        android:text="끈기"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/button_selector_gray_to_light_blue"
+        app:layout_constraintStart_toEndOf="@id/btn_bright"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_bright"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <!--다음-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_next"
+        android:layout_width="284dp"
+        android:layout_height="39dp"
+        android:text="다음"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:background="@drawable/round_square_main_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="60dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

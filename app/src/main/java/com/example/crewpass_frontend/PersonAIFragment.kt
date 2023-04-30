@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.crewpass_frontend.AI.Personal.PersonalChooseRecruitmentActivity
-import com.example.crewpass_frontend.AI.Personal.PersonalPrepareInterviewActivity
+import com.example.crewpass_frontend.AI.Personal.PersonalChooseApplicationActivity
 import com.example.crewpass_frontend.databinding.FragmentPersonAiBinding
-import com.example.crewpass_frontend.databinding.ItemChatRoomBinding
 
 class PersonAIFragment : Fragment() {
     lateinit var binding: FragmentPersonAiBinding
@@ -23,7 +21,7 @@ class PersonAIFragment : Fragment() {
         initActionBar()
 
         binding.btnQuestionPredict.setOnClickListener {
-            val intent = Intent(activity, PersonalChooseRecruitmentActivity::class.java)
+            val intent = Intent(activity, PersonalChooseApplicationActivity::class.java)
             startActivity(intent)
         }
 
