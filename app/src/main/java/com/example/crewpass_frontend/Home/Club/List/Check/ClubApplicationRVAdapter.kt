@@ -1,16 +1,13 @@
-package com.example.crewpass_frontend.AI.Personal
+package com.example.crewpass_frontend.Home.Club.List.Check
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crewpass_frontend.Data.Application
-import com.example.crewpass_frontend.Retrofit.FindSchool.Data
 import com.example.crewpass_frontend.Timestamp_to_SDF
 import com.example.crewpass_frontend.databinding.ItemPersonalApplicationCheckboxBinding
 
-class AIApplicationRVAdapter (private val application_list: ArrayList<Application>) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
+class ClubApplicationRVAdapter  (private val application_list: ArrayList<Application>) : RecyclerView.Adapter<ClubApplicationRVAdapter.ViewHolder>() {
 
     private var items : List<Application> = ArrayList()
 
@@ -48,7 +45,7 @@ class AIApplicationRVAdapter (private val application_list: ArrayList<Applicatio
     inner class ViewHolder(val binding: ItemPersonalApplicationCheckboxBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(application: Application) {
-            binding.txtClubName.text = "동아리 이름"
+            binding.txtClubName.text = "지원자 이름"
 
             val timestampToSdf = Timestamp_to_SDF()
             binding.itemDateTxt.text = timestampToSdf.convert(application.submit_time)

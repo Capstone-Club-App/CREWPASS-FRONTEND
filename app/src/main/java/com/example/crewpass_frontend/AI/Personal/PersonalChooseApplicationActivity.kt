@@ -11,7 +11,7 @@ import java.sql.Timestamp
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PersonalChooseRecruitmentActivity:AppCompatActivity() {
+class PersonalChooseApplicationActivity:AppCompatActivity() {
     lateinit var binding: ActivityPersonalChooseAnnouncementBinding
     lateinit var context: Context
     var application_list = ArrayList<Application>()

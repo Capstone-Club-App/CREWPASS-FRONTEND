@@ -1,25 +1,34 @@
 package com.example.crewpass_frontend.Chat
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crewpass_frontend.Data.Chat
+import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.databinding.ActivityChattingBinding
+import com.example.crewpass_frontend.databinding.LayoutChattingSlideBinding
 import java.sql.Timestamp
 import java.util.*
 
-class ChattingActivity:AppCompatActivity() {
+class ChattingActivity:AppCompatActivity(), View.OnClickListener {
     lateinit var binding: ActivityChattingBinding
+    lateinit var binding_drawer:LayoutChattingSlideBinding
     lateinit var chatRVAdapter: ChatRVAdapter
     var timestamp = Timestamp(Date().time)
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChattingBinding.inflate(layoutInflater)
+        binding_drawer = LayoutChattingSlideBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initActionBar()
+
 
         // dummy data
         var chatDatas = mutableListOf<Chat>()
@@ -37,6 +46,7 @@ class ChattingActivity:AppCompatActivity() {
 //        val chatAllGetService = ChatAllGetService()
 //        chatAllGetService.setChatAllGetResult(this)
 //        chatAllGetService.getChatAll(chatRoom_id_get)
+        binding.btnDrawer.setOnClickListener(this)
     }
 
 
@@ -97,6 +107,19 @@ class ChattingActivity:AppCompatActivity() {
                         1
                     )
                 )
+            }
+        }
+    }
+
+    override fun onClick(view: View?) {
+        view?.let{
+            when(it.id){
+                R.id.btn_drawer -> {
+                    if(binding.drawerLayout.isDrawerOpen(binding_drawer.llDrawer))
+                        binding.drawerLayout.closeDrawer(binding_drawer.llDrawer)
+                    else
+                        binding.drawerLayout.openDrawer(binding_drawer.llDrawer)
+                }
             }
         }
     }
