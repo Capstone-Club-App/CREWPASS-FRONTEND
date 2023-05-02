@@ -17,9 +17,7 @@ class AnalyzedApplicationActivity: AppCompatActivity() {
         initActionBar()
 
         binding.btnPdf.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
-            finishAffinity()
-            startActivity(intent)
+
         }
     }
 

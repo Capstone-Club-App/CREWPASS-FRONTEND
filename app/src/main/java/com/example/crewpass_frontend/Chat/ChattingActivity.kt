@@ -14,7 +14,7 @@ import com.example.crewpass_frontend.databinding.LayoutChattingSlideBinding
 import java.sql.Timestamp
 import java.util.*
 
-class ChattingActivity:AppCompatActivity(), View.OnClickListener {
+class ChattingActivity:AppCompatActivity() {
     lateinit var binding: ActivityChattingBinding
     lateinit var binding_drawer:LayoutChattingSlideBinding
     lateinit var chatRVAdapter: ChatRVAdapter
@@ -46,7 +46,7 @@ class ChattingActivity:AppCompatActivity(), View.OnClickListener {
 //        val chatAllGetService = ChatAllGetService()
 //        chatAllGetService.setChatAllGetResult(this)
 //        chatAllGetService.getChatAll(chatRoom_id_get)
-        binding.btnDrawer.setOnClickListener(this)
+//        binding.btnDrawer.setOnClickListener(this)
     }
 
 
@@ -111,16 +111,16 @@ class ChattingActivity:AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    override fun onClick(view: View?) {
-        view?.let{
-            when(it.id){
-                R.id.btn_drawer -> {
-                    if(binding.drawerLayout.isDrawerOpen(binding_drawer.llDrawer))
-                        binding.drawerLayout.closeDrawer(binding_drawer.llDrawer)
-                    else
-                        binding.drawerLayout.openDrawer(binding_drawer.llDrawer)
-                }
-            }
-        }
-    }
+//    override fun onClick(view: View?) {
+//        view?.let{
+//            when(it.id){
+//                R.id.btn_drawer -> {
+//                    if(binding.drawerLayout.isDrawerOpen(binding_drawer.llDrawer))
+//                        binding.drawerLayout.closeDrawer(binding_drawer.llDrawer)
+//                    else
+//                        binding.drawerLayout.openDrawer(binding_drawer.llDrawer)
+//                }
+//            }
+//        }
+//    }
 }

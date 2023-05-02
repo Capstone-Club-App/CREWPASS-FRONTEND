@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyPage.Personal.PersonalEditInfoActivity">
+
+    <include
+        android:id="@+id/inner_page_top"
+        layout="@layout/acttionbar_inner_page_top" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inner_page_top">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/round_square_main_blue"
+                android:drawableStart="@drawable/icon_edit"
+                android:outlineProvider="none"
+                android:paddingStart="3dp"
+                app:layout_constraintEnd_toEndOf="@id/profile_img"
+                app:layout_constraintTop_toTopOf="@id/profile_img" />
+
+            <!--프로필 이미지-->
+            <ImageView
+                android:id="@+id/profile_img"
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/round_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--회원 이름-->
+            <EditText
+                android:id="@+id/edittext_name"
+                android:layout_width="205dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="10dp"
+                android:hint="동아리명"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_img" />
+
+
+            <!--아이디-->
+            <TextView
+                android:id="@+id/personal_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="ID"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/edittext_password"
+                app:layout_constraintTop_toBottomOf="@id/edittext_name" />
+
+            <EditText
+                android:id="@+id/edittext_id"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edit_text_box"
+                app:layout_constraintStart_toStartOf="@id/personal_id"
+                app:layout_constraintTop_toBottomOf="@id/personal_id" />
+
+            <!--패스워드-->
+            <TextView
+                android:id="@+id/personal_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="PW"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/edittext_id"
+                app:layout_constraintTop_toBottomOf="@id/edittext_id" />
+
+            <EditText
+                android:id="@+id/edittext_password"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edit_text_box"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personal_password" />
+
+
+            <!--이메일-->
+            <TextView
+                android:id="@+id/club_region"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="활동지역"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/edittext_password"
+                app:layout_constraintTop_toBottomOf="@id/edittext_password" />
+
+            <HorizontalScrollView
+                android:id="@+id/scrollView_region"
+                android:layout_width="284dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:scrollbars="none"
+                app:layout_constraintStart_toStartOf="@id/club_region"
+                app:layout_constraintTop_toBottomOf="@id/club_region">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_all_region"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:text="전체"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_seoul"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="서울"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_gyeongi"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="경기"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_gangwon"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="강원도"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_chungcheon_nam"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="충청남도"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_chungcheon_book"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="충청북도"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_jeolla_nam"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="전라남도"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_jeolla_book"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="전라북도"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_gyeonsang_book"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="경상북도"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_gyeonsang_nam"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="경상남도"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_jeju"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="제주도"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!--활동분야-->
+            <TextView
+                android:id="@+id/personal_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="활동분야"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/scrollView_region"
+                app:layout_constraintTop_toBottomOf="@id/scrollView_region" />
+
+            <HorizontalScrollView
+                android:id="@+id/scrollView_field"
+                android:layout_width="284dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:scrollbars="none"
+                app:layout_constraintStart_toStartOf="@id/personal_job"
+                app:layout_constraintTop_toBottomOf="@id/personal_job">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_art"
+                        android:layout_width="130dp"
+                        android:layout_height="33dp"
+                        android:text="문화/예술/교양"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_volunteer"
+                        android:layout_width="110dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="봉사/사회활동"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_research"
+                        android:layout_width="90dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="학술/교양"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_employment"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="창업/취업"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_language"
+                        android:layout_width="90dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="어학"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_sports"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="체육"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_friend"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="친목"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_etc"
+                        android:layout_width="79dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="5dp"
+                        android:text="기타"
+                        android:textSize="16sp"
+                        android:background="@drawable/button_selector_white_to_light_blue" />
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!--이메일-->
+            <TextView
+                android:id="@+id/txt_chairman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="회장 이메일"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/scrollView_field"
+                app:layout_constraintTop_toBottomOf="@id/scrollView_field" />
+
+            <EditText
+                android:id="@+id/edittext_chairman"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edit_text_box"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/txt_chairman"
+                app:layout_constraintTop_toBottomOf="@id/txt_chairman" />
+
+
+            <!--이메일-->
+            <TextView
+                android:id="@+id/txt_vice_chairman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="부회장 이메일"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/edittext_chairman"
+                app:layout_constraintTop_toBottomOf="@id/edittext_chairman" />
+
+            <EditText
+                android:id="@+id/edittext_vice_chairman"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edit_text_box"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/txt_vice_chairman"
+                app:layout_constraintTop_toBottomOf="@id/txt_vice_chairman" />
+
+
+            <!--다음-->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/round_square_main_blue"
+                android:text="저장하기"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edittext_vice_chairman" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
