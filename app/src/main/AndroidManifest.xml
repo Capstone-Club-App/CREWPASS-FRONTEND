@@ -81,6 +81,10 @@
         <activity android:name=".MyPage.Personal.PersonalScrapActivity"/>
         <activity android:name=".MyPage.Personal.PersonalSubmitPrevActivity"/>
         <activity android:name=".MyPage.Personal.ApplicationEditActivity"/>
+
+        <activity android:name=".MyPage.Club.ClubEditInfoActivity"/>
+        <activity android:name=".MyPage.Club.ClubEditRecruitmentActivity"/>
+        <activity android:name=".MyPage.Club.EditRecruitmentDetailActivity"/>
     </application>
 
 </manifest>

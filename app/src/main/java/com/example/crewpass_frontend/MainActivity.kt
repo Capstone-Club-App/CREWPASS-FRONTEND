@@ -28,11 +28,11 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment_main_container, PersonalHomeFragment())
 
 
+
         binding.navBottom.run {
             setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.menu_home -> {
-
                         if (key.equals("Club"))
                             supportFragmentManager
                                 .beginTransaction()

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.crewpass_frontend.MyPage.Club.ClubEditInfoActivity
+import com.example.crewpass_frontend.MyPage.Club.ClubEditRecruitmentActivity
 import com.example.crewpass_frontend.MyPage.Personal.PersonalEditInfoActivity
 import com.example.crewpass_frontend.MyPage.Personal.PersonalScrapActivity
 import com.example.crewpass_frontend.MyPage.Personal.PersonalSubmitPrevActivity
@@ -23,13 +25,13 @@ class ClubMyPageFragment : Fragment(){
         initActionBar()
 
         binding.btnEditInfo.setOnClickListener {
-//            val intent = Intent(activity, PersonalEditInfoActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(activity, ClubEditInfoActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnEditAnnouncement.setOnClickListener {
-//            val intent = Intent(activity, PersonalScrapActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(activity, ClubEditRecruitmentActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root
