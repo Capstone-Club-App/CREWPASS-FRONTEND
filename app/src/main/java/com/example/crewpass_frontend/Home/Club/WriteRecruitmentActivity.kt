@@ -56,7 +56,6 @@ class WriteRecruitmentActivity: AppCompatActivity() {
     fun initActionBar(){
         binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
         binding.innerPageTop.appbarPageNameLeftTv.text = "모집글 작성"
-
         binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
     }
 }
