@@ -17,22 +17,20 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
-import com.example.crewpass_frontend.Data.SignUp_Club
-import com.example.crewpass_frontend.R
+import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.databinding.ActivityClubSignupBinding
-import com.google.gson.annotations.SerializedName
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.io.Serializable
+
 
 class ClubSignUpActivity : AppCompatActivity() {
     lateinit var binding: ActivityClubSignupBinding
     private var PICK_IMAGE = 1
     var picture : MultipartBody.Part? = null
+    var profile_uri : Uri? = null
     var picture_name : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,24 +39,7 @@ class ClubSignUpActivity : AppCompatActivity() {
 
         binding.btnProfile.setOnClickListener {
             Log.d("click", "")
-            val status = ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-            if (status == PackageManager.PERMISSION_GRANTED) {
-                Log.d("if", "")
-                // Permission 허용
-                getImage()
-            } else {
-                // Permission 허용
-                // 허용 요청
-                Log.d("else", "")
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf<String>(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                    100
-                )
-            }
+            getImage()
         }
 
 
@@ -85,8 +66,8 @@ class ClubSignUpActivity : AppCompatActivity() {
 
             intent.putExtra("club_name", binding.edittextName.text.toString())
             intent.putExtra("club_id", binding.edittextId.text.toString())
-            intent.putExtra("club_passwd", binding.edittextPassword.toString())
-
+            intent.putExtra("club_passwd", binding.edittextPassword.text.toString())
+            intent.putExtra("profile", profile_uri)
 
             startActivity(intent)
             overridePendingTransition(0,0)
@@ -120,22 +101,22 @@ class ClubSignUpActivity : AppCompatActivity() {
         // 돌려받은 resultCode가 정상인지 체크
         if(resultCode == Activity.RESULT_OK){
             // 사진 가져오는 부분
-            if (requestCode == PICK_IMAGE) {
-                val imagePath = data!!.data
+            val imagePath = data!!.data
+            profile_uri = imagePath
+            Log.d("profile_uri : ", profile_uri.toString())
 
-                val file = File(absolutelyPath(imagePath, this))
-                val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
-                val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+            val file = File(absolutelyPath(imagePath, this))
+            val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+            val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+            Log.d("파일 생성!! ======== ", file.name)
+            picture = body
+            picture_name = file.name
+            setAdjImgUri(imagePath!!)
 
-                Log.d("파일 생성!! ======== ", file.name)
-                picture = body
-                picture_name = file.name
-                club_profile_img = picture
-                setAdjImgUri(imagePath!!)
+            Glide.with(this).load(imagePath)
+                .circleCrop()
+                .into(binding.profileImg)
 
-            }else {
-                Toast.makeText(this, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
@@ -176,11 +157,10 @@ class ClubSignUpActivity : AppCompatActivity() {
             BitmapFactory.decodeStream(inputStream, null, bmOptions)?.also { bitmap ->
                 val matrix = Matrix()
                 matrix.preRotate(0f, 0f, 0f)
-                binding.profileImg.setImageBitmap(
-                    Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, false)
-                )
+//                binding.profileImg.setImageBitmap(
+//                    Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, false)
+//                )
             }
         }
     }
 }
-var club_profile_img : MultipartBody.Part? = null

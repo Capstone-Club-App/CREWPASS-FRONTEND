@@ -13,5 +13,5 @@ data class SignUp_Club(
     @SerializedName(value ="field2") val field2 : String?,
     @SerializedName(value ="masterEmail") val crew_master_email : String,
     @SerializedName(value ="subEmail") val crew_sub_email : String,
-    @SerializedName(value ="profile") val crew_profile : MultipartBody.Part
+//    @SerializedName(value ="profile") val crew_profile : MultipartBody.Part
 )

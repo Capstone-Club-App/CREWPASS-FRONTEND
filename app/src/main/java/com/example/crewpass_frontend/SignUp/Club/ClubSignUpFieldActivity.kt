@@ -1,12 +1,14 @@
 package com.example.crewpass_frontend.SignUp.Club
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.databinding.ActivityClubSignupFieldBinding
+import okhttp3.MultipartBody
 
 class ClubSignUpFieldActivity : AppCompatActivity() {
     lateinit var binding: ActivityClubSignupFieldBinding
@@ -23,6 +25,7 @@ class ClubSignUpFieldActivity : AppCompatActivity() {
         var club_passwd = intent.getStringExtra("club_passwd")
         var region1 = intent.getStringExtra("region1")
         var region2 = intent.getStringExtra("region2")
+        val profile : Uri = intent.getParcelableExtra("profile")!!
 
         Log.d("vales : ", "club_name: ${club_name}, club_id: ${club_id}, club_passwd: ${club_passwd}, field1: ${region1}, club_passwd: ${region2}")
 
@@ -36,12 +39,12 @@ class ClubSignUpFieldActivity : AppCompatActivity() {
                 }
                 else {
                     btn_count++
-                    field_list.add("문화/예술/교양")
+                    field_list.add("문화,예술,교양")
                 }
             }
             else{
                 btn_count--
-                field_list.remove("문화/예술/교양")
+                field_list.remove("문화,예술,교양")
             }
 
 
@@ -56,12 +59,12 @@ class ClubSignUpFieldActivity : AppCompatActivity() {
                 }
                 else {
                     btn_count++
-                    field_list.add("봉사/사회활동")
+                    field_list.add("봉사,사회활동")
                 }
             }
             else{
                 btn_count--
-                field_list.remove("봉사/사회활동")
+                field_list.remove("봉사,사회활동")
             }
         }
 
@@ -75,12 +78,12 @@ class ClubSignUpFieldActivity : AppCompatActivity() {
                 }
                 else {
                     btn_count++
-                    field_list.add("학술/교양")
+                    field_list.add("학술,교양")
                 }
             }
             else{
                 btn_count--
-                field_list.remove("학술/교양")
+                field_list.remove("학술,교양")
             }
         }
 
@@ -93,12 +96,12 @@ class ClubSignUpFieldActivity : AppCompatActivity() {
                 }
                 else {
                     btn_count++
-                    field_list.add("창업/취업")
+                    field_list.add("창업,취업")
                 }
             }
             else{
                 btn_count--
-                field_list.remove("창업/취업")
+                field_list.remove("창업,취업")
             }
         }
 
@@ -182,7 +185,11 @@ class ClubSignUpFieldActivity : AppCompatActivity() {
             intent.putExtra("region1", region1)
             intent.putExtra("region2", region2)
             intent.putExtra("field1", field_list[0])
-            intent.putExtra("field2", field_list[1])
+            if(field_list.size != 1)
+                intent.putExtra("field2", field_list[1])
+            else
+                intent.putExtra("field2", "null")
+            intent.putExtra("profile", profile)
             startActivity(intent)
             overridePendingTransition(0,0)
         }
