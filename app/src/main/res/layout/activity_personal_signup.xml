@@ -30,6 +30,19 @@
         android:layout_marginTop="30dp"
         />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_profile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/round_square_main_blue"
+        android:drawableStart="@drawable/icon_camera"
+        android:outlineProvider="none"
+        android:paddingStart="3dp"
+        app:layout_constraintEnd_toEndOf="@id/profile_img"
+        app:layout_constraintTop_toTopOf="@id/profile_img" />
+
     <!--회원 이름-->
     <TextView
         android:id="@+id/personal_name"
@@ -96,6 +109,7 @@
         android:text="사용가능한 아이디입니다."
         android:textSize="10sp"
         android:textColor="@color/green"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/edittext_id"
         app:layout_constraintStart_toStartOf="@id/edittext_id"
         />
@@ -186,10 +200,10 @@
 
     <!--중복확인 버튼-->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_send_number"
+        android:id="@+id/btn_email_compare"
         android:layout_width="87dp"
         android:layout_height="38dp"
-        android:text="인증번호 전송"
+        android:text="중복 확인"
         android:textColor="@color/black"
         android:background="@drawable/round_square_light_blue"
         app:layout_constraintStart_toEndOf="@id/edittext_id"
@@ -197,29 +211,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"/>
 
-    <EditText
-        android:id="@+id/edittext_number"
-        android:layout_width="186dp"
-        android:layout_height="39dp"
-        android:hint="인증번호 입력"
-        android:textSize="14sp"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="@id/edittext_email"
-        app:layout_constraintTop_toBottomOf="@id/edittext_email"
-        android:layout_marginTop="5dp"/>
-
-    <!--중복확인 버튼-->
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="87dp"
-        android:layout_height="38dp"
-        android:text="인증번호 확인"
-        android:textColor="@color/black"
-        android:background="@drawable/round_square_light_blue"
-        app:layout_constraintStart_toEndOf="@id/edittext_id"
-        app:layout_constraintTop_toBottomOf="@id/edittext_email"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"/>
 
     <!--다음-->
     <androidx.appcompat.widget.AppCompatButton

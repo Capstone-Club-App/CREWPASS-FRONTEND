@@ -1,12 +1,14 @@
 package com.example.crewpass_frontend.SignUp.Club
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.databinding.ActivityClubSignupRegionBinding
+import okhttp3.MultipartBody
 
 class ClubSignUpRegionActivity : AppCompatActivity() {
     lateinit var binding : ActivityClubSignupRegionBinding
@@ -21,8 +23,10 @@ class ClubSignUpRegionActivity : AppCompatActivity() {
         var club_name = intent.getStringExtra("club_name")
         var club_id = intent.getStringExtra("club_id")
         var club_passwd = intent.getStringExtra("club_passwd")
+        val profile : Uri = intent.getParcelableExtra("profile")!!
 
-        Log.d("vales : ", "club_name: ${club_name}, club_id: ${club_id}, club_passwd: ${club_passwd}")
+
+        Log.d("vales : ", "club_name: ${club_name}, club_id: ${club_id}, club_passwd: ${club_passwd}, profile: ${profile}")
 
         binding.btnAllRegion.setOnClickListener {
             binding.btnAllRegion.isSelected = !binding.btnAllRegion.isSelected
@@ -304,7 +308,11 @@ class ClubSignUpRegionActivity : AppCompatActivity() {
             intent.putExtra("club_id", club_id)
             intent.putExtra("club_passwd", club_passwd)
             intent.putExtra("region1", region_list[0])
-            intent.putExtra("region2", region_list[1])
+            if(region_list.size != 1)
+                intent.putExtra("region2", region_list[1])
+            else
+                intent.putExtra("region2", "null")
+            intent.putExtra("profile", profile)
             startActivity(intent)
             overridePendingTransition(0,0)
         }

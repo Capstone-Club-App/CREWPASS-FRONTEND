@@ -59,14 +59,25 @@
     
     <EditText
         android:id="@+id/edittext_name"
-        android:layout_width="284dp"
+        android:layout_width="186dp"
         android:layout_height="39dp"
         android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/edittext_password"
         app:layout_constraintTop_toBottomOf="@id/club_name"
         android:layout_marginTop="5dp"/>
 
+    <!--중복확인 버튼-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_name_compare"
+        android:layout_width="87dp"
+        android:layout_height="38dp"
+        android:text="중복확인"
+        android:textColor="@color/black"
+        android:background="@drawable/round_square_light_blue"
+        app:layout_constraintStart_toEndOf="@id/edittext_id"
+        app:layout_constraintTop_toBottomOf="@id/club_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"/>
 
     <!--아이디-->
     <TextView
@@ -92,6 +103,7 @@
     
     <!--중복확인 버튼-->
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_id_compare"
         android:layout_width="87dp"
         android:layout_height="38dp"
         android:text="중복확인"
@@ -111,6 +123,7 @@
         android:text="사용가능한 아이디입니다."
         android:textSize="10sp"
         android:textColor="@color/green"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/edittext_id"
         app:layout_constraintStart_toStartOf="@id/edittext_id"
         />
