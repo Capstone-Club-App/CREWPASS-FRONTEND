@@ -3,6 +3,8 @@ package com.example.crewpass_frontend.SignUp.Club
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,7 +17,10 @@ import com.example.crewpass_frontend.databinding.ActivityClubSignupEmailBinding
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.IOException
+import java.io.InputStream
 
 class ClubSignUpEmailActivity : AppCompatActivity(), SignUpResult {
     lateinit var binding: ActivityClubSignupEmailBinding
@@ -52,9 +57,28 @@ class ClubSignUpEmailActivity : AppCompatActivity(), SignUpResult {
 
     fun signUp(profile : Uri){
         Log.d("profile_uri : ", profile.toString())
+
+        var body : MultipartBody.Part? = null
+
         val file = File(absolutelyPath(profile, this))
+
+//        var inputStream : InputStream? = null
+//
+//        try{
+//            inputStream = this.contentResolver.openInputStream(profile)
+//        }catch (e : IOException){
+//            e.printStackTrace()
+//        }
+//
+//        val bitmap = BitmapFactory.decodeStream(inputStream)
+//        val byteArrayOutputStream = ByteArrayOutputStream()
+//        bitmap.compress(Bitmap.CompressFormat.JPEG,20, byteArrayOutputStream)
+//
+//        val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
+//        val uploadFile = MultipartBody.Part.createFormData("profile", file.getName() ,requestBody)
+
         val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
-        val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+        body = MultipartBody.Part.createFormData("profile", file.name, requestFile)
 
         Log.d("파일 이름 : ", file.name)
         Log.d("body- profile : ", body.toString())

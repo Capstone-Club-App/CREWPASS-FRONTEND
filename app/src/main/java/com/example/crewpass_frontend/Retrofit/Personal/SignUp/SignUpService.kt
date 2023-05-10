@@ -1,4 +1,4 @@
-package com.example.crewpass_frontend.Retrofit.Club.SignUp
+package com.example.crewpass_frontend.Retrofit.Personal.SignUp
 
 import android.util.Log
 import com.example.crewpass_frontend.Data.Crew
