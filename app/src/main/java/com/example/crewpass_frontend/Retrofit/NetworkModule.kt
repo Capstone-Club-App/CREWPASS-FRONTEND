@@ -1,12 +1,16 @@
 package com.example.crewpass_frontend
 
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Response
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import okhttp3.*
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
+import java.net.CookieManager
 
 const val BASE_URL = "http://34.64.142.47:8080"
 
@@ -14,33 +18,56 @@ const val BASE_URL = "http://34.64.142.47:8080"
 private const val CONNECT_TIMEOUT_SEC = 20000L
 
 fun getRetrofit(): Retrofit {
+    val okHttpClient = OkHttpClient.Builder()
+        .cookieJar(JavaNetCookieJar(CookieManager()))
+        .build()
 
     val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-//        .client(provideOkHttpClient(AppInterceptor()))
+        .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     return retrofit
 }
+//
+//object CookieManager {
+//    private const val PREFS_NAME = "CookiePrefs"
+//    private const val PREFS_COOKIE = "Cookies"
+//
+//    private val cookiePrefs: SharedPreferences by lazy {
+//        MyApp.instance.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+//    }
+//
+//    fun saveCookies(cookies: List<Cookie>) {
+//        val cookiesJson = Gson().toJson(cookies)
+//        cookiePrefs.edit().putString(PREFS_COOKIE, cookiesJson).apply()
+//    }
+//
+//    fun loadCookies(): List<Cookie> {
+//        val cookiesJson = cookiePrefs.getString(PREFS_COOKIE, null)
+//        return if (cookiesJson != null) {
+//            val type = object : TypeToken<List<Cookie>>() {}.type
+//            Gson().fromJson(cookiesJson, type)
+//        } else {
+//            emptyList()
+//        }
+//    }
+//
+//    fun clearCookies() {
+//        cookiePrefs.edit().remove(PREFS_COOKIE).apply()
+//    }
+//}
 
-private fun provideOkHttpClient(
-    interceptor: AppInterceptor
-): OkHttpClient = OkHttpClient.Builder()
-    .run {
-        addInterceptor(interceptor)
-        build()
+
+class MyApp : Application() {
+    companion object {
+        lateinit var instance: MyApp
+            private set
     }
 
-class AppInterceptor : Interceptor {
-    @Throws(IOException::class)
-    override fun intercept(chain: Interceptor.Chain)
-            : Response = with(chain) {
-        val newRequest = request().newBuilder()
-            .addHeader("X-Naver-Client-Id", "33chRuAiqlSn5hn8tIme")
-            .addHeader("X-Naver-Client-Secret", "fyfwt9PCUN")
-            .build()
-
-        proceed(newRequest)
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
     }
 }

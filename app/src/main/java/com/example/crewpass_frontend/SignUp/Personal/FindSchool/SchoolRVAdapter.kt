@@ -53,6 +53,7 @@ class SchoolRVAdapter () : RecyclerView.Adapter<SchoolRVAdapter.ViewHolder>() {
                 notifyItemRangeChanged(0, items.size)
             }
             binding.txtSchool.text = data.schoolName
+            school_name_selected = data.schoolName
         }
     }
 
@@ -67,3 +68,4 @@ class SchoolRVAdapter () : RecyclerView.Adapter<SchoolRVAdapter.ViewHolder>() {
     private lateinit var itemClickListener: OnItemClickListener
 
 }
+var school_name_selected = ""

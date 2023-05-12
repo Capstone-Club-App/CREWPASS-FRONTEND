@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.Login.LoginActivity
-import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.databinding.ActivityPersonalSignupDoneBinding
 
 class PersonalSignUpDoneActivity : AppCompatActivity() {
