@@ -15,6 +15,7 @@ import com.example.crewpass_frontend.Retrofit.Club.SignUp.SignUpResult
 import com.example.crewpass_frontend.Retrofit.Club.SignUp.SignUpService
 import com.example.crewpass_frontend.databinding.ActivityClubSignupEmailBinding
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.ByteArrayOutputStream
@@ -77,7 +78,7 @@ class ClubSignUpEmailActivity : AppCompatActivity(), SignUpResult {
 //        val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
 //        val uploadFile = MultipartBody.Part.createFormData("profile", file.getName() ,requestBody)
 
-        val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+        val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
         body = MultipartBody.Part.createFormData("profile", file.name, requestFile)
 
         Log.d("파일 이름 : ", file.name)

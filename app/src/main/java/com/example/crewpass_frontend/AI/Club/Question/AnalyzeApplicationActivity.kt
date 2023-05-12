@@ -1,11 +1,8 @@
 package com.example.crewpass_frontend.AI.Club.Question
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.crewpass_frontend.Login.LoginActivity
-import com.example.crewpass_frontend.MainActivity
 import com.example.crewpass_frontend.databinding.ActivityAnalyzeApplicationBinding
 
 class AnalyzeApplicationActivity: AppCompatActivity() {

@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.databinding.ActivityClubSignupBinding
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
@@ -106,7 +107,7 @@ class ClubSignUpActivity : AppCompatActivity() {
             Log.d("profile_uri : ", profile_uri.toString())
 
             val file = File(absolutelyPath(imagePath, this))
-            val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+            val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
             val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
             Log.d("파일 생성!! ======== ", file.name)
             picture = body

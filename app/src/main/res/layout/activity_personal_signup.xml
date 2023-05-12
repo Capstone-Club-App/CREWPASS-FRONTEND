@@ -90,6 +90,7 @@
     
     <!--중복확인 버튼-->
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_id_compare"
         android:layout_width="87dp"
         android:layout_height="38dp"
         android:text="중복확인"
