@@ -39,7 +39,11 @@ class RecruitmentAllService {
             }
         })
     }
+    private lateinit var recruitmentGetDetailResult: RecruitmentGetDetailResult
 
+    fun setRecruitmentGetDetailResultt(recruitmentGetDetailResult: RecruitmentGetDetailResult){
+        this.recruitmentGetDetailResult = recruitmentGetDetailResult
+    }
     fun getRecruitmentDetail(recruitment_id : Int){
         val authService = getRetrofit().create(RecruitmentRetrofitInterfaces::class.java)
         authService.getRecruitmenDetail(recruitment_id).enqueue(object :
@@ -50,10 +54,10 @@ class RecruitmentAllService {
                     val resp: RecruitmentDetailResponse = response.body()!!
                     when (resp.statusCode) {
                         200 -> {
-                            recruitmentGetAllResult.recruitmentGetAllSuccess(resp.statusCode, resp.data)
+                            recruitmentGetDetailResult.recruitmentGetDetailSuccess(resp.statusCode, resp.data)
                         }
                         else -> {
-                            recruitmentGetAllResult.recruitmentGetAllFailure(resp.statusCode)
+                            recruitmentGetDetailResult.recruitmentGetDetailFailure(resp.statusCode)
                         }
                     }
                 }
