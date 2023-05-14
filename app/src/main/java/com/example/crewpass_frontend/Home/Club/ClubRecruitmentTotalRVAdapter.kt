@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.crewpass_frontend.Data.Recruitment
-import com.example.crewpass_frontend.Retrofit.Club.Recruitment.RecruitmentData
 import com.example.crewpass_frontend.databinding.ItemAnnouncementClubBinding
 import java.text.SimpleDateFormat
+import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment
 
-class ClubRecruitmentRVAdapter (private val recruitment_list: ArrayList<RecruitmentData>) : RecyclerView.Adapter<ClubRecruitmentRVAdapter.ViewHolder>() {
+class ClubRecruitmentTotalRVAdapter (private val recruitment_list: ArrayList<Recruitment>) : RecyclerView.Adapter<ClubRecruitmentTotalRVAdapter.ViewHolder>() {
 
     lateinit var context: Context
 
@@ -40,7 +39,7 @@ class ClubRecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitm
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemAnnouncementClubBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(recruitment: RecruitmentData) {
+        fun bind(recruitment: Recruitment) {
 //            binding.itemAnnounceDetail.text = recruitment.content
             binding.itemAnnounceTitle.text = recruitment.title
 
@@ -70,7 +69,7 @@ class ClubRecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitm
     }
 
     interface OnItemClickListener {
-        fun onItemClick(recruitment: RecruitmentData)
+        fun onItemClick(recruitment: Recruitment)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {

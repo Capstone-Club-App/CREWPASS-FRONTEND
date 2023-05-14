@@ -12,7 +12,6 @@ class ClubLoginService {
     fun setLoginResult(clubLoginResult: ClubLoginResult){
         this.clubLoginResult = clubLoginResult
     }
-
     fun login(loginId : String,
               password : String){
         val authService = getRetrofit().create(ClubLoginRetrofitInterfaces::class.java)
