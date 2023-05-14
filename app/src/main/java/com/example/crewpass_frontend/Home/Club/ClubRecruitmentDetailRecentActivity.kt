@@ -1,4 +1,4 @@
-package com.example.crewpass_frontend.Home.Club.List
+package com.example.crewpass_frontend.Home.Club
 
 import android.content.Context
 import android.content.Intent
@@ -11,14 +11,15 @@ import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.DetailResult
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentAllService
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetDetailResult
 import com.example.crewpass_frontend.databinding.ActivityClubRecruitmentDetailBinding
+import com.example.crewpass_frontend.databinding.ActivityClubRecruitmentDetailRecentBinding
 import java.text.SimpleDateFormat
 
-class ClubRecruitmentDetailActivity: AppCompatActivity(), RecruitmentGetDetailResult {
-    lateinit var binding : ActivityClubRecruitmentDetailBinding
+class ClubRecruitmentDetailRecentActivity: AppCompatActivity(), RecruitmentGetDetailResult {
+    lateinit var binding : ActivityClubRecruitmentDetailRecentBinding
     lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityClubRecruitmentDetailBinding.inflate(layoutInflater)
+        binding = ActivityClubRecruitmentDetailRecentBinding.inflate(layoutInflater)
         setContentView(binding.root)
         context = this
 
@@ -29,11 +30,6 @@ class ClubRecruitmentDetailActivity: AppCompatActivity(), RecruitmentGetDetailRe
             val recruitmentAllService = RecruitmentAllService()
             recruitmentAllService.setRecruitmentGetDetailResultt(this)
             recruitmentAllService.getRecruitmentDetail(recruitment_id)
-        }
-
-        binding.btnCheckApplication.setOnClickListener {
-            val intent = Intent(this, CheckApplicationActivity::class.java)
-            startActivity(intent) // 지원서 작성으로 이동
         }
     }
 

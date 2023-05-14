@@ -65,6 +65,8 @@ class ClubRecruitmentTotalRVAdapter (private val recruitment_list: ArrayList<Rec
             Glide.with(context).load(recruitment.crew_profile)
                 .circleCrop()
                 .into(binding.profileImg)
+
+            binding.itemAnnounceDetail.text = recruitment.crew_name
         }
     }
 

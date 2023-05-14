@@ -205,21 +205,6 @@
                 android:textColor="@color/black"
                 android:background="@drawable/edit_text_box"
                 />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_check_application"
-                android:layout_width="284dp"
-                android:layout_height="39dp"
-                android:text="지원서 확인"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:background="@drawable/round_square_main_blue"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView_image"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

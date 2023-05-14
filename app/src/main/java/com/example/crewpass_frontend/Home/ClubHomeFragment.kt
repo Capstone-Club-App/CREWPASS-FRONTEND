@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.crewpass_frontend.Home.Club.ClubRecruitmentDetailRecentActivity
 import com.example.crewpass_frontend.Home.Club.ClubRecruitmentRVAdapter
 import com.example.crewpass_frontend.Home.Club.ClubRecruitmentTotalRVAdapter
+import com.example.crewpass_frontend.Home.Club.List.ClubRecruitmentDetailActivity
 import com.example.crewpass_frontend.Home.Club.List.ClubRecruitmentListActivity
 import com.example.crewpass_frontend.Home.Club.Recent.ClubRecentListActivity
 
 import com.example.crewpass_frontend.Home.Club.WriteRecruitmentActivity
+import com.example.crewpass_frontend.Home.Personal.List.RecruitmentDetailActivity
 import com.example.crewpass_frontend.Login.logined_id
 import com.example.crewpass_frontend.Retrofit.Club.Recruitment.RecruitmentData
 import com.example.crewpass_frontend.Retrofit.Club.Recruitment.RecruitmentGetResult
@@ -83,7 +86,9 @@ class ClubHomeFragment:Fragment(), RecruitmentGetResult, RecruitmentGetAllResult
             announcementRVAdapter.setItemClickListener(object :
                 ClubRecruitmentRVAdapter.OnItemClickListener{
                 override fun onItemClick(recruitment: RecruitmentData) {
-                    Log.d("상세보기로 이동", "")
+                    val intent = Intent(context, ClubRecruitmentDetailActivity::class.java)
+                    intent.putExtra("recruitment_id", recruitment.recruitment_id)
+                    startActivity(intent) // 상세보기
                 }
             })
         }
@@ -113,7 +118,9 @@ class ClubHomeFragment:Fragment(), RecruitmentGetResult, RecruitmentGetAllResult
         recruitmentTotalRVAdapter.setItemClickListener(object :
             ClubRecruitmentTotalRVAdapter.OnItemClickListener{
             override fun onItemClick(recruitment: Recruitment) {
-                Log.d("상세보기로 이동", "")
+                val intent = Intent(context, ClubRecruitmentDetailRecentActivity::class.java)
+                intent.putExtra("recruitment_id", recruitment.recruitment_id)
+                startActivity(intent) // 상세보기
             }
         })
     }

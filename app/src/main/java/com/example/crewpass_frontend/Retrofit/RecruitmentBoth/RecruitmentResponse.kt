@@ -28,11 +28,11 @@ data class Recruitment(
 data class RecruitmentDetailResponse(
     @SerializedName(value ="statusCode") val statusCode : Int,
     @SerializedName(value = "responseMessage") val responseMessage : Any?,
-    @SerializedName(value = "data") val data : ArrayList<Recruitment>
+    @SerializedName(value = "data") val data : ArrayList<DetailResult>
 )
 
 data class DetailResult(
-    @SerializedName(value = "content") val content : Int,
+    @SerializedName(value = "content") val content : String,
     @SerializedName(value = "crew_Id") val crew_id : Int,
     @SerializedName(value = "question_id") val question_id : Int,
     @SerializedName(value = "register_time") val register_time : Timestamp,
