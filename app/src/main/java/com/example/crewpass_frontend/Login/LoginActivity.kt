@@ -7,9 +7,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.IDPW_Find.IDPWFindActivity
 import com.example.crewpass_frontend.MainActivity
+import com.example.crewpass_frontend.Retrofit.Club.Club.ClubGetResult
+import com.example.crewpass_frontend.Retrofit.Club.Club.ClubService
 import com.example.crewpass_frontend.Retrofit.Club.LogIn.*
 import com.example.crewpass_frontend.Retrofit.Personal.LogIn.Data
 import com.example.crewpass_frontend.Retrofit.Club.LogIn.ClubLoginService
@@ -19,7 +22,7 @@ import com.example.crewpass_frontend.SignUp.Personal.PersonalSignUpActivity
 import com.example.crewpass_frontend.SignUp.SignUpDialog
 import com.example.crewpass_frontend.databinding.ActivityLoginBinding
 
-class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.SignUpDialogInterface, PersonalLoginResult, ClubLoginResult {
+class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.SignUpDialogInterface, PersonalLoginResult, ClubLoginResult{
     lateinit var binding: ActivityLoginBinding
     lateinit var pref : SharedPreferences
     var string = ""
@@ -73,45 +76,22 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
 
         // 로그인 버튼
         binding.btnLogin.setOnClickListener {
-            if(string.equals("Personal")){
-                val personalLoginService = PersonalLoginService()
-                personalLoginService.setLoginResult(this)
-                personalLoginService.login(binding.edittextId.text.toString(), binding.edittextPassword.text.toString())
+            if(club_clicked == false && personal_clicked == false){
+                Toast.makeText(this, "로그인 타입을 선택해주세요(일반/동아리)", Toast.LENGTH_LONG)
             }
             else{
-                val clubLoginService = ClubLoginService()
-                clubLoginService.setLoginResult(this)
-                clubLoginService.login(binding.edittextId.text.toString(), binding.edittextPassword.text.toString())
+                if(string.equals("Personal")){
+                    val personalLoginService = PersonalLoginService()
+                    personalLoginService.setLoginResult(this)
+                    personalLoginService.login(binding.edittextId.text.toString(), binding.edittextPassword.text.toString())
+                }
+                else{
+                    val clubLoginService = ClubLoginService()
+                    clubLoginService.setLoginResult(this)
+                    clubLoginService.login(binding.edittextId.text.toString(), binding.edittextPassword.text.toString())
+                }
             }
 
-//            val authService = getRetrofit().create(LoginRetrofitInterfaces::class.java)
-//
-//            authService.login(Data(binding.edittextId.text.toString(), binding.edittextPassword.text.toString())).enqueue(object :
-//                Callback<LoginResponse> {
-//                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>,) {
-//                    if(response.body() != null) {
-//                        Log.d("LOGIN-SUCCESS",response.toString())
-//                        val resp: LoginResponse = response.body()!!
-//                        when (resp.statusCode) {
-//                            200 -> {
-//
-//
-//                            }
-//                            else -> {
-//
-//
-//                            }
-//                        }
-//                    }
-//                    else
-//                        Log.d("LOGIN-FAILURE", "NULL")
-//
-//                }
-//
-//                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                    Log.d("LOGIN-FAILURE",t.message.toString())
-//                }
-//            })
         }
 
 
@@ -145,25 +125,53 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
     }
 
     override fun clubLoginSuccess(code: Int, data : ClubData) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("Key", string)
-        startActivity(intent)
+//        get_club()
+        logined_id = data.crew_user_id
+        Log.d("logined_id : ", logined_id.toString())
+        val dlg = MyCustomDialog(this, this)
+        dlg.show()
+
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.putExtra("Key", string)
+//        startActivity(intent)
     }
 
     override fun clubLoginUpFailure(code: Int) {
         Log.d("LOGIN-FAILURE", "로그인 실패")
     }
 
+//    fun get_club(){
+//        val clubService = ClubService()
+//        clubService.setRecruitmentResult(this)
+//        clubService.getClub()
+//    }
+
+
+//    override fun clubGetSuccess(code: Int, data: com.example.crewpass_frontend.Retrofit.Club.Club.ClubData) {
+//        Log.d("동아리 정보 불러오기 성공", "")
+//        logined_id = data.crew_id
+//        Log.d("logined_id : ", logined_id.toString())
+//    }
+//
+//    override fun clubGetFailure(code: Int) {
+//        Log.d("동아리 정보 불러오기 실패", "")
+//    }
+
+
     override fun personalLoginSuccess(
         code: Int,
         data: Data
     ) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("Key", string)
-        startActivity(intent)
+        logined_id = data.crew_user_id
+        val dlg = MyCustomDialog(this, this)
+        dlg.show()
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.putExtra("Key", string)
+//        startActivity(intent)
     }
 
     override fun personalLoginUpFailure(code: Int) {
         Log.d("LOGIN-FAILURE", "로그인 실패")
     }
 }
+var logined_id = 0

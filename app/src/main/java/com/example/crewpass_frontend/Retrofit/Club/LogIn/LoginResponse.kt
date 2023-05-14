@@ -9,6 +9,7 @@ data class LoginResponse (
 )
 
 data class ClubData(
+    @SerializedName(value = "crew_user_id") val crew_user_id : Int,
     @SerializedName(value = "loginId") val loginId : String,
     @SerializedName(value = "password") val password : String
 )
