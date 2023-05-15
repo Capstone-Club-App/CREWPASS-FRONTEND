@@ -60,24 +60,7 @@ class ClubSignUpEmailActivity : AppCompatActivity(), SignUpResult {
         Log.d("profile_uri : ", profile.toString())
 
         var body : MultipartBody.Part? = null
-
         val file = File(absolutelyPath(profile, this))
-
-//        var inputStream : InputStream? = null
-//
-//        try{
-//            inputStream = this.contentResolver.openInputStream(profile)
-//        }catch (e : IOException){
-//            e.printStackTrace()
-//        }
-//
-//        val bitmap = BitmapFactory.decodeStream(inputStream)
-//        val byteArrayOutputStream = ByteArrayOutputStream()
-//        bitmap.compress(Bitmap.CompressFormat.JPEG,20, byteArrayOutputStream)
-//
-//        val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
-//        val uploadFile = MultipartBody.Part.createFormData("profile", file.getName() ,requestBody)
-
         val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
         body = MultipartBody.Part.createFormData("profile", file.name, requestFile)
 

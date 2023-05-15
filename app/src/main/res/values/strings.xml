@@ -4,4 +4,12 @@
     <string name="menu_chat">채팅</string>
     <string name="menu_ai">AI</string>
     <string name="menu_mypage">마이페이지</string>
+
+    <string-array name="spinner_txt">
+        <item>100자</item>
+        <item>200자</item>
+        <item>300자</item>
+        <item>400자</item>
+        <item>500자</item>
+    </string-array>
 </resources>

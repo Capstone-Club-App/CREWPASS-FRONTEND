@@ -18,6 +18,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.crewpass_frontend.Retrofit.Club.SignUp.CheckDuplicateCrewIDResult
+import com.example.crewpass_frontend.Retrofit.Club.SignUp.CheckDuplicateCrewNameResult
+import com.example.crewpass_frontend.Retrofit.Club.SignUp.SignUpService
 import com.example.crewpass_frontend.databinding.ActivityClubSignupBinding
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -27,7 +30,7 @@ import java.io.File
 import java.io.Serializable
 
 
-class ClubSignUpActivity : AppCompatActivity() {
+class ClubSignUpActivity : AppCompatActivity(), CheckDuplicateCrewNameResult, CheckDuplicateCrewIDResult {
     lateinit var binding: ActivityClubSignupBinding
     private var PICK_IMAGE = 1
     var picture : MultipartBody.Part? = null
@@ -43,6 +46,17 @@ class ClubSignUpActivity : AppCompatActivity() {
             getImage()
         }
 
+        binding.btnNameCompare.setOnClickListener {
+            val signUpService = SignUpService()
+            signUpService.setCheckDuplicateCrewNameResult(this)
+            signUpService.checkDuplicateCrewName(binding.edittextName.text.toString())
+        }
+
+        binding.btnIdCompare.setOnClickListener {
+            val signUpService = SignUpService()
+            signUpService.setCheckDuplicateCrewIDResult(this)
+            signUpService.checkDuplicateCrewID(binding.edittextId.text.toString())
+        }
 
         binding.edittextPasswordCheck.addTextChangedListener (object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -112,7 +126,6 @@ class ClubSignUpActivity : AppCompatActivity() {
             Log.d("파일 생성!! ======== ", file.name)
             picture = body
             picture_name = file.name
-            setAdjImgUri(imagePath!!)
 
             Glide.with(this).load(imagePath)
                 .circleCrop()
@@ -132,36 +145,19 @@ class ClubSignUpActivity : AppCompatActivity() {
         return result!!
     }
 
-    private fun setAdjImgUri(imgUri: Uri) {
+    override fun usableCrewName(code: Int) {
+        binding.txtNameUsable.visibility = View.VISIBLE
+    }
 
-        //2)Resizing 할 BitmapOption 만들기
-        val bmOptions = BitmapFactory.Options().apply {
-            // Get the dimensions of the bitmap
-            inJustDecodeBounds = true
-            contentResolver.openInputStream(imgUri)?.use { inputStream ->
-                //get img dimension
-                BitmapFactory.decodeStream(inputStream, null, this)
-            }
+    override fun unusableCrewName(code: Int) {
+        binding.txtNameUnusable.visibility = View.VISIBLE
+    }
 
-            // Determine how much to scale down the image
-            val targetW: Int = 1000 //in pixel
-            val targetH: Int = 1000 //in pixel
-            val scaleFactor: Int = Math.min(outWidth / targetW, outHeight / targetH)
+    override fun usableCrewID(code: Int) {
+        binding.txtIdUsable.visibility = View.VISIBLE
+    }
 
-            // Decode the image file into a Bitmap sized to fill the View
-            inJustDecodeBounds = false
-            inSampleSize = scaleFactor
-        }
-
-        //3) Bitmap 생성 및 셋팅 (resized + rotated)
-        contentResolver.openInputStream(imgUri)?.use { inputStream ->
-            BitmapFactory.decodeStream(inputStream, null, bmOptions)?.also { bitmap ->
-                val matrix = Matrix()
-                matrix.preRotate(0f, 0f, 0f)
-//                binding.profileImg.setImageBitmap(
-//                    Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, false)
-//                )
-            }
-        }
+    override fun unusableCrewID(code: Int) {
+        binding.txtIdUnusable.visibility = View.VISIBLE
     }
 }

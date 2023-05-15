@@ -11,6 +11,14 @@ import retrofit2.http.Part
 
 interface SignUpRetrofitInterface {
     @Multipart
+    @POST("/crew/new/name")
+    fun checkDuplicateCrewName(@Part("name") name : String) : Call<SignUpResponse>
+
+    @Multipart
+    @POST("/crew/new/loginId")
+    fun checkDuplicateCrewID(@Part("loginId") loginId: String) : Call<SignUpResponse>
+
+    @Multipart
     @POST("/crew/new")
     fun signUp (
                 @Part("loginId") loginId : String,

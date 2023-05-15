@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import java.sql.Timestamp
 
+// 모집글 리스트 가져오기
 data class RecruitmentResponse (
     @SerializedName(value ="statusCode") val statusCode : Int,
     @SerializedName(value = "responseMessage") val responseMessage : Any?,
@@ -22,4 +23,15 @@ data class RecruitmentData(
     @SerializedName(value = "title") val title : String,
     @SerializedName(value = "register_time") val register_time : Timestamp,
     @SerializedName(value = "question_id") val question_id : Int, // ai 기능 지원서 목록 바로 뽑을 수 있게!!
+)
+
+// 모집글 등록하기
+data class RecruitmentPostResponse (
+    @SerializedName(value ="statusCode") val statusCode : Int,
+    @SerializedName(value = "responseMessage") val responseMessage : Any?,
+    @SerializedName(value = "data") val data : PostResult
+)
+
+data class PostResult(
+    @SerializedName(value = "recruitment_id") val recruitment_id : Int
 )
