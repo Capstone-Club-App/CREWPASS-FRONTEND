@@ -42,6 +42,27 @@
                 android:background="@drawable/edit_text_box"
                 />
 
+            <Spinner
+                android:id="@+id/spinner_question1"
+                android:layout_width="61dp"
+                android:layout_height="21.8dp"
+                android:background="@drawable/spinner_border_layout"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_1"
+                app:layout_constraintTop_toBottomOf="@id/edittext_question_1"
+                app:layout_constraintEnd_toStartOf="@id/txt_spinner1"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"/>
+            <TextView
+                android:id="@+id/txt_spinner1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이내"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_1"
+                app:layout_constraintTop_toTopOf="@id/spinner_question1"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_question1"/>
+
             <TextView
                 android:id="@+id/txt_question_2"
                 android:layout_width="wrap_content"
@@ -51,7 +72,7 @@
                 android:text="질문 2"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="30dp"/>
 
             <EditText
                 android:id="@+id/edittext_question_2"
@@ -66,6 +87,27 @@
                 android:background="@drawable/edit_text_box"
                 />
 
+            <Spinner
+                android:id="@+id/spinner_question2"
+                android:layout_width="61dp"
+                android:layout_height="21.8dp"
+                android:background="@drawable/spinner_border_layout"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_2"
+                app:layout_constraintTop_toBottomOf="@id/edittext_question_2"
+                app:layout_constraintEnd_toStartOf="@id/txt_spinner2"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"/>
+            <TextView
+                android:id="@+id/txt_spinner2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이내"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_2"
+                app:layout_constraintTop_toTopOf="@id/spinner_question2"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_question2"/>
+
             <TextView
                 android:id="@+id/txt_question_3"
                 android:layout_width="wrap_content"
@@ -75,7 +117,7 @@
                 android:text="질문 3"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="30dp"/>
 
             <EditText
                 android:id="@+id/edittext_question_3"
@@ -90,6 +132,27 @@
                 android:background="@drawable/edit_text_box"
                 />
 
+            <Spinner
+                android:id="@+id/spinner_question3"
+                android:layout_width="61dp"
+                android:layout_height="21.8dp"
+                android:background="@drawable/spinner_border_layout"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_3"
+                app:layout_constraintTop_toBottomOf="@id/edittext_question_3"
+                app:layout_constraintEnd_toStartOf="@id/txt_spinner2"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"/>
+            <TextView
+                android:id="@+id/txt_spinner3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이내"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_3"
+                app:layout_constraintTop_toTopOf="@id/spinner_question3"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_question3"/>
+
 
             <TextView
                 android:id="@+id/txt_question_4"
@@ -100,7 +163,7 @@
                 android:text="질문 4"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="30dp"/>
 
             <EditText
                 android:id="@+id/edittext_question_4"
@@ -115,6 +178,27 @@
                 android:background="@drawable/edit_text_box"
                 />
 
+            <Spinner
+                android:id="@+id/spinner_question4"
+                android:layout_width="61dp"
+                android:layout_height="21.8dp"
+                android:background="@drawable/spinner_border_layout"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_4"
+                app:layout_constraintTop_toBottomOf="@id/edittext_question_4"
+                app:layout_constraintEnd_toStartOf="@id/txt_spinner4"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"/>
+            <TextView
+                android:id="@+id/txt_spinner4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이내"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_4"
+                app:layout_constraintTop_toTopOf="@id/spinner_question4"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_question4"/>
+
             <TextView
                 android:id="@+id/txt_question_5"
                 android:layout_width="wrap_content"
@@ -124,7 +208,7 @@
                 android:text="질문 5"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:visibility="gone"/>
 
             <EditText
@@ -141,7 +225,28 @@
                 android:visibility="gone"
                 />
 
-
+            <Spinner
+                android:id="@+id/spinner_question5"
+                android:layout_width="61dp"
+                android:layout_height="21.8dp"
+                android:background="@drawable/spinner_border_layout"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_5"
+                app:layout_constraintTop_toBottomOf="@id/edittext_question_5"
+                app:layout_constraintEnd_toStartOf="@id/txt_spinner5"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txt_spinner5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이내"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_5"
+                app:layout_constraintTop_toTopOf="@id/spinner_question5"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_question5"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/txt_question_6"
@@ -152,7 +257,7 @@
                 android:text="질문 6"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:visibility="gone"/>
 
             <EditText
@@ -169,6 +274,29 @@
                 android:visibility="gone"
                 />
 
+            <Spinner
+                android:id="@+id/spinner_question6"
+                android:layout_width="61dp"
+                android:layout_height="21.8dp"
+                android:background="@drawable/spinner_border_layout"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_6"
+                app:layout_constraintTop_toBottomOf="@id/edittext_question_6"
+                app:layout_constraintEnd_toStartOf="@id/txt_spinner6"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txt_spinner6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이내"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_6"
+                app:layout_constraintTop_toTopOf="@id/spinner_question6"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_question6"
+                android:visibility="gone"/>
+
 
             <TextView
                 android:id="@+id/txt_question_7"
@@ -179,7 +307,7 @@
                 android:text="질문 7"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:visibility="gone"/>
 
             <EditText
@@ -196,6 +324,29 @@
                 android:visibility="gone"
                 />
 
+            <Spinner
+                android:id="@+id/spinner_question7"
+                android:layout_width="61dp"
+                android:layout_height="21.8dp"
+                android:background="@drawable/spinner_border_layout"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_7"
+                app:layout_constraintTop_toBottomOf="@id/edittext_question_7"
+                app:layout_constraintEnd_toStartOf="@id/txt_spinner7"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txt_spinner7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이내"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/edittext_question_7"
+                app:layout_constraintTop_toTopOf="@id/spinner_question7"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_question7"
+                android:visibility="gone"/>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_add_question"
                 android:layout_width="40dp"
@@ -204,7 +355,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edittext_question_7"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="30dp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_submit"
@@ -220,7 +371,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="30dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

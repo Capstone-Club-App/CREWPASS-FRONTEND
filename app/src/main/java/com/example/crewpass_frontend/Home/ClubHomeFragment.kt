@@ -33,8 +33,6 @@ class ClubHomeFragment:Fragment(), RecruitmentGetResult, RecruitmentGetAllResult
     lateinit var recruitmentTotalRVAdapter: ClubRecruitmentTotalRVAdapter
     lateinit var recruitmentAllService : RecruitmentAllService
 
-    var club_recent_list = ArrayList<Recruitment>()
-    var club_my_list = ArrayList<Recruitment>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,9 +63,8 @@ class ClubHomeFragment:Fragment(), RecruitmentGetResult, RecruitmentGetAllResult
     }
 
     override fun onResume() {
-        getRecruitment_my(logined_id)
-
         super.onResume()
+        getRecruitment_my(logined_id)
     }
 
 

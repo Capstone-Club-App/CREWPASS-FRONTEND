@@ -8,6 +8,38 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignUpService {
+
+    // 아이디 중복검사
+    private lateinit var checkDuplicateIDResult: CheckDuplicateIDResult
+
+    fun setCheckDuplicateCrewNameResult(checkDuplicateIDResult: CheckDuplicateIDResult){
+        this.checkDuplicateIDResult = checkDuplicateIDResult
+    }
+
+    fun checkDuplicateID(loginId : String){
+        val authService = getRetrofit().create(SignUpRetrofitInterface::class.java)
+        authService.checkDuplicateID(loginId).enqueue(object : Callback<SignUpResponse> {
+            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>,) {
+                if(response.body() != null) {
+                    Log.d("CHECK-NAME-SUCCESS",response.toString())
+                    val resp: SignUpResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> checkDuplicateIDResult.usableID(resp.statusCode)
+                        else -> checkDuplicateIDResult.unusableID(resp.statusCode)
+                    }
+                }
+                else
+                    Log.d("CHECK-NAME-FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                Log.d("CHECK-NAME-FAILURE",t.message.toString())
+            }
+        })
+    }
+
+    // 회원 가입
     private lateinit var signUpResult: SignUpResult
 
     fun setSignUpResult(signUpResult: SignUpResult){

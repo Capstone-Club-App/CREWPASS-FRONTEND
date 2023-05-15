@@ -12,6 +12,67 @@ import retrofit2.http.Multipart
 import retrofit2.http.Part
 
 class SignUpService {
+    // 아이디 중복검사
+    private lateinit var checkDuplicateCrewNameResult: CheckDuplicateCrewNameResult
+
+    fun setCheckDuplicateCrewNameResult(checkDuplicateCrewNameResult: CheckDuplicateCrewNameResult){
+        this.checkDuplicateCrewNameResult = checkDuplicateCrewNameResult
+    }
+
+    fun checkDuplicateCrewName(name : String){
+        val authService = getRetrofit().create(SignUpRetrofitInterface::class.java)
+        authService.checkDuplicateCrewName(name).enqueue(object : Callback<SignUpResponse> {
+            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>,) {
+                if(response.body() != null) {
+                    Log.d("CHECK-NAME-SUCCESS",response.toString())
+                    val resp: SignUpResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> checkDuplicateCrewNameResult.usableCrewName(resp.statusCode)
+                        else -> checkDuplicateCrewNameResult.unusableCrewName(resp.statusCode)
+                    }
+                }
+                else
+                    Log.d("CHECK-NAME-FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                Log.d("CHECK-NAME-FAILURE",t.message.toString())
+            }
+        })
+    }
+
+    // 아이디 중복검사
+    private lateinit var checkDuplicateCrewIDResult: CheckDuplicateCrewIDResult
+
+    fun setCheckDuplicateCrewIDResult(checkDuplicateCrewIDResult: CheckDuplicateCrewIDResult){
+        this.checkDuplicateCrewIDResult = checkDuplicateCrewIDResult
+    }
+
+    fun checkDuplicateCrewID(name : String){
+        val authService = getRetrofit().create(SignUpRetrofitInterface::class.java)
+        authService.checkDuplicateCrewID(name).enqueue(object : Callback<SignUpResponse> {
+            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>,) {
+                if(response.body() != null) {
+                    Log.d("CHECK-ID-SUCCESS",response.toString())
+                    val resp: SignUpResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> checkDuplicateCrewIDResult.usableCrewID(resp.statusCode)
+                        else -> checkDuplicateCrewIDResult.unusableCrewID(resp.statusCode)
+                    }
+                }
+                else
+                    Log.d("CHECK-ID-FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                Log.d("CHECK-ID-FAILURE",t.message.toString())
+            }
+        })
+    }
+
+    // 회원가입
     private lateinit var signUpResult: SignUpResult
 
     fun setSignUpResult(signUpResult: SignUpResult){
