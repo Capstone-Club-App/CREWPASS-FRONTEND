@@ -24,7 +24,6 @@ class PersonalSignUpSchoolActivity : AppCompatActivity(), FindSchoolDialog.Custo
 
     var personal_name = ""
     var personal_id = ""
-    var club_passwd = ""
     var personal_passwd = ""
     var email = ""
     var job  = ""
@@ -66,28 +65,13 @@ class PersonalSignUpSchoolActivity : AppCompatActivity(), FindSchoolDialog.Custo
 
         val file = File(absolutelyPath(profile, this))
 
-//        var inputStream : InputStream? = null
-//
-//        try{
-//            inputStream = this.contentResolver.openInputStream(profile)
-//        }catch (e : IOException){
-//            e.printStackTrace()
-//        }
-//
-//        val bitmap = BitmapFactory.decodeStream(inputStream)
-//        val byteArrayOutputStream = ByteArrayOutputStream()
-//        bitmap.compress(Bitmap.CompressFormat.JPEG,20, byteArrayOutputStream)
-//
-//        val requestBody = RequestBody.create(MediaType.parse("image/*"),byteArrayOutputStream.toByteArray())
-//        val uploadFile = MultipartBody.Part.createFormData("profile", file.getName() ,requestBody)
-
         val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
         body = MultipartBody.Part.createFormData("profile", file.name, requestFile)
 
         var school = binding.edittextSchool.text.toString()
 
         val signUpService = SignUpService()
-        signUpService.signUp(personal_name, personal_id, club_passwd, email, job, school ,body)
+        signUpService.signUp(personal_name, personal_id, personal_passwd, email, job, school ,body)
         signUpService.setSignUpResult(this)
     }
 
