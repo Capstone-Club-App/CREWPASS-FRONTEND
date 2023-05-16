@@ -44,6 +44,21 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_language_recent"
             tools:listitem="@layout/item_announcement_personal" />
+
+        <TextView
+            android:id="@+id/txt_recent_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_language_recent"
+            app:layout_constraintBottom_toBottomOf="@id/center_layout"
+            android:text="아직 등록된 모집글이 없습니다!"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:visibility="invisible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -85,5 +100,20 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_language_imminent"
             tools:listitem="@layout/item_announcement_personal" />
+
+        <TextView
+            android:id="@+id/txt_imminent_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_language_imminent"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_layout"
+            android:text="아직 등록된 모집글이 없습니다!"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:visibility="invisible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

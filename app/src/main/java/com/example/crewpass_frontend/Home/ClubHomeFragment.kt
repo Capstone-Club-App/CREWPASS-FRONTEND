@@ -126,7 +126,10 @@ class ClubHomeFragment:Fragment(), RecruitmentGetResult, RecruitmentGetAllResult
         code: Int,
         data: ArrayList<Recruitment>
     ) {
-        initRecyclerView_recent(data)
+        if (data.size != 0)
+            initRecyclerView_recent(data)
+        else
+            binding.txtRecruitmentTotalNone.visibility = View.VISIBLE
     }
 
 

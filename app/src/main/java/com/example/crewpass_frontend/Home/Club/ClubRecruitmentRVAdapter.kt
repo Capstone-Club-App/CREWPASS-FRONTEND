@@ -41,8 +41,9 @@ class ClubRecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitm
     inner class ViewHolder(val binding: ItemAnnouncementClubBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(recruitment: RecruitmentData) {
-//            binding.itemAnnounceDetail.text = recruitment.content
+            binding.itemAnnounceDetail.text = recruitment.crew_name
             binding.itemAnnounceTitle.text = recruitment.title
+
 
             var hashTagList = ArrayList<String>()
             hashTagList.add(recruitment.region1)

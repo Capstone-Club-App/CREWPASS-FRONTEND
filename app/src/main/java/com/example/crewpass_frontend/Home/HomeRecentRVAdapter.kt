@@ -6,13 +6,12 @@ import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crewpass_frontend.Data.Recruitment
 import com.example.crewpass_frontend.R
+import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment
 import com.example.crewpass_frontend.databinding.ItemAnnouncementPersonalBinding
 
 class HomeRecentRVAdapter (private val recruitment_list: ArrayList<Recruitment>) : RecyclerView.Adapter<HomeRecentRVAdapter.ViewHolder>() {
 
-    var checkList = ArrayList<CheckStatus>()
     var checkStatus = SparseBooleanArray()
     lateinit var context: Context
 
@@ -60,7 +59,7 @@ class HomeRecentRVAdapter (private val recruitment_list: ArrayList<Recruitment>)
                 notifyDataSetChanged()
             }
 
-            binding.itemAnnounceDetail.text = recruitment.content
+            binding.itemAnnounceDetail.text = recruitment.crew_name
             binding.itemAnnounceTitle.text = recruitment.title
             // 날짜 적용도 추가하기
         }
