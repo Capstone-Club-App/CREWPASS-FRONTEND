@@ -58,7 +58,7 @@ class WriteQuestionActivity: AppCompatActivity(), RecruitmentPostResult, Questio
         content = intent.getStringExtra("content")!!
         image = intent.getParcelableExtra("image")!!
 
-        Log.d("vales : ", "isDeleted: ${isDeleted}, title: ${title}, deadline: ${deadline}, content: ${content}")
+        Log.d("vales : ", "isDeleted: ${isDeleted}, title: ${title}, deadline: ${deadline}, content: ${content}, uri: ${image}")
 
         initActionBar()
 

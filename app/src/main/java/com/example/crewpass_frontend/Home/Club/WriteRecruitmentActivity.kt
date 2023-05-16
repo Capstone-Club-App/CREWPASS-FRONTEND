@@ -55,9 +55,11 @@ class WriteRecruitmentActivity: AppCompatActivity() {
         binding.btnWriteQuestion.setOnClickListener {
             val intent = Intent(this, WriteQuestionActivity::class.java)
 
+            val time = binding.txtDeadlineDate.text.toString() + " "+binding.txtDeadlineTime.text.toString() + ":30"
+
             intent.putExtra("isDeleted", 0)
             intent.putExtra("title", binding.edittextTitle.text.toString())
-            intent.putExtra("deadline", "${binding.txtDeadlineDate.text}T${binding.txtDeadlineTime.text}:30.000+00:00" )
+            intent.putExtra("deadline", time)
             intent.putExtra("content", binding.edittextContent.text.toString())
             intent.putExtra("image", image_uri)
 

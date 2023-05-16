@@ -56,7 +56,7 @@ class SignUpService {
         val authService = getRetrofit().create(SignUpRetrofitInterface::class.java)
 
         Log.d("profile : ", profile.toString())
-        authService.signUp(loginId, password, name, email, job, school,profile).enqueue(object : Callback<SignUpResponse> {
+        authService.signUp(name, loginId, password, email, job, school, profile).enqueue(object : Callback<SignUpResponse> {
             override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>,) {
                 if(response.body() != null) {
                     Log.d("SIGNUP SUCCESS",response.toString())
