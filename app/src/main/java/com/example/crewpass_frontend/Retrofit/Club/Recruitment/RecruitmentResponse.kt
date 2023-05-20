@@ -33,5 +33,5 @@ data class RecruitmentPostResponse (
 )
 
 data class PostResult(
-    @SerializedName(value = "recruitment_id") val recruitment_id : Int
+    @SerializedName(value = "recruitmentId") val recruitment_id : Int
 )

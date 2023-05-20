@@ -111,6 +111,7 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
     override fun onbtnGotoMainClicked() {
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("Key", string)
+//        finish()
         startActivity(intent)
     }
 

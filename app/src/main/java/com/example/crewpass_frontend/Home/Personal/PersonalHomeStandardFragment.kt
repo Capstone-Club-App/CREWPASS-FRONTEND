@@ -14,16 +14,24 @@ import com.example.crewpass_frontend.Home.HomeImminentRVAdapter
 import com.example.crewpass_frontend.Home.HomeRecentRVAdapter
 import com.example.crewpass_frontend.Home.Personal.List.RecruitmentDetailActivity
 import com.example.crewpass_frontend.Home.Personal.List.PersonalRecruitmentListActivity
+import com.example.crewpass_frontend.Login.logined_id
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapGetAllResult
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapService
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.getResult
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentAllService
 import com.example.crewpass_frontend.databinding.FragmentPersonalHomeStandardBinding
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetAllResult
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetDeadlineResult
 
-class PersonalHomeStandardFragment : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadlineResult {
+var scrap_list = ArrayList<getResult>()
+
+class PersonalHomeStandardFragment : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadlineResult,
+    ScrapGetAllResult {
     lateinit var binding: FragmentPersonalHomeStandardBinding
     lateinit var homeRecentRVAdapter: HomeRecentRVAdapter
     lateinit var homeImminentRVAdapter: HomeImminentRVAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,12 +42,14 @@ class PersonalHomeStandardFragment : Fragment(), RecruitmentGetAllResult, Recrui
         binding.btnStandardRecent.setOnClickListener {
             val intent = Intent(activity, PersonalRecruitmentListActivity::class.java)
             intent.putExtra("list_state", "recent")
+            intent.putExtra("type", "total")
             startActivity(intent)
         }
 
         binding.btnStandardImminent.setOnClickListener {
             val intent = Intent(activity, PersonalRecruitmentListActivity::class.java)
             intent.putExtra("list_state", "imminent")
+            intent.putExtra("type", "total")
             startActivity(intent)
         }
 
@@ -49,7 +59,23 @@ class PersonalHomeStandardFragment : Fragment(), RecruitmentGetAllResult, Recrui
 
     override fun onResume() {
         super.onResume()
+        getScrap()
+    }
+
+    // 스크랩 목록 가져오기
+    fun getScrap(){
+        val scrapService = ScrapService()
+        scrapService.setScrapGetAllResult(this)
+        scrapService.getScrap(logined_id)
+    }
+
+    override fun scrapGetAllSuccess(code: Int, data: ArrayList<getResult>) {
+        scrap_list = data
         getRecruitment_recent()
+    }
+
+    override fun scrapGetAllFailure(code: Int) {
+        Log.d("스크랩 목록 가져오기 실패", "")
     }
 
     // 전체 최신 모집글 불러오기
@@ -58,6 +84,7 @@ class PersonalHomeStandardFragment : Fragment(), RecruitmentGetAllResult, Recrui
         recruitmentAllService.setRecruitmentGetAllResult(this)
         recruitmentAllService.getRecruitmentAll("total")
     }
+
     fun initRecyclerView_recent(result : ArrayList<Recruitment>){
         homeRecentRVAdapter = HomeRecentRVAdapter(result)
         binding.standardRecentRv.adapter = homeRecentRVAdapter

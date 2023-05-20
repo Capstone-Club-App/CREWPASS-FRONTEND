@@ -32,7 +32,7 @@ class WriteRecruitmentActivity: AppCompatActivity() {
     var str_date = ""
     var str_time = ""
     var timestamp : String = ""
-
+    var RESULT_FINISH = 300
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteAnnouncementBinding.inflate(layoutInflater)
@@ -63,7 +63,7 @@ class WriteRecruitmentActivity: AppCompatActivity() {
             intent.putExtra("content", binding.edittextContent.text.toString())
             intent.putExtra("image", image_uri)
 
-            startActivity(intent)
+            startActivityForResult(intent, RESULT_FINISH)
         }
     }
 
@@ -127,18 +127,21 @@ class WriteRecruitmentActivity: AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         // 돌려받은 resultCode가 정상인지 체크
         if(resultCode == Activity.RESULT_OK){
-            // 사진 가져오는 부분
-            val imagePath = data!!.data
-            image_uri = imagePath
+            if(requestCode == PICK_IMAGE){
+                // 사진 가져오는 부분
+                val imagePath = data!!.data
+                image_uri = imagePath
 
-            val file = File(absolutelyPath(imagePath, this))
-            val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-            val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
-            picture = body
+                val file = File(absolutelyPath(imagePath, this))
+                val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+                picture = body
 
-            Glide.with(this).load(imagePath)
-                .into(binding.imageViewImage)
-
+                Glide.with(this).load(imagePath)
+                    .into(binding.imageViewImage)
+            }
+            else if(resultCode == 300)
+                finish()
         }
     }
 
@@ -152,4 +155,5 @@ class WriteRecruitmentActivity: AppCompatActivity() {
 
         return result!!
     }
+
 }

@@ -55,6 +55,8 @@ class FragmentVolunteer : Fragment(), RecruitmentGetAllResult, RecruitmentGetDea
         getRecruitment_recent()
     }
 
+
+
     // 전체 최신 모집글 불러오기
     fun getRecruitment_recent(){
         val recruitmentAllService = RecruitmentAllService()

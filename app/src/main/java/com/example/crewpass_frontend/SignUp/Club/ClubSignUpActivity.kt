@@ -3,6 +3,7 @@ package com.example.crewpass_frontend.SignUp.Club
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Bitmap
@@ -103,6 +104,7 @@ class ClubSignUpActivity : AppCompatActivity(), CheckDuplicateCrewNameResult, Ch
         }
     }
 
+
     // 이미지 가져오기
     fun getImage() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -126,6 +128,12 @@ class ClubSignUpActivity : AppCompatActivity(), CheckDuplicateCrewNameResult, Ch
             Log.d("파일 생성!! ======== ", file.name)
             picture = body
             picture_name = file.name
+
+            // sharedPreference에 기존 profile 저장해주기
+            val sharedPreference = getSharedPreferences("crew_profile", MODE_PRIVATE)
+            val editor : SharedPreferences.Editor = sharedPreference.edit()
+            editor.putString("crew_profile_uri", imagePath.toString())
+            editor.commit()
 
             Glide.with(this).load(imagePath)
                 .circleCrop()

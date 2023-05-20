@@ -3,6 +3,7 @@ package com.example.crewpass_frontend.MyPage.Club
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
@@ -35,6 +36,8 @@ class ClubEditInfoActivity : AppCompatActivity(), ClubPutResult {
 
     private var PICK_IMAGE = 1
     var picture: MultipartBody.Part? = null
+
+    var imagePath : Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,6 +128,15 @@ class ClubEditInfoActivity : AppCompatActivity(), ClubPutResult {
         else
             region2 = "null"
 
+        val pref = this.getPreferences(MODE_PRIVATE)
+        if(imagePath == null){
+            val file = File(absolutelyPath(Uri.parse(pref.getString("user_profile_uri","")), this))
+            val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+            val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+            Log.d("파일 생성!! ======== ", file.name)
+            picture = body
+        }
+
         val clubService = ClubService()
         clubService.setClubPutResult(this)
         clubService.putClub(
@@ -163,13 +175,19 @@ class ClubEditInfoActivity : AppCompatActivity(), ClubPutResult {
         // 돌려받은 resultCode가 정상인지 체크
         if (resultCode == Activity.RESULT_OK) {
             // 사진 가져오는 부분
-            val imagePath = data!!.data
+            imagePath = data!!.data
 
             val file = File(absolutelyPath(imagePath, this))
             val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
             val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
             Log.d("파일 생성!! ======== ", file.name)
             picture = body
+
+            // sharedPreference에 기존 profile 저장해주기
+            val sharedPreference = getSharedPreferences("crew_profile", MODE_PRIVATE)
+            val editor : SharedPreferences.Editor = sharedPreference.edit()
+            editor.putString("crew_profile_uri", imagePath.toString())
+            editor.commit()
 
             Glide.with(this).load(imagePath)
                 .circleCrop()

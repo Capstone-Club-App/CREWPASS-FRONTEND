@@ -3,6 +3,7 @@ package com.example.crewpass_frontend.SignUp.Personal
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.Cursor
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -15,7 +16,11 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.crewpass_frontend.Login.logined_id
 import com.example.crewpass_frontend.R
+import com.example.crewpass_frontend.Retrofit.Personal.SignUp.CheckDuplicateIDResult
+import com.example.crewpass_frontend.Retrofit.Personal.SignUp.SignUpResult
+import com.example.crewpass_frontend.Retrofit.Personal.SignUp.SignUpService
 import com.example.crewpass_frontend.databinding.ActivityPersonalSignupBinding
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -23,7 +28,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
-class PersonalSignUpActivity : AppCompatActivity() {
+class PersonalSignUpActivity : AppCompatActivity(), CheckDuplicateIDResult {
     lateinit var binding: ActivityPersonalSignupBinding
     private var PICK_IMAGE = 1
     var picture : MultipartBody.Part? = null
@@ -37,6 +42,12 @@ class PersonalSignUpActivity : AppCompatActivity() {
         binding.btnProfile.setOnClickListener {
             Log.d("click", "")
             getImage()
+        }
+
+        binding.btnIdCompare.setOnClickListener {
+            val signUpService = SignUpService()
+            signUpService.setCheckDuplicateCrewNameResult(this)
+            signUpService.checkDuplicateID(binding.edittextId.text.toString())
         }
 
 
@@ -109,6 +120,12 @@ class PersonalSignUpActivity : AppCompatActivity() {
             picture_name = file.name
             setAdjImgUri(imagePath!!)
 
+            // sharedPreference에 기존 profile 저장해주기
+            val sharedPreference = getSharedPreferences("user_profile", MODE_PRIVATE)
+            val editor : SharedPreferences.Editor = sharedPreference.edit()
+            editor.putString("user_profile_uri", imagePath.toString())
+            editor.commit()
+
             Glide.with(this).load(imagePath)
                 .circleCrop()
                 .into(binding.profileImg)
@@ -158,5 +175,13 @@ class PersonalSignUpActivity : AppCompatActivity() {
 //                )
             }
         }
+    }
+
+    override fun usableID(code: Int) {
+        binding.txtIdUsable.visibility = View.VISIBLE
+    }
+
+    override fun unusableID(code: Int) {
+        binding.txtIdUnusable.visibility = View.VISIBLE
     }
 }
