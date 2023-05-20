@@ -2,7 +2,12 @@ package com.example.crewpass_frontend.Retrofit.Club.Recruitment
 
 import android.util.Log
 import com.example.crewpass_frontend.getRetrofit
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,8 +53,13 @@ class RecruitmentService {
         this.recruitmentPostResult = recruitmentPostResult
     }
 
-    fun postRecruitment(crew_id: Int, isDeleted: Int, title: String, deadline: String, content : String, image: MultipartBody.Part){
+    fun postRecruitment(crew_id: Int, isDeleted: Int, title: String, deadline : String, content : String, image: MultipartBody.Part){
         val authService = getRetrofit().create(RecruitmentRetrofitInterfaces::class.java)
+        Log.d("RETRO 안 vales : ", "isDeleted: ${isDeleted}, title: ${title}, deadline: ${deadline}, content: ${content}")
+//        val title_ = RequestBody.create("text/plain".toMediaTypeOrNull(), title)
+//        val deadline_ = RequestBody.create("text/plain".toMediaTypeOrNull(), deadline)
+//        val content_ = RequestBody.create("text/plain".toMediaTypeOrNull(), content)
+
         authService.postRecruitment(title, isDeleted, deadline, content, image, crew_id).enqueue(object :
             Callback<RecruitmentPostResponse> {
             override fun onResponse(call: Call<RecruitmentPostResponse>, response: Response<RecruitmentPostResponse>,) {
@@ -71,7 +81,7 @@ class RecruitmentService {
             }
 
             override fun onFailure(call: Call<RecruitmentPostResponse>, t: Throwable) {
-                Log.d("RECRUIT-GET-FAILURE",t.message.toString())
+                Log.d("RECRUIT-POST-FAILURE",t.message.toString())
             }
         })
     }

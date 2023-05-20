@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat
 class ClubRecruitmentDetailActivity: AppCompatActivity(), RecruitmentGetDetailResult {
     lateinit var binding : ActivityClubRecruitmentDetailBinding
     lateinit var context: Context
+    var question_id : Int = -1
+    var crew_name : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClubRecruitmentDetailBinding.inflate(layoutInflater)
@@ -33,6 +35,8 @@ class ClubRecruitmentDetailActivity: AppCompatActivity(), RecruitmentGetDetailRe
 
         binding.btnCheckApplication.setOnClickListener {
             val intent = Intent(this, CheckApplicationActivity::class.java)
+            intent.putExtra("question_id", question_id)
+            intent.putExtra("crew_name", crew_name)
             startActivity(intent) // 지원서 작성으로 이동
         }
     }
@@ -53,6 +57,9 @@ class ClubRecruitmentDetailActivity: AppCompatActivity(), RecruitmentGetDetailRe
 
         binding.edittextTitle.text = data[0].title
         binding.edittextContent.text = data[0].content
+
+        question_id = data[0].question_id
+        crew_name = data[0].crew_name
     }
 
     override fun recruitmentGetDetailFailure(code: Int) {

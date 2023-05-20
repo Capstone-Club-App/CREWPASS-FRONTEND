@@ -37,11 +37,13 @@ class SignUpDialog(context: Context, Interface: SignUpDialogInterface) : Dialog(
 
         btn_personal_dlg.setOnClickListener {
             // 정보 보내주기
+            dlg.dismiss()
             signUpDialogInterface.onPersonalButtonClicked()
         }
 
         btn_club_dlg.setOnClickListener {
             // 정보 보내주기
+            dlg.dismiss()
             signUpDialogInterface.onClubButtonClicked()
         }
 

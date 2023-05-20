@@ -95,6 +95,7 @@ class ClubHomeFragment:Fragment(), RecruitmentGetResult, RecruitmentGetAllResult
     }
 
     override fun clubRecruitmentGetSuccess(code: Int, data: ArrayList<RecruitmentData>) {
+        Log.d("동아리 모집글 정보 불러오기 성공", "")
         initRecyclerView_my(data)
         getRecruitment_total()
     }
@@ -126,6 +127,7 @@ class ClubHomeFragment:Fragment(), RecruitmentGetResult, RecruitmentGetAllResult
         code: Int,
         data: ArrayList<Recruitment>
     ) {
+        Log.d("동아리 모집글 정보 불러오기 성공", "")
         if (data.size != 0)
             initRecyclerView_recent(data)
         else

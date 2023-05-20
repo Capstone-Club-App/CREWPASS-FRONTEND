@@ -1,5 +1,6 @@
 package com.example.crewpass_frontend.Home.Club
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -28,24 +29,25 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
-class WriteQuestionActivity: AppCompatActivity(), RecruitmentPostResult, QuestionPostResult {
+class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, QuestionPostResult {
     var add_count = 4
     lateinit var binding: ActivityWriteQuestionBinding
-    var question1Limit : Int = 0
-    var question2Limit : Int = 0
-    var question3Limit : Int = 0
-    var question4Limit : Int = 0
-    var question5Limit : Int? = 0
-    var question6Limit : Int? = 0
-    var question7Limit : Int? = 0
+    var question1Limit: Int = 0
+    var question2Limit: Int = 0
+    var question3Limit: Int = 0
+    var question4Limit: Int = 0
+    var question5Limit: Int? = 0
+    var question6Limit: Int? = 0
+    var question7Limit: Int? = 0
 
     var isDeleted = 0
     var title = ""
     var deadline = ""
     var content = ""
-    var image : Uri? = null
+    var image: Uri? = null
 
     var recruitment_id = -1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,25 +60,23 @@ class WriteQuestionActivity: AppCompatActivity(), RecruitmentPostResult, Questio
         content = intent.getStringExtra("content")!!
         image = intent.getParcelableExtra("image")!!
 
-        Log.d("vales : ", "isDeleted: ${isDeleted}, title: ${title}, deadline: ${deadline}, content: ${content}, uri: ${image}")
-
         initActionBar()
 
         binding.btnAddQuestion.setOnClickListener {
             add_count++
-            if(add_count == 5){
+            if (add_count == 5) {
                 binding.txtQuestion5.visibility = View.VISIBLE
                 binding.edittextQuestion5.visibility = View.VISIBLE
                 binding.spinnerQuestion5.visibility = View.VISIBLE
                 binding.txtSpinner5.visibility = View.VISIBLE
             }
-            if(add_count == 6){
+            if (add_count == 6) {
                 binding.txtQuestion6.visibility = View.VISIBLE
                 binding.edittextQuestion6.visibility = View.VISIBLE
                 binding.spinnerQuestion6.visibility = View.VISIBLE
                 binding.txtSpinner6.visibility = View.VISIBLE
             }
-            if(add_count == 7){
+            if (add_count == 7) {
                 binding.txtQuestion7.visibility = View.VISIBLE
                 binding.edittextQuestion7.visibility = View.VISIBLE
                 binding.btnAddQuestion.visibility = View.GONE
@@ -108,20 +108,21 @@ class WriteQuestionActivity: AppCompatActivity(), RecruitmentPostResult, Questio
 
 
     private fun setupSpinnerHandler() {
-            binding.spinnerQuestion1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.spinnerQuestion1.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
                     position: Int,
                     id: Long
                 ) {
-                    if(position == 0)
+                    if (position == 0)
                         question1Limit = 100
-                    else if(position == 1)
+                    else if (position == 1)
                         question1Limit = 200
-                    else if(position == 2)
+                    else if (position == 2)
                         question1Limit = 300
-                    else if(position == 3)
+                    else if (position == 3)
                         question1Limit = 400
                     else
                         question1Limit = 500
@@ -132,163 +133,169 @@ class WriteQuestionActivity: AppCompatActivity(), RecruitmentPostResult, Questio
                 }
             }
 
-        binding.spinnerQuestion2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if(position == 0)
-                    question2Limit = 100
-                else if(position == 1)
-                    question2Limit = 200
-                else if(position == 2)
-                    question2Limit = 300
-                else if(position == 3)
-                    question2Limit = 400
-                else
-                    question2Limit = 500
+        binding.spinnerQuestion2.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position == 0)
+                        question2Limit = 100
+                    else if (position == 1)
+                        question2Limit = 200
+                    else if (position == 2)
+                        question2Limit = 300
+                    else if (position == 3)
+                        question2Limit = 400
+                    else
+                        question2Limit = 500
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-        }
+        binding.spinnerQuestion3.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position == 0)
+                        question3Limit = 100
+                    else if (position == 1)
+                        question3Limit = 200
+                    else if (position == 2)
+                        question3Limit = 300
+                    else if (position == 3)
+                        question3Limit = 400
+                    else
+                        question3Limit = 500
+                }
 
-        binding.spinnerQuestion3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if(position == 0)
-                    question3Limit = 100
-                else if(position == 1)
-                    question3Limit = 200
-                else if(position == 2)
-                    question3Limit = 300
-                else if(position == 3)
-                    question3Limit = 400
-                else
-                    question3Limit = 500
-            }
+                override fun onNothingSelected(p0: AdapterView<*>?) {
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-        }
-
-        binding.spinnerQuestion4.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if(position == 0)
-                    question4Limit = 100
-                else if(position == 1)
-                    question4Limit = 200
-                else if(position == 2)
-                    question4Limit = 300
-                else if(position == 3)
-                    question4Limit = 400
-                else
-                    question4Limit = 500
+                }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+        binding.spinnerQuestion4.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position == 0)
+                        question4Limit = 100
+                    else if (position == 1)
+                        question4Limit = 200
+                    else if (position == 2)
+                        question4Limit = 300
+                    else if (position == 3)
+                        question4Limit = 400
+                    else
+                        question4Limit = 500
+                }
 
-            }
-        }
+                override fun onNothingSelected(p0: AdapterView<*>?) {
 
-        binding.spinnerQuestion5.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if(position == 0)
-                    question5Limit = 100
-                else if(position == 1)
-                    question5Limit = 200
-                else if(position == 2)
-                    question5Limit = 300
-                else if(position == 3)
-                    question5Limit = 400
-                else
-                    question5Limit = 500
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-        }
-
-        binding.spinnerQuestion6.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if(position == 0)
-                    question6Limit = 100
-                else if(position == 1)
-                    question6Limit = 200
-                else if(position == 2)
-                    question6Limit = 300
-                else if(position == 3)
-                    question6Limit = 400
-                else
-                    question6Limit = 500
+                }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+        binding.spinnerQuestion5.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position == 0)
+                        question5Limit = 100
+                    else if (position == 1)
+                        question5Limit = 200
+                    else if (position == 2)
+                        question5Limit = 300
+                    else if (position == 3)
+                        question5Limit = 400
+                    else
+                        question5Limit = 500
+                }
 
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
             }
-        }
 
-        binding.spinnerQuestion7.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if(position == 0)
-                    question7Limit = 100
-                else if(position == 1)
-                    question7Limit = 200
-                else if(position == 2)
-                    question7Limit = 300
-                else if(position == 3)
-                    question7Limit = 400
-                else
-                    question7Limit = 500
+        binding.spinnerQuestion6.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position == 0)
+                        question6Limit = 100
+                    else if (position == 1)
+                        question6Limit = 200
+                    else if (position == 2)
+                        question6Limit = 300
+                    else if (position == 3)
+                        question6Limit = 400
+                    else
+                        question6Limit = 500
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+        binding.spinnerQuestion7.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position == 0)
+                        question7Limit = 100
+                    else if (position == 1)
+                        question7Limit = 200
+                    else if (position == 2)
+                        question7Limit = 300
+                    else if (position == 3)
+                        question7Limit = 400
+                    else
+                        question7Limit = 500
+                }
 
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
             }
-        }
     }
 
-    fun initActionBar(){
+    fun initActionBar() {
         binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
         binding.innerPageTop.appbarPageNameLeftTv.text = "지원서 질문 작성"
 
-        binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
+        binding.innerPageTop.appbarBackBtn.setOnClickListener { onBackPressed() }
     }
 
     // 동아리 모집글 등록
-    fun postRecruitment(image : Uri){
-        var body : MultipartBody.Part? = null
+    fun postRecruitment(image: Uri) {
+        var body: MultipartBody.Part? = null
         val file = File(absolutelyPath(image, this))
         val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-        body = MultipartBody.Part.createFormData("profile", file.name, requestFile)
+        body = MultipartBody.Part.createFormData("image", file.name, requestFile)
 
         val recruitmentService = RecruitmentService()
         recruitmentService.setRecruitmentResult(this)
@@ -296,9 +303,9 @@ class WriteQuestionActivity: AppCompatActivity(), RecruitmentPostResult, Questio
     }
 
     fun absolutelyPath(path: Uri?, context: Context): String {
-        var proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
-        var c: Cursor? = context.contentResolver.query(path!!, proj, null, null, null)
-        var index = c?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        val proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
+        val c: Cursor? = context.contentResolver.query(path!!, proj, null, null, null)
+        val index = c?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         c?.moveToFirst()
 
         var result = c?.getString(index!!)
@@ -308,6 +315,7 @@ class WriteQuestionActivity: AppCompatActivity(), RecruitmentPostResult, Questio
 
     override fun clubRecruitmentPostSuccess(code: Int, data: PostResult) {
         recruitment_id = data.recruitment_id
+        Log.d("recruitment_id :", recruitment_id.toString())
         postQuestion()
     }
 
@@ -316,17 +324,18 @@ class WriteQuestionActivity: AppCompatActivity(), RecruitmentPostResult, Questio
     }
 
     // 질문 등록
-    fun postQuestion(){
-        if(binding.edittextQuestion5.visibility == View.INVISIBLE)
+    fun postQuestion() {
+        if (binding.edittextQuestion5.visibility == View.INVISIBLE)
             question5Limit = null
-        if(binding.edittextQuestion6.visibility == View.INVISIBLE)
+        if (binding.edittextQuestion6.visibility == View.INVISIBLE)
             question6Limit = null
-        if(binding.edittextQuestion7.visibility == View.INVISIBLE)
+        if (binding.edittextQuestion7.visibility == View.INVISIBLE)
             question7Limit = null
 
         val questionService = QuestionService()
         questionService.setQuestionPostResult(this)
-        questionService.postQuestion(logined_id, recruitment_id,
+        questionService.postQuestion(
+            recruitment_id,
             binding.edittextQuestion1.text.toString(),
             binding.edittextQuestion2.text.toString(),
             binding.edittextQuestion3.text.toString(),
@@ -336,13 +345,14 @@ class WriteQuestionActivity: AppCompatActivity(), RecruitmentPostResult, Questio
             binding.edittextQuestion7.text.toString(),
             question1Limit,
             question2Limit,
-            question3Limit, question4Limit, question5Limit , question6Limit, question7Limit)
+            question3Limit, question4Limit, question5Limit, question6Limit, question7Limit
+        )
     }
 
     override fun questionPostSuccess(code: Int) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        intent.putExtra("finish", "finish")
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
     override fun questionPostFailure(code: Int) {
