@@ -58,7 +58,6 @@
         <activity android:name=".Home.Club.WriteRecruitmentActivity"/>
         <activity android:name=".Home.Club.List.ClubRecruitmentListActivity"/>
         <activity android:name=".Home.Club.List.Check.CheckApplicationActivity"/>
-        <activity android:name=".Home.Club.List.CheckRecruitmentActivity"/>
         <activity android:name=".Home.Club.List.Check.ClubApplicationDetailActivity"/>
         <activity android:name=".Home.Club.List.ClubRecruitmentDetailActivity"/>
         <activity android:name=".Home.Club.Recent.RecentRecruitmentDetailActivity"/>
@@ -86,6 +85,7 @@
         <activity android:name=".MyPage.Personal.PersonalScrapActivity"/>
         <activity android:name=".MyPage.Personal.PersonalSubmitPrevActivity"/>
         <activity android:name=".MyPage.Personal.ApplicationEditActivity"/>
+        <activity android:name=".MyPage.Personal.ApplicationDetailActivity"/>
 
         <activity android:name=".MyPage.Club.ClubEditInfoActivity"/>
         <activity android:name=".MyPage.Club.ClubEditRecruitmentActivity"/>

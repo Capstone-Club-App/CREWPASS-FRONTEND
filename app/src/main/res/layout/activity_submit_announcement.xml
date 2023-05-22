@@ -21,15 +21,501 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/question_list_rv"
+            <!-- 질문1 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question1"
                 android:layout_width="wrap_content"
-                android:layout_height="600dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="30dp"
-                tools:listitem="@layout/item_question"/>
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:id="@+id/txt_item_question_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/edittext_item_answer"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/txt_item_question1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="질문"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/txt_item_question_num"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <EditText
+                    android:id="@+id/edittext_item_answer"
+                    android:layout_width="322dp"
+                    android:layout_height="149dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintTop_toBottomOf="@id/txt_item_question_num"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_item_margin_text_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer"
+                    app:layout_constraintEnd_toEndOf="@id/edittext_item_answer"
+                    android:text="null자"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_slash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_margin_text_num"
+                    android:text=" / "
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_current_text_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_slash"
+                    android:text="0"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 질문2 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question1"
+                app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:id="@+id/txt_item_question2_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2. "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/edittext_item_answer2"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/txt_item_question2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="질문"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/txt_item_question2_num"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <EditText
+                    android:id="@+id/edittext_item_answer2"
+                    android:layout_width="322dp"
+                    android:layout_height="149dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintTop_toBottomOf="@id/txt_item_question2_num"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_item_margin_text_num2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer2"
+                    app:layout_constraintEnd_toEndOf="@id/edittext_item_answer2"
+                    android:text="null자"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_slash2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer2"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_margin_text_num2"
+                    android:text=" / "
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_current_text_num2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer2"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_slash2"
+                    android:text="0"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 질문3 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question2"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:id="@+id/txt_item_question3_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3. "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/edittext_item_answer3"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/txt_item_question3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="질문"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/txt_item_question3_num"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <EditText
+                    android:id="@+id/edittext_item_answer3"
+                    android:layout_width="322dp"
+                    android:layout_height="149dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintTop_toBottomOf="@id/txt_item_question3_num"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_item_margin_text_num3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer3"
+                    app:layout_constraintEnd_toEndOf="@id/edittext_item_answer3"
+                    android:text="null자"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_slash3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer3"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_margin_text_num3"
+                    android:text=" / "
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_current_text_num3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer3"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_slash3"
+                    android:text="0"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 질문3 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question3"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:id="@+id/txt_item_question4_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4. "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/edittext_item_answer4"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/txt_item_question4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="질문"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/txt_item_question4_num"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <EditText
+                    android:id="@+id/edittext_item_answer4"
+                    android:layout_width="322dp"
+                    android:layout_height="149dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintTop_toBottomOf="@id/txt_item_question4_num"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_item_margin_text_num4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer4"
+                    app:layout_constraintEnd_toEndOf="@id/edittext_item_answer4"
+                    android:text="null자"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_slash4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer4"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_margin_text_num4"
+                    android:text=" / "
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_current_text_num4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer4"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_slash4"
+                    android:text="0"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 질문3 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question4"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:id="@+id/txt_item_question5_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5. "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/edittext_item_answer5"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/txt_item_question5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="질문"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/txt_item_question5_num"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <EditText
+                    android:id="@+id/edittext_item_answer5"
+                    android:layout_width="322dp"
+                    android:layout_height="149dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintTop_toBottomOf="@id/txt_item_question5_num"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_item_margin_text_num5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer5"
+                    app:layout_constraintEnd_toEndOf="@id/edittext_item_answer5"
+                    android:text="null자"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_slash5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer5"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_margin_text_num5"
+                    android:text=" / "
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_current_text_num5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer5"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_slash5"
+                    android:text="0"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 질문3 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question5"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:id="@+id/txt_item_question6_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6. "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/edittext_item_answer6"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/txt_item_question6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="질문"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/txt_item_question6_num"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <EditText
+                    android:id="@+id/edittext_item_answer6"
+                    android:layout_width="322dp"
+                    android:layout_height="149dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintTop_toBottomOf="@id/txt_item_question6_num"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_item_margin_text_num6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer6"
+                    app:layout_constraintEnd_toEndOf="@id/edittext_item_answer6"
+                    android:text="null자"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_slash6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer6"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_margin_text_num6"
+                    android:text=" / "
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_current_text_num6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer6"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_slash6"
+                    android:text="0"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 질문3 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question6"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:id="@+id/txt_item_question7_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7. "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/edittext_item_answer7"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/txt_item_question7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="질문"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/txt_item_question7_num"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <EditText
+                    android:id="@+id/edittext_item_answer7"
+                    android:layout_width="322dp"
+                    android:layout_height="149dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintTop_toBottomOf="@id/txt_item_question7_num"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_item_margin_text_num7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer7"
+                    app:layout_constraintEnd_toEndOf="@id/edittext_item_answer7"
+                    android:text="null자"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_slash7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer7"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_margin_text_num7"
+                    android:text=" / "
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/txt_item_current_text_num7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/edittext_item_answer7"
+                    app:layout_constraintEnd_toStartOf="@id/txt_item_slash7"
+                    android:text="0"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_submit"
@@ -42,9 +528,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/question_list_rv"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"/>
+                app:layout_constraintTop_toBottomOf="@id/layout_question7"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="100dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

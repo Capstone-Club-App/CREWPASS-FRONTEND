@@ -34,6 +34,7 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
 
         context = this
         question_id = intent.getIntExtra("question_id", -1)
+        Log.d("question_id : $question_id", "")
         crew_name = intent.getStringExtra("crew_name")!!
 
         initActionBar()
@@ -69,7 +70,7 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
     fun getApplicaitonList() {
         val applicationService = ApplicationService()
         applicationService.setApplicationGetResult(this)
-        applicationService.getApplication(logined_id, question_id)
+        applicationService.getApplication(question_id)
     }
 
     override fun applicationGetSuccess(code: Int, data: ArrayList<ApplicationData>) {
@@ -89,7 +90,7 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
             ClubApplicationRVAdapter.OnItemClickListener {
             override fun onItemClick(application: ApplicationData) {
                 val intent = Intent(context, ClubApplicationDetailActivity::class.java)
-                intent.putExtra("application_id", true)
+                intent.putExtra("application_id", application.application_id)
                 startActivity(intent)
             }
         })
@@ -102,7 +103,8 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
             userId += it + ", "
         }
         userId = userId.substring(0, userId.length - 2)
-        var msg = binding.edittextPass.text.toString()
+        val msg = binding.edittextPass.text.toString()
+        Log.d("msg : $msg", "")
 
         val applicationService = ApplicationService()
         applicationService.setPassNpassResult(this)
@@ -144,29 +146,29 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
     override fun passNpassSuccess(code: Int) {
         Log.d("합불통보 성공", "")
 //        clubApplicationRVAdapter.checkPass(check_list)
-
-        val layoutManager = binding.announcementListRv.layoutManager as LinearLayoutManager
-        val adapter = binding.announcementListRv.adapter as ClubApplicationRVAdapter
-
-        val itemCount = adapter.itemCount
-        for(position in 0 until itemCount){
-            val viewHolder =
-                binding.announcementListRv.findViewHolderForAdapterPosition(position) as ClubApplicationRVAdapter.ViewHolder
-            if(viewHolder != null){
-                if(pass_npass.equals("pass")){
-                    if(check_list.contains(application_list[position].user_id.toString())) {
-                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
-                        viewHolder.binding.itemTxtPass.visibility = View.VISIBLE
-                    }
-                }
-                else{
-                    if(!check_list.contains(application_list[position].user_id.toString())) {
-                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
-                        viewHolder.binding.itemTxtNpass.visibility = View.VISIBLE
-                    }
-                }
-            }
-        }
+//
+//        val layoutManager = binding.announcementListRv.layoutManager as LinearLayoutManager
+//        val adapter = binding.announcementListRv.adapter as ClubApplicationRVAdapter
+//
+//        val itemCount = adapter.itemCount
+//        for(position in 0 until itemCount){
+//            val viewHolder =
+//                binding.announcementListRv.findViewHolderForAdapterPosition(position) as ClubApplicationRVAdapter.ViewHolder
+//            if(viewHolder != null){
+//                if(pass_npass.equals("pass")){
+//                    if(check_list.contains(application_list[position].user_id.toString())) {
+//                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
+//                        viewHolder.binding.itemTxtPass.visibility = View.VISIBLE
+//                    }
+//                }
+//                else{
+//                    if(!check_list.contains(application_list[position].user_id.toString())) {
+//                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
+//                        viewHolder.binding.itemTxtNpass.visibility = View.VISIBLE
+//                    }
+//                }
+//            }
+//        }
     }
 
     override fun passNpassFailure(code: Int) {

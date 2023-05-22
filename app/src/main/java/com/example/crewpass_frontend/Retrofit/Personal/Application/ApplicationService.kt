@@ -81,4 +81,128 @@ class ApplicationService {
         })
     }
 
+
+    // 지원서 작성하기
+    private lateinit var questionGetResult: QuestionGetResult
+
+    fun setQuestionGetResult(questionGetResult: QuestionGetResult) {
+        this.questionGetResult = questionGetResult
+    }
+
+    fun getQuestion(
+        questionId: Int,
+    ) {
+        val authService = getRetrofit().create(ApplicationRetrofitInterfaces::class.java)
+        authService.getQuestion(
+            questionId,
+        ).enqueue(object :
+            Callback<QuestionGetResponse> {
+            override fun onResponse(
+                call: Call<QuestionGetResponse>,
+                response: Response<QuestionGetResponse>,
+            ) {
+                if (response.body() != null) {
+                    Log.d("Q-GET-SUCCESS", response.toString())
+                    val resp: QuestionGetResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> {
+                            questionGetResult.questionGetSuccess(resp.statusCode, resp.data)
+                        }
+                        else -> {
+                            questionGetResult.questionGetFailure(resp.statusCode)
+                        }
+                    }
+                } else
+                    Log.d("Q-GET-FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<QuestionGetResponse>, t: Throwable) {
+                Log.d("Q-GET-FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    // 지원서 상세 가져오기
+    private lateinit var applicationGetResult: ApplicationGetResult
+
+    fun setApplicationGetResult(applicationGetResult: ApplicationGetResult) {
+        this.applicationGetResult = applicationGetResult
+    }
+
+    fun getApplication(
+        applicationId: Int,
+    ) {
+        val authService = getRetrofit().create(ApplicationRetrofitInterfaces::class.java)
+        authService.getApplication(
+            applicationId,
+        ).enqueue(object :
+            Callback<ApplicationGetResponse> {
+            override fun onResponse(
+                call: Call<ApplicationGetResponse>,
+                response: Response<ApplicationGetResponse>,
+            ) {
+                if (response.body() != null) {
+                    Log.d("APPI-GET-SUCCESS", response.toString())
+                    val resp: ApplicationGetResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> {
+                            applicationGetResult.applicationGetSuccess(resp.statusCode, resp.data)
+                        }
+                        else -> {
+                            applicationGetResult.applicationGetFailure(resp.statusCode)
+                        }
+                    }
+                } else
+                    Log.d("APPI-GET-FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<ApplicationGetResponse>, t: Throwable) {
+                Log.d("APPI-GET-FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    // 지원서 상세 가져오기
+    private lateinit var applicationGetListResult: ApplicationGetListResult
+
+    fun setApplicationGetListResult(applicationGetListResult: ApplicationGetListResult) {
+        this.applicationGetListResult = applicationGetListResult
+    }
+
+    fun getApplicationList(
+        userId: Int,
+    ) {
+        val authService = getRetrofit().create(ApplicationRetrofitInterfaces::class.java)
+        authService.getApplicationList(
+            userId,
+        ).enqueue(object :
+            Callback<ApplicationGetListResponse> {
+            override fun onResponse(
+                call: Call<ApplicationGetListResponse>,
+                response: Response<ApplicationGetListResponse>,
+            ) {
+                if (response.body() != null) {
+                    Log.d("APPI-GET-SUCCESS", response.toString())
+                    val resp: ApplicationGetListResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> {
+                            applicationGetListResult.applicationGetListSuccess(resp.statusCode, resp.data)
+                        }
+                        else -> {
+                            applicationGetListResult.applicationGetListFailure(resp.statusCode)
+                        }
+                    }
+                } else
+                    Log.d("APPI-GET-FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<ApplicationGetListResponse>, t: Throwable) {
+                Log.d("APPI-GET-FAILURE", t.message.toString())
+            }
+        })
+    }
+
 }

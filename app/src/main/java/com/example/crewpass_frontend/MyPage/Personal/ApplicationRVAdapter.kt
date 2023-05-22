@@ -5,8 +5,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crewpass_frontend.Data.Application
+import com.bumptech.glide.Glide
+import com.example.crewpass_frontend.Retrofit.Personal.Application.Application
+
 import com.example.crewpass_frontend.databinding.ItemPrevBinding
+import java.text.SimpleDateFormat
 
 class ApplicationRVAdapter (private val application_list: ArrayList<Application>, var context: Context) : RecyclerView.Adapter<ApplicationRVAdapter.ViewHolder>() {
 
@@ -37,10 +40,16 @@ class ApplicationRVAdapter (private val application_list: ArrayList<Application>
     inner class ViewHolder(val binding: ItemPrevBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(application: Application) {
-            binding.txtClubName.text = "동아리 이름"
+            binding.txtClubName.text = application.crew_name
+            var sdf = SimpleDateFormat("yyyy.MM.dd HH:mm")
+            var date = sdf.format(application.submit_time)
+            binding.itemDateTimeTxt.text = date
+
+            Glide.with(context).load(application.crew_profile)
+                .circleCrop()
+                .into(binding.itemProfileImg)
 
             // 날짜 적용도 추가하기
-
             binding.btnEditApplication.setOnClickListener {
                 val intent = Intent(context, ApplicationEditActivity::class.java)
                 itemView.context.startActivity(intent)

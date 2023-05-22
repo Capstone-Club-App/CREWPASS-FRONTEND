@@ -3,19 +3,20 @@ package com.example.crewpass_frontend.MyPage.Personal
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.crewpass_frontend.Data.Application
-import com.example.crewpass_frontend.Home.Personal.List.RecruitmentDetailActivity
+import com.example.crewpass_frontend.Login.logined_id
+import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationGetListResult
+import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationService
 import com.example.crewpass_frontend.databinding.ActivityPersonalSubmitPrevBinding
-import java.sql.Timestamp
-import java.util.Date
+import com.example.crewpass_frontend.Retrofit.Personal.Application.Application
 
-class PersonalSubmitPrevActivity:AppCompatActivity() {
+class PersonalSubmitPrevActivity:AppCompatActivity(), ApplicationGetListResult {
     lateinit var binding: ActivityPersonalSubmitPrevBinding
     lateinit var context: Context
-    var application_list = ArrayList<Application>()
+
     lateinit var applicationRVAdapter: ApplicationRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +26,7 @@ class PersonalSubmitPrevActivity:AppCompatActivity() {
         context = this
 
         initActionBar()
-        initRecyclerView()
+        getApplicationList()
     }
 
     fun initActionBar() {
@@ -34,34 +35,36 @@ class PersonalSubmitPrevActivity:AppCompatActivity() {
         binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
     }
 
-    fun initRecyclerView() {
+    fun getApplicationList(){
+        val applicationService = ApplicationService()
+        applicationService.setApplicationGetListResult(this)
+        applicationService.getApplicationList(logined_id)
+    }
 
-        // 마감임박순 데이터 가져오기
-        // 임의값
-        var timestamp = Timestamp(Date().time)
-        application_list.apply {
-            add(Application(1,timestamp,
-                "...", "...", "11", " ", " ", " ", " ",
-            3, 3, 2, 1, 1, 1, 1,
-                1, 1
-            ))
-            add(Application(1,timestamp,
-                "...", "...", "11", " ", " ", " ", " ",
-                3, 3, 2, 1, 1, 1, 1,
-                1, 1
-            ))
-
-            applicationRVAdapter = ApplicationRVAdapter(application_list, context)
+    fun initRecyclerView(data : ArrayList<Application>) {
+            applicationRVAdapter = ApplicationRVAdapter(data, context)
             binding.announcementListRv.adapter = applicationRVAdapter
             binding.announcementListRv.layoutManager = LinearLayoutManager(context)
             applicationRVAdapter.setItemClickListener(object :
                 ApplicationRVAdapter.OnItemClickListener {
                 override fun onItemClick(application: Application) {
-                    val intent = Intent(context, RecruitmentDetailActivity::class.java)
-                    intent.putExtra("scrap", true)
+                    val intent = Intent(context, ApplicationDetailActivity::class.java)
+                    intent.putExtra("application_id", application.application_id)
                     startActivity(intent) // 지원서 작성으로 이동
                 }
             })
-        }
+
+    }
+
+    override fun applicationGetListSuccess(
+        code: Int,
+        data: ArrayList<Application>
+    ) {
+        Log.d("지원서 목록 가져오기 성공","")
+        initRecyclerView(data)
+    }
+
+    override fun applicationGetListFailure(code: Int) {
+        Log.d("지원서 목록 가져오기 실패","")
     }
 }

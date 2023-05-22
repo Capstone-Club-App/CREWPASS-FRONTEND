@@ -36,6 +36,8 @@
         app:layout_constraintTop_toTopOf="@id/list_item"
         android:layout_marginTop="10dp"
         android:layout_marginStart="12dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         />
 
     <TextView

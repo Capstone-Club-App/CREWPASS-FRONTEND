@@ -13,6 +13,9 @@ import com.example.crewpass_frontend.Retrofit.Personal.Scrap.*
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment
 import com.example.crewpass_frontend.databinding.ItemAnnouncementPersonalBinding
 import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 class HomeRecentRVAdapter (private val recruitment_list: ArrayList<Recruitment>)
     : RecyclerView.Adapter<HomeRecentRVAdapter.ViewHolder>()
@@ -86,6 +89,19 @@ class HomeRecentRVAdapter (private val recruitment_list: ArrayList<Recruitment>)
             binding.itemAnnounceDetail.text = recruitment.crew_name
             binding.itemAnnounceTitle.text = recruitment.title
             // 날짜 적용도 추가하기
+            val currentTimeStamp = System.currentTimeMillis()
+            /*
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val dDayDateString = sdf.format(recruitment.deadline)
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val dDayDate = dateFormat.parse(dDayDateString)
+            val dDayTimeStamp = dDayDate.time
+
+            val differenceInMillis = dDayTimeStamp - currentTimeStamp
+            val daysUntilDday = TimeUnit.MILLISECONDS.toDays(differenceInMillis)
+
+            binding.itemDayTxt.text = daysUntilDday.toString() */
         }
 
 

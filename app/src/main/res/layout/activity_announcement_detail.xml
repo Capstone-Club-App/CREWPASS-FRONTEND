@@ -221,7 +221,7 @@
             <ImageView
                 android:id="@+id/imageView_image"
                 android:layout_width="321dp"
-                android:layout_height="95dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image"
@@ -244,7 +244,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView_image"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="100dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

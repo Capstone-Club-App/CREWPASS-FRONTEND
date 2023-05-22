@@ -15,12 +15,10 @@ class ApplicationService {
     }
 
     fun getApplication(
-        crewId: Int,
-        questionId: Int,
+        questionId: Int
     ) {
         val authService = getRetrofit().create(ApplicationRetrofitInterfaces::class.java)
         authService.getApplication(
-            crewId,
             questionId
         ).enqueue(object :
             Callback<ApplicationGetResponse> {
@@ -45,7 +43,7 @@ class ApplicationService {
             }
 
             override fun onFailure(call: Call<ApplicationGetResponse>, t: Throwable) {
-                Log.d("APPLI-GET-FAILURE", t.message.toString())
+                Log.d("APPLI-GET-ONFAILURE", t.message.toString())
             }
         })
     }

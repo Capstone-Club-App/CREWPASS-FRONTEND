@@ -11,12 +11,12 @@ import retrofit2.http.Path
 
 interface ApplicationRetrofitInterfaces {
     // 지원서 목록 가져오기
-    @POST("/application/new/{questionId}")
+    @GET("/application/list/{questionId}")
     fun getApplication(
-        @Header("crewId") crewId: Int,
-        @Path("questionId") questionId: Int,
+        @Path("questionId") questionId: Int
     ): Call<ApplicationGetResponse>
 
+    @Multipart
     @POST("/notice")
     fun postPassNpass(
         @Part("crewName") crewName : String,

@@ -31,4 +31,23 @@ interface ApplicationRetrofitInterfaces {
         @Part("answer6Count") answer6Count : Int?,
         @Part("answer7Count") answer7Count : Int?,
     ): Call<ApplicationPostResponse>
+
+    // 질문 가져오기
+    @GET("/application/new/{questionId}")
+    fun getQuestion(
+        @Path("questionId") questionId: Int
+    ): Call<QuestionGetResponse>
+
+    // 지원서 상세 가져오기
+    @GET("/application/detail/{applicationId}")
+    fun getApplication(
+        @Path("applicationId") applicationId: Int
+    ) : Call<ApplicationGetResponse>
+
+    // 지원서 목록 가져오기
+    @GET("/application/myList")
+    fun getApplicationList(
+        @Header("userId") userId: Int
+    ) : Call<ApplicationGetListResponse>
+
 }
