@@ -13,7 +13,7 @@ data class RecruitmentResponse (
 
 data class RecruitmentData(
     @SerializedName(value = "crew_id") val crew_id : Int,
-    @SerializedName(value = "crew_profile") val crew_profile : MultipartBody.Part,
+    @SerializedName(value = "crew_profile") val crew_profile : String,
     @SerializedName(value = "crew_name") val crew_name : String,
     @SerializedName(value = "region1") val region1 : String,
     @SerializedName(value = "region2") val region2 : String,

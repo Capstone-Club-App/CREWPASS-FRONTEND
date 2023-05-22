@@ -11,6 +11,6 @@ interface RecruitmentGetDeadlineResult {
 }
 
 interface RecruitmentGetDetailResult{
-    fun recruitmentGetDetailSuccess(code : Int, data :ArrayList<DetailResult>)
+    fun recruitmentGetDetailSuccess(code : Int, data :DetailResult)
     fun recruitmentGetDetailFailure(code : Int)
 }

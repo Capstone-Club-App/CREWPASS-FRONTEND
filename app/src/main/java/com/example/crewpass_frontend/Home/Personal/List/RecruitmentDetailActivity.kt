@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat
 class RecruitmentDetailActivity : AppCompatActivity(), RecruitmentGetDetailResult {
     lateinit var binding: ActivityAnnouncementDetailBinding
     lateinit var context: Context
+    var question_id = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAnnouncementDetailBinding.inflate(layoutInflater)
@@ -38,6 +39,7 @@ class RecruitmentDetailActivity : AppCompatActivity(), RecruitmentGetDetailResul
 
         binding.btnSubmit.setOnClickListener {
             val intent = Intent(this, SubmitApplicationActivity::class.java)
+            intent.putExtra("question_id", question_id)
             startActivity(intent) // 지원서 작성으로 이동
         }
     }
@@ -46,22 +48,24 @@ class RecruitmentDetailActivity : AppCompatActivity(), RecruitmentGetDetailResul
         binding.innerPageTop.appbarBackBtn.setOnClickListener { onBackPressed() }
     }
 
-    override fun recruitmentGetDetailSuccess(code: Int, data: ArrayList<DetailResult>) {
-        Glide.with(context).load(data[0].crew_profile)
+    override fun recruitmentGetDetailSuccess(code: Int, data: DetailResult) {
+        Glide.with(context).load(data.crew_profile)
             .circleCrop()
             .into(binding.imgProfile)
-        binding.txtClubName.text = data[0].crew_name
+        binding.txtClubName.text = data.crew_name
 //        binding.itemAnnounceDetail.text = data.content
         var sdf_d = SimpleDateFormat("yyyy-MM-dd")
-        var date = sdf_d.format(data[0].register_time)
+        var date = sdf_d.format(data.register_time)
         binding.txtDeadlineDate.text = date
 
         var sdf_t = SimpleDateFormat("HH:mm")
-        val time = sdf_t.format(data[0].register_time)
+        val time = sdf_t.format(data.register_time)
         binding.txtDeadlineTime.text = time
 
-        binding.edittextTitle.text = data[0].title
-        binding.edittextContent.text = data[0].content
+        binding.edittextTitle.text = data.title
+        binding.edittextContent.text = data.content
+
+        question_id = data.question_id
     }
 
     override fun recruitmentGetDetailFailure(code: Int) {

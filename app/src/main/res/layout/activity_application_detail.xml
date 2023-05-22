@@ -9,55 +9,13 @@
         android:id="@+id/inner_page_top"
         layout="@layout/acttionbar_inner_page_top"/>
 
-    <View
-        android:id="@+id/view_personal"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
-        app:layout_constraintTop_toBottomOf="@id/inner_page_top"
-        android:background="@color/gray_rectangle"/>
-
-    <ImageView
-        android:id="@+id/img_profile"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:background="@drawable/round_image"
-        app:layout_constraintStart_toStartOf="@id/view_personal"
-        app:layout_constraintTop_toTopOf="@id/view_personal"
-        android:layout_marginStart="12dp"
-        app:layout_constraintBottom_toBottomOf="@id/view_personal"/>
-
-    <TextView
-        android:id="@+id/txt_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/img_profile"
-        app:layout_constraintTop_toTopOf="@id/img_profile"
-        android:text="홍길동"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="2dp"/>
-
-    <TextView
-        android:id="@+id/txt_date_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2023.04.04. 16:39"
-        android:textSize="14dp"
-        app:layout_constraintStart_toEndOf="@id/img_profile"
-        app:layout_constraintTop_toBottomOf="@id/txt_user_name"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="12dp"
-        />
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_personal"
+        app:layout_constraintTop_toBottomOf="@id/inner_page_top"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout

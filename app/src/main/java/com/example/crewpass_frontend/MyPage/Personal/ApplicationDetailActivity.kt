@@ -1,34 +1,35 @@
-package com.example.crewpass_frontend.Home.Club.List.Check
+package com.example.crewpass_frontend.MyPage.Personal
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationData
 import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationGetResult
 import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationService
-import com.example.crewpass_frontend.databinding.ActivityClubApplicationDetailBinding
-import java.text.SimpleDateFormat
+import com.example.crewpass_frontend.databinding.ActivityApplicationDetailBinding
 
-class ClubApplicationDetailActivity :AppCompatActivity(), ApplicationGetResult {
-    lateinit var binding: ActivityClubApplicationDetailBinding
+class ApplicationDetailActivity: AppCompatActivity(), ApplicationGetResult {
+    lateinit var binding : ActivityApplicationDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityClubApplicationDetailBinding.inflate(layoutInflater)
+        binding = ActivityApplicationDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val application_id = intent.getIntExtra("application_id", -1)
         if(application_id != -1)
             getApplicationDetail(application_id)
+
+        binding.btnClose.setOnClickListener {
+            finish()
+        }
+
         initActionBar()
     }
 
-    fun initActionBar(){
-        binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
-        binding.innerPageTop.appbarPageNameLeftTv.text = "지원서 조회"
-
-        binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
+    fun initActionBar() {
+        binding.innerPageTop.appbarPageNameLeftTv.text = "지원서 상세"
+        binding.innerPageTop.appbarBackBtn.setOnClickListener { onBackPressed() }
     }
 
     fun getApplicationDetail(application_id : Int){
@@ -38,15 +39,6 @@ class ClubApplicationDetailActivity :AppCompatActivity(), ApplicationGetResult {
     }
 
     override fun applicationGetSuccess(code: Int, data: ArrayList<ApplicationData>) {
-
-        var sdf = SimpleDateFormat("yyyy.MM.dd HH:mm")
-        var date = sdf.format(data[0].submit_time)
-        binding.txtDateTime.text = date
-
-        Glide.with(this).load(data[0].user_profile)
-            .circleCrop()
-            .into(binding.imgProfile)
-
         binding.txtItemQuestion1.text = data[0].question1
         binding.txtItemMarginTextNum.text = data[0].question1Limit.toString() + "자"
         binding.edittextItemAnswer.text = data[0].answer1

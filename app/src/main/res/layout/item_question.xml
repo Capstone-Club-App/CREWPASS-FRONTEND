@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="20dp">
 
+
     <TextView
         android:id="@+id/txt_item_question_num"
         android:layout_width="wrap_content"

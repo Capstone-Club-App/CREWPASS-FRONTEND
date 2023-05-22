@@ -37,18 +37,18 @@ class ClubRecruitmentDetailRecentActivity: AppCompatActivity(), RecruitmentGetDe
         binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
     }
 
-    override fun recruitmentGetDetailSuccess(code: Int, data: ArrayList<DetailResult>) {
-        Glide.with(context).load(data[0].crew_profile)
+    override fun recruitmentGetDetailSuccess(code: Int, data: DetailResult) {
+        Glide.with(context).load(data.crew_profile)
             .circleCrop()
             .into(binding.imgProfile)
-        binding.txtClubName.text = data[0].crew_name
+        binding.txtClubName.text = data.crew_name
 //        binding.itemAnnounceDetail.text = data.content
         var sdf = SimpleDateFormat("yyyy.MM.dd HH:mm")
-        var date = sdf.format(data[0].register_time)
+        var date = sdf.format(data.register_time)
         binding.txtDateTime.text = date
 
-        binding.edittextTitle.text = data[0].title
-        binding.edittextContent.text = data[0].content
+        binding.edittextTitle.text = data.title
+        binding.edittextContent.text = data.content
     }
 
     override fun recruitmentGetDetailFailure(code: Int) {

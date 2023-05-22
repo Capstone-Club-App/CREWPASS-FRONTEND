@@ -12,7 +12,7 @@ import com.example.crewpass_frontend.databinding.ItemPersonalApplicationCheckbox
 
 class ClubApplicationRVAdapter  (private val application_list: ArrayList<ApplicationData>) : RecyclerView.Adapter<ClubApplicationRVAdapter.ViewHolder>() {
 
-    private var items : List<ApplicationData> = ArrayList()
+//    private var items : List<ApplicationData> = ArrayList()
     lateinit var context : Context
 
     // 아이템 레이아웃 결합
@@ -39,9 +39,8 @@ class ClubApplicationRVAdapter  (private val application_list: ArrayList<Applica
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(application_list[position])
-
         holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(items[position])
+            itemClickListener.onItemClick(application_list[position])
             notifyItemChanged(position)
         }
     }
@@ -60,7 +59,7 @@ class ClubApplicationRVAdapter  (private val application_list: ArrayList<Applica
                     check_list.add(application.user_id.toString())
                 else
                     check_list.remove(application.user_id.toString())
-                notifyItemRangeChanged(0, items.size)
+                notifyItemRangeChanged(0, application_list.size)
             }
 
 
