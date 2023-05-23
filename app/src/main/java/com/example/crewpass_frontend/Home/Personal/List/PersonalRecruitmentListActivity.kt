@@ -7,18 +7,26 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.crewpass_frontend.Data.Recruitment
+import com.example.crewpass_frontend.Home.HomeImminentRVAdapter
+import com.example.crewpass_frontend.Home.HomeRecentRVAdapter
+import com.example.crewpass_frontend.Login.logined_id
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapGetAllResult
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapService
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.getResult
+import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentAllService
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetAllResult
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetDeadlineResult
 import com.example.crewpass_frontend.databinding.ActivityPersonalAnnouncementListBinding
 
+
 class PersonalRecruitmentListActivity : AppCompatActivity(), RecruitmentGetAllResult,
-    RecruitmentGetDeadlineResult {
+    RecruitmentGetDeadlineResult, ScrapGetAllResult {
     lateinit var binding: ActivityPersonalAnnouncementListBinding
-    lateinit var recruitmentRVAdapter: RecruitmentRVAdapter
-    var recent_list = ArrayList<Recruitment>()
-    var imminent_list = ArrayList<Recruitment>()
+    lateinit var homeRecentRVAdapter: HomeRecentRVAdapter
+    lateinit var homeImminentRVAdapter: HomeImminentRVAdapter
+
+    var scrap_list = ArrayList<getResult>()
     lateinit var context: Context
     var list_state = ""
     var type = ""
@@ -49,6 +57,30 @@ class PersonalRecruitmentListActivity : AppCompatActivity(), RecruitmentGetAllRe
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        getScrap()
+    }
+
+    // 스크랩 목록 가져오기
+    fun getScrap(){
+        val scrapService = ScrapService()
+        scrapService.setScrapGetAllResult(this)
+        scrapService.getScrap(logined_id)
+    }
+
+    override fun scrapGetAllSuccess(code: Int, data: ArrayList<getResult>) {
+        scrap_list = data
+        if(list_state.equals("recent"))
+            getRecruitment_recent()
+        else
+            getRecruitment_imminent()
+    }
+
+    override fun scrapGetAllFailure(code: Int) {
+        Log.d("스크랩 목록 가져오기 실패", "")
+    }
+
     // 전체 최신 모집글 불러오기
     fun getRecruitment_recent() {
         val recruitmentAllService = RecruitmentAllService()
@@ -65,7 +97,7 @@ class PersonalRecruitmentListActivity : AppCompatActivity(), RecruitmentGetAllRe
 
     override fun recruitmentGetAllSuccess(
         code: Int,
-        data: ArrayList<com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment>
+        data: ArrayList<Recruitment>
     ) {
         initRecyclerView("recent", data)
     }
@@ -76,7 +108,7 @@ class PersonalRecruitmentListActivity : AppCompatActivity(), RecruitmentGetAllRe
 
     override fun recruitmentGetDeadlineSuccess(
         code: Int,
-        data: ArrayList<com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment>
+        data: ArrayList<Recruitment>
     ) {
         initRecyclerView(list_state, data)
     }
@@ -87,32 +119,33 @@ class PersonalRecruitmentListActivity : AppCompatActivity(), RecruitmentGetAllRe
 
     fun initRecyclerView(
         list_state: String,
-        data: ArrayList<com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment>
+        data: ArrayList<Recruitment>
     ) {
         if (list_state.equals("recent")) {
             // 최신순 데이터 가져오기
-            recruitmentRVAdapter = RecruitmentRVAdapter(recent_list)
-            binding.announcementListRv.adapter = recruitmentRVAdapter
-            binding.announcementListRv.layoutManager = LinearLayoutManager(context)
-            recruitmentRVAdapter.setItemClickListener(object :
-                RecruitmentRVAdapter.OnItemClickListener {
+            homeRecentRVAdapter = HomeRecentRVAdapter(data,scrap_list)
+            binding.announcementListRv.adapter = homeRecentRVAdapter
+            binding.announcementListRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            homeRecentRVAdapter.setItemClickListener(object :
+                HomeRecentRVAdapter.OnItemClickListener{
                 override fun onItemClick(recruitment: Recruitment) {
                     val intent = Intent(context, RecruitmentDetailActivity::class.java)
-                    startActivity(intent)
+                    intent.putExtra("recruitment_id", recruitment.recruitment_id)
+                    startActivity(intent) // 상세보기
                 }
             })
 
         } else {
             // 마감임박순 데이터 가져오기
-            // 임의값
-            recruitmentRVAdapter = RecruitmentRVAdapter(imminent_list)
-            binding.announcementListRv.adapter = recruitmentRVAdapter
-            binding.announcementListRv.layoutManager = LinearLayoutManager(context)
-            recruitmentRVAdapter.setItemClickListener(object :
-                RecruitmentRVAdapter.OnItemClickListener {
+            homeImminentRVAdapter = HomeImminentRVAdapter(data,scrap_list)
+            binding.announcementListRv.adapter = homeImminentRVAdapter
+            binding.announcementListRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            homeImminentRVAdapter.setItemClickListener(object :
+                HomeImminentRVAdapter.OnItemClickListener{
                 override fun onItemClick(recruitment: Recruitment) {
                     val intent = Intent(context, RecruitmentDetailActivity::class.java)
-                    startActivity(intent)
+                    intent.putExtra("recruitment_id", recruitment.recruitment_id)
+                    startActivity(intent) // 상세보기
                 }
             })
         }

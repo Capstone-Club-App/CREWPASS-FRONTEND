@@ -13,6 +13,7 @@ import com.example.crewpass_frontend.Home.HomeRecentRVAdapter
 import com.example.crewpass_frontend.Home.Personal.List.RecruitmentDetailActivity
 import com.example.crewpass_frontend.Home.Personal.List.PersonalRecruitmentListActivity
 import com.example.crewpass_frontend.Retrofit.Club.Recruitment.RecruitmentGetResult
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.getResult
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentAllService
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetAllResult
@@ -24,6 +25,7 @@ class FragmentVolunteer : Fragment(), RecruitmentGetAllResult, RecruitmentGetDea
 
     lateinit var homeRecentRVAdapter: HomeRecentRVAdapter
     lateinit var homeImminentRVAdapter: HomeImminentRVAdapter
+    var scrap_list = ArrayList<getResult>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,12 +38,14 @@ class FragmentVolunteer : Fragment(), RecruitmentGetAllResult, RecruitmentGetDea
         binding.btnVolunteerRecent.setOnClickListener {
             val intent = Intent(activity, PersonalRecruitmentListActivity::class.java)
             intent.putExtra("list_state", "recent")
+            intent.putExtra("type", "봉사,사회활동")
             startActivity(intent)
         }
 
         binding.btnVolunteerImminent.setOnClickListener {
             val intent = Intent(activity, PersonalRecruitmentListActivity::class.java)
             intent.putExtra("list_state", "imminent")
+            intent.putExtra("type", "봉사,사회활동")
             startActivity(intent)
         }
 
@@ -64,7 +68,7 @@ class FragmentVolunteer : Fragment(), RecruitmentGetAllResult, RecruitmentGetDea
         recruitmentAllService.getRecruitmentAll("봉사,사회활동")
     }
     fun initRecyclerView_recent(result : ArrayList<Recruitment>){
-        homeRecentRVAdapter = HomeRecentRVAdapter(result)
+        homeRecentRVAdapter = HomeRecentRVAdapter(result, scrap_list)
         binding.volunteerRecentRv.adapter = homeRecentRVAdapter
         binding.volunteerRecentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         homeRecentRVAdapter.setItemClickListener(object :
@@ -96,7 +100,7 @@ class FragmentVolunteer : Fragment(), RecruitmentGetAllResult, RecruitmentGetDea
         recruitmentAllService.getRecruitmentDeadline("봉사,사회활동")
     }
     fun initRecyclerView_imminent(result : ArrayList<Recruitment>){
-        homeImminentRVAdapter = HomeImminentRVAdapter(result)
+        homeImminentRVAdapter = HomeImminentRVAdapter(result, scrap_list)
         binding.volunteerImminentRv.adapter = homeImminentRVAdapter
         binding.volunteerImminentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         homeImminentRVAdapter.setItemClickListener(object :
