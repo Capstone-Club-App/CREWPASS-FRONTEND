@@ -79,6 +79,8 @@
                 android:layout_width="284dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="5dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
                 android:background="@drawable/edit_text_box"
                 app:layout_constraintStart_toStartOf="@id/personal_id"
                 app:layout_constraintTop_toBottomOf="@id/personal_id" />
@@ -115,6 +117,8 @@
                 android:layout_width="284dp"
                 android:layout_height="39dp"
                 android:layout_marginTop="5dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
                 android:background="@drawable/edit_text_box"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -365,7 +369,8 @@
                 android:layout_height="39dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/edit_text_box"
-                android:paddingLeft="10dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@id/txt_chairman"
                 app:layout_constraintTop_toBottomOf="@id/txt_chairman" />
@@ -381,6 +386,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
+
                 app:layout_constraintStart_toStartOf="@+id/edittext_chairman"
                 app:layout_constraintTop_toBottomOf="@id/edittext_chairman" />
 
@@ -390,7 +396,8 @@
                 android:layout_height="39dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/edit_text_box"
-                android:paddingLeft="10dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@id/txt_vice_chairman"
                 app:layout_constraintTop_toBottomOf="@id/txt_vice_chairman" />

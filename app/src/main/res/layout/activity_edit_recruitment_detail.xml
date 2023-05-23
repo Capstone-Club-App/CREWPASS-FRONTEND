@@ -35,6 +35,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
                 android:textColor="@color/black"
@@ -105,7 +107,11 @@
             <EditText
                 android:id="@+id/edittext_content"
                 android:layout_width="321dp"
-                android:layout_height="278dp"
+                android:layout_height="wrap_content"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/content"
@@ -138,7 +144,7 @@
             <ImageView
                 android:id="@+id/imageView_image"
                 android:layout_width="321dp"
-                android:layout_height="95dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image"
@@ -161,7 +167,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView_image"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="150dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

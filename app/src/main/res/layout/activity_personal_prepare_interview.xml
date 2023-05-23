@@ -73,7 +73,11 @@
     <EditText
         android:id="@+id/edittext_question"
         android:layout_width="322dp"
-        android:layout_height="149dp"
+        android:layout_height="wrap_content"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:background="@drawable/edit_text_box"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
