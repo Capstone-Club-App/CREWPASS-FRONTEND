@@ -125,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="이미 존재하는 아이디입니다."
+        android:text="이미 사용중인 아이디입니다."
         android:textSize="10sp"
         android:textColor="@color/red"
         android:visibility="invisible"
@@ -221,6 +221,34 @@
         app:layout_constraintStart_toStartOf="@id/personal_email"
         app:layout_constraintTop_toBottomOf="@id/personal_email"
         android:layout_marginTop="5dp"/>
+
+    <!--중복/사용가능 아이다-->
+    <TextView
+        android:id="@+id/txt_email_usable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="사용가능한 아이디입니다."
+        android:textSize="10sp"
+        android:textColor="@color/green"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/edittext_email"
+        app:layout_constraintStart_toStartOf="@id/edittext_email"
+        />
+
+    <!--중복/사용가능 아이다-->
+    <TextView
+        android:id="@+id/txt_email_unusable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="이미 사용중인 이메일입니다."
+        android:textSize="10sp"
+        android:textColor="@color/red"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/edittext_email"
+        app:layout_constraintStart_toStartOf="@id/edittext_email"
+        />
 
     <!--중복확인 버튼-->
     <androidx.appcompat.widget.AppCompatButton

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.Login.logined_id
 import com.example.crewpass_frontend.R
+import com.example.crewpass_frontend.Retrofit.Personal.SignUp.CheckDuplicateEmailResult
 import com.example.crewpass_frontend.Retrofit.Personal.SignUp.CheckDuplicateIDResult
 import com.example.crewpass_frontend.Retrofit.Personal.SignUp.SignUpResult
 import com.example.crewpass_frontend.Retrofit.Personal.SignUp.SignUpService
@@ -28,7 +29,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
-class PersonalSignUpActivity : AppCompatActivity(), CheckDuplicateIDResult {
+class PersonalSignUpActivity : AppCompatActivity(), CheckDuplicateIDResult, CheckDuplicateEmailResult {
     lateinit var binding: ActivityPersonalSignupBinding
     private var PICK_IMAGE = 1
     var picture : MultipartBody.Part? = null
@@ -48,6 +49,12 @@ class PersonalSignUpActivity : AppCompatActivity(), CheckDuplicateIDResult {
             val signUpService = SignUpService()
             signUpService.setCheckDuplicateCrewNameResult(this)
             signUpService.checkDuplicateID(binding.edittextId.text.toString())
+        }
+
+        binding.btnEmailCompare.setOnClickListener {
+            val signUpService = SignUpService()
+            signUpService.setCheckDuplicateEmailResult(this)
+            signUpService.checkDuplicateEmail(binding.edittextEmail.text.toString())
         }
 
 
@@ -170,9 +177,6 @@ class PersonalSignUpActivity : AppCompatActivity(), CheckDuplicateIDResult {
             BitmapFactory.decodeStream(inputStream, null, bmOptions)?.also { bitmap ->
                 val matrix = Matrix()
                 matrix.preRotate(0f, 0f, 0f)
-//                binding.profileImg.setImageBitmap(
-//                    Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, false)
-//                )
             }
         }
     }
@@ -183,5 +187,13 @@ class PersonalSignUpActivity : AppCompatActivity(), CheckDuplicateIDResult {
 
     override fun unusableID(code: Int) {
         binding.txtIdUnusable.visibility = View.VISIBLE
+    }
+
+    override fun usableEmail(code: Int) {
+        binding.txtEmailUsable.visibility = View.VISIBLE
+    }
+
+    override fun unusableEmail(code: Int) {
+        binding.txtEmailUnusable.visibility = View.VISIBLE
     }
 }

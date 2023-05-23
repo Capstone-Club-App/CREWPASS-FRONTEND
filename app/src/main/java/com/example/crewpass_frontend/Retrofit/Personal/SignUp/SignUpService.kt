@@ -39,6 +39,36 @@ class SignUpService {
         })
     }
 
+    // 이메일 중복검사
+    private lateinit var checkDuplicateEmailResult: CheckDuplicateEmailResult
+
+    fun setCheckDuplicateEmailResult(checkDuplicateEmailResult: CheckDuplicateEmailResult){
+        this.checkDuplicateEmailResult = checkDuplicateEmailResult
+    }
+
+    fun checkDuplicateEmail(email : String){
+        val authService = getRetrofit().create(SignUpRetrofitInterface::class.java)
+        authService.checkDuplicateEmail(email).enqueue(object : Callback<SignUpResponse> {
+            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>,) {
+                if(response.body() != null) {
+                    Log.d("CHECK-EMAIL-SUCCESS",response.toString())
+                    val resp: SignUpResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> checkDuplicateEmailResult.usableEmail(resp.statusCode)
+                        else -> checkDuplicateEmailResult.unusableEmail(resp.statusCode)
+                    }
+                }
+                else
+                    Log.d("CHECK-EMAIL-FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                Log.d("CHECK-EMAIL-FAILURE",t.message.toString())
+            }
+        })
+    }
+
     // 회원 가입
     private lateinit var signUpResult: SignUpResult
 
