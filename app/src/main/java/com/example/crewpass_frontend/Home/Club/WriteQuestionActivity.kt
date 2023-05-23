@@ -325,12 +325,18 @@ class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, Questi
 
     // 질문 등록
     fun postQuestion() {
-        if (binding.edittextQuestion5.visibility == View.INVISIBLE)
+        if (binding.edittextQuestion5.visibility == View.GONE) {
+            binding.edittextQuestion5.text = null
             question5Limit = null
-        if (binding.edittextQuestion6.visibility == View.INVISIBLE)
+        }
+        if (binding.edittextQuestion6.visibility == View.GONE) {
+            binding.edittextQuestion6.text = null
             question6Limit = null
-        if (binding.edittextQuestion7.visibility == View.INVISIBLE)
+        }
+        if (binding.edittextQuestion7.visibility == View.GONE) {
+            binding.edittextQuestion7.text = null
             question7Limit = null
+        }
 
         val questionService = QuestionService()
         questionService.setQuestionPostResult(this)
