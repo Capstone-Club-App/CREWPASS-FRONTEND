@@ -6,7 +6,6 @@ import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crewpass_frontend.Home.Personal.scrap_list
 import com.example.crewpass_frontend.Login.logined_id
 import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.Retrofit.Personal.Scrap.*
@@ -17,7 +16,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
-class HomeRecentRVAdapter (private val recruitment_list: ArrayList<Recruitment>)
+class HomeRecentRVAdapter (private val recruitment_list: ArrayList<Recruitment>, private val scrap_list: ArrayList<getResult>)
     : RecyclerView.Adapter<HomeRecentRVAdapter.ViewHolder>()
 {
     var checkStatus = SparseBooleanArray()
@@ -63,22 +62,12 @@ class HomeRecentRVAdapter (private val recruitment_list: ArrayList<Recruitment>)
             binding.btnHeart.setOnClickListener {
                 binding.btnHeart.isSelected = !binding.btnHeart.isSelected
                 if(!binding.btnHeart.isSelected) { // 스크랩 취소
-//                    Log.d("check false", binding.btnHeart.isSelected.toString())
-//                    Log.d("adapterPosition : ", adapterPosition.toString())
-//                    checkStatus.put(adapterPosition, false)
-//                    binding.btnHeart.setBackgroundResource(R.drawable.img_heart_notfill)
-
                     val scrapService = ScrapService()
                     scrapService.setScrapDeleteResult(this)
                     scrapService.deleteScrap(scrap_id_get)
                 }
                 else { // 스크랩 등록
                     // 버튼 클릭상태
-//                    Log.d("check true", binding.btnHeart.isSelected.toString())
-//                    Log.d("adapterPosition : ", adapterPosition.toString())
-//                    checkStatus.put(adapterPosition, true)
-//                    binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
-
                     val scrapService = ScrapService()
                     scrapService.setScrapPostResult(this)
                     scrapService.postScrap(recruitment.recruitment_id)
@@ -88,20 +77,6 @@ class HomeRecentRVAdapter (private val recruitment_list: ArrayList<Recruitment>)
 
             binding.itemAnnounceDetail.text = recruitment.crew_name
             binding.itemAnnounceTitle.text = recruitment.title
-            // 날짜 적용도 추가하기
-            val currentTimeStamp = System.currentTimeMillis()
-            /*
-            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val dDayDateString = sdf.format(recruitment.deadline)
-
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val dDayDate = dateFormat.parse(dDayDateString)
-            val dDayTimeStamp = dDayDate.time
-
-            val differenceInMillis = dDayTimeStamp - currentTimeStamp
-            val daysUntilDday = TimeUnit.MILLISECONDS.toDays(differenceInMillis)
-
-            binding.itemDayTxt.text = daysUntilDday.toString() */
         }
 
 

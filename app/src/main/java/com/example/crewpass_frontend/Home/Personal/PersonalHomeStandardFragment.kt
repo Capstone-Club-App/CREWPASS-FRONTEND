@@ -24,14 +24,12 @@ import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetAllResult
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetDeadlineResult
 
-var scrap_list = ArrayList<getResult>()
-
 class PersonalHomeStandardFragment : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadlineResult,
     ScrapGetAllResult {
     lateinit var binding: FragmentPersonalHomeStandardBinding
     lateinit var homeRecentRVAdapter: HomeRecentRVAdapter
     lateinit var homeImminentRVAdapter: HomeImminentRVAdapter
-
+    var scrap_list = ArrayList<getResult>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +84,7 @@ class PersonalHomeStandardFragment : Fragment(), RecruitmentGetAllResult, Recrui
     }
 
     fun initRecyclerView_recent(result : ArrayList<Recruitment>){
-        homeRecentRVAdapter = HomeRecentRVAdapter(result)
+        homeRecentRVAdapter = HomeRecentRVAdapter(result, scrap_list)
         binding.standardRecentRv.adapter = homeRecentRVAdapter
         binding.standardRecentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         homeRecentRVAdapter.setItemClickListener(object :
@@ -118,7 +116,7 @@ class PersonalHomeStandardFragment : Fragment(), RecruitmentGetAllResult, Recrui
         recruitmentAllService.getRecruitmentDeadline("total")
     }
     fun initRecyclerView_imminent(result : ArrayList<Recruitment>){
-        homeImminentRVAdapter = HomeImminentRVAdapter(result)
+        homeImminentRVAdapter = HomeImminentRVAdapter(result, scrap_list)
         binding.standardImminentRv.adapter = homeImminentRVAdapter
         binding.standardImminentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         homeImminentRVAdapter.setItemClickListener(object :

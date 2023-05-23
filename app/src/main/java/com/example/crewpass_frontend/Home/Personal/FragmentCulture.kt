@@ -12,17 +12,21 @@ import com.example.crewpass_frontend.Home.HomeImminentRVAdapter
 import com.example.crewpass_frontend.Home.HomeRecentRVAdapter
 import com.example.crewpass_frontend.Home.Personal.List.RecruitmentDetailActivity
 import com.example.crewpass_frontend.Home.Personal.List.PersonalRecruitmentListActivity
+import com.example.crewpass_frontend.Login.logined_id
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapGetAllResult
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapService
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.getResult
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentAllService
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetAllResult
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetDeadlineResult
 import com.example.crewpass_frontend.databinding.FragmentCultureBinding
 
-class FragmentCulture : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadlineResult {
+class FragmentCulture : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadlineResult, ScrapGetAllResult {
     lateinit var binding: FragmentCultureBinding
 
     lateinit var homeRecentRVAdapter: HomeRecentRVAdapter
     lateinit var homeImminentRVAdapter: HomeImminentRVAdapter
-
+    var scrap_list = ArrayList<getResult>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,12 +39,14 @@ class FragmentCulture : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadl
         binding.btnCultureRecent.setOnClickListener {
             val intent = Intent(activity, PersonalRecruitmentListActivity::class.java)
             intent.putExtra("list_state", "recent")
+            intent.putExtra("type", "문화,예술,공연")
             startActivity(intent)
         }
 
         binding.btnCultureImminent.setOnClickListener {
             val intent = Intent(activity, PersonalRecruitmentListActivity::class.java)
             intent.putExtra("list_state", "imminent")
+            intent.putExtra("type", "문화,예술,공연")
             startActivity(intent)
         }
 
@@ -49,7 +55,23 @@ class FragmentCulture : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadl
     }
     override fun onResume() {
         super.onResume()
+        getScrap()
+    }
+
+    // 스크랩 목록 가져오기
+    fun getScrap(){
+        val scrapService = ScrapService()
+        scrapService.setScrapGetAllResult(this)
+        scrapService.getScrap(logined_id)
+    }
+
+    override fun scrapGetAllSuccess(code: Int, data: ArrayList<getResult>) {
+        scrap_list = data
         getRecruitment_recent()
+    }
+
+    override fun scrapGetAllFailure(code: Int) {
+        Log.d("스크랩 목록 가져오기 실패", "")
     }
 
     // 전체 최신 모집글 불러오기
@@ -59,7 +81,7 @@ class FragmentCulture : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadl
         recruitmentAllService.getRecruitmentAll("문화,예술,교양")
     }
     fun initRecyclerView_recent(result : ArrayList<com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment>){
-        homeRecentRVAdapter = HomeRecentRVAdapter(result)
+        homeRecentRVAdapter = HomeRecentRVAdapter(result, scrap_list)
         binding.cultureRecentRv.adapter = homeRecentRVAdapter
         binding.cultureRecentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         homeRecentRVAdapter.setItemClickListener(object :
@@ -91,7 +113,7 @@ class FragmentCulture : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadl
         recruitmentAllService.getRecruitmentDeadline("문화,예술,교양")
     }
     fun initRecyclerView_imminent(result : ArrayList<com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment>){
-        homeImminentRVAdapter = HomeImminentRVAdapter(result)
+        homeImminentRVAdapter = HomeImminentRVAdapter(result, scrap_list)
         binding.cultureImminentRv.adapter = homeImminentRVAdapter
         binding.cultureImminentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         homeImminentRVAdapter.setItemClickListener(object :
