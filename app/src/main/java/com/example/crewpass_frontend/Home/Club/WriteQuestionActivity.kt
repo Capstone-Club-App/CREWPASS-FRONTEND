@@ -35,7 +35,7 @@ class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, Questi
     var question1Limit: Int = 0
     var question2Limit: Int = 0
     var question3Limit: Int = 0
-    var question4Limit: Int = 0
+    var question4Limit: Int? = 0
     var question5Limit: Int? = 0
     var question6Limit: Int? = 0
     var question7Limit: Int? = 0
@@ -64,6 +64,12 @@ class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, Questi
 
         binding.btnAddQuestion.setOnClickListener {
             add_count++
+            if (add_count == 4) {
+                binding.txtQuestion4.visibility = View.VISIBLE
+                binding.edittextQuestion4.visibility = View.VISIBLE
+                binding.spinnerQuestion4.visibility = View.VISIBLE
+                binding.txtSpinner4.visibility = View.VISIBLE
+            }
             if (add_count == 5) {
                 binding.txtQuestion5.visibility = View.VISIBLE
                 binding.edittextQuestion5.visibility = View.VISIBLE
@@ -325,6 +331,10 @@ class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, Questi
 
     // 질문 등록
     fun postQuestion() {
+        if (binding.edittextQuestion4.visibility == View.GONE) {
+            binding.edittextQuestion4.text = null
+            question4Limit = null
+        }
         if (binding.edittextQuestion5.visibility == View.GONE) {
             binding.edittextQuestion5.text = null
             question5Limit = null

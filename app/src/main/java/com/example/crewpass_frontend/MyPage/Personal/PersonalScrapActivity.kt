@@ -3,15 +3,20 @@ package com.example.crewpass_frontend.MyPage.Personal
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.crewpass_frontend.Data.Recruitment
 import com.example.crewpass_frontend.Home.Personal.List.RecruitmentDetailActivity
 import com.example.crewpass_frontend.Home.Personal.List.RecruitmentRVAdapter
+import com.example.crewpass_frontend.Login.logined_id
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapGetAllResult
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapService
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.getResult
+import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment
 import com.example.crewpass_frontend.databinding.ActivityPersonalScrapBinding
 
-class PersonalScrapActivity : AppCompatActivity() {
+class PersonalScrapActivity : AppCompatActivity(), ScrapGetAllResult {
     lateinit var binding: ActivityPersonalScrapBinding
     lateinit var context : Context
 
@@ -26,7 +31,6 @@ class PersonalScrapActivity : AppCompatActivity() {
         context = this
 
         initActionBar()
-        initRecyclerView()
     }
 
     fun initActionBar() {
@@ -35,31 +39,35 @@ class PersonalScrapActivity : AppCompatActivity() {
         binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
     }
 
-    fun initRecyclerView() {
-
-        // 마감임박순 데이터 가져오기
-        // 임의값
-        scrap_list.apply {
-            add(Recruitment("임박 동아리1", "제목1", "내용1"))
-            add(Recruitment("임박 동아리2", "제목2", "내용2"))
-            add(Recruitment("임박 동아리3", "제목3", "내용3"))
-            add(Recruitment("임박 동아리4", "제목4", "내용4"))
-            add(Recruitment("임박 동아리5", "제목5", "내용5"))
-            add(Recruitment("임박 동아리6", "제목6", "내용6"))
-            add(Recruitment("임박 동아리7", "제목7", "내용7"))
-
-            recruitmentRVAdapter = RecruitmentRVAdapter(scrap_list)
-            binding.announcementListRv.adapter = recruitmentRVAdapter
-            binding.announcementListRv.layoutManager = LinearLayoutManager(context)
-            recruitmentRVAdapter.setItemClickListener(object :
-                RecruitmentRVAdapter.OnItemClickListener {
-                override fun onItemClick(recruitment: Recruitment) {
-                    val intent = Intent(context, RecruitmentDetailActivity::class.java)
-                    intent.putExtra("scrap", true)
-                    startActivity(intent) // 지원서 작성으로 이동
-                }
-            })
-        }
+    override fun onResume() {
+        super.onResume()
+        getScrap()
     }
+
+    // 스크랩 목록 가져오기
+    fun getScrap(){
+        val scrapService = ScrapService()
+        scrapService.setScrapGetAllResult(this)
+        scrapService.getScrap(logined_id)
+    }
+
+    override fun scrapGetAllSuccess(code: Int, data: ArrayList<getResult>) {
+        recruitmentRVAdapter = RecruitmentRVAdapter(data)
+        binding.announcementListRv.adapter = recruitmentRVAdapter
+        binding.announcementListRv.layoutManager = LinearLayoutManager(context)
+        recruitmentRVAdapter.setItemClickListener(object :
+            RecruitmentRVAdapter.OnItemClickListener {
+            override fun onItemClick(recruitment: getResult) {
+                val intent = Intent(context, RecruitmentDetailActivity::class.java)
+                intent.putExtra("scrap", true)
+                startActivity(intent) // 지원서 작성으로 이동
+            }
+        })
+    }
+
+    override fun scrapGetAllFailure(code: Int) {
+        Log.d("스크랩 목록 가져오기 실패", "")
+    }
+
 
 }

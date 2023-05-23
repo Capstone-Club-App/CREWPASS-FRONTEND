@@ -17,9 +17,9 @@ class QuestionService {
     fun postQuestion(
         recruitment_id: Int,
         question1: String, question2: String, question3: String,
-        question4: String, question5: String?, question6: String?, question7: String?,
+        question4: String?, question5: String?, question6: String?, question7: String?,
         question1Limit: Int, question2Limit: Int, question3Limit: Int,
-        question4Limit: Int, question5Limit: Int?, question6Limit: Int?,
+        question4Limit: Int?, question5Limit: Int?, question6Limit: Int?,
         question7Limit: Int?
     ) {
         val authService = getRetrofit().create(QuestionRetrofitInterfaces::class.java)

@@ -6,15 +6,16 @@ import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crewpass_frontend.Data.Recruitment
 import com.example.crewpass_frontend.R
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.getResult
 import com.example.crewpass_frontend.databinding.ItemAnnouncementPersonalBinding
 
-class RecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitment>) : RecyclerView.Adapter<RecruitmentRVAdapter.ViewHolder>() {
 
-    var announceCheck = SparseBooleanArray()
+class RecruitmentRVAdapter (private val recruitment_list: ArrayList<getResult>)
+    : RecyclerView.Adapter<RecruitmentRVAdapter.ViewHolder>()
+{
+    var checkStatus = SparseBooleanArray()
     lateinit var context: Context
-
 
     // 아이템 레이아웃 결합
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -29,25 +30,9 @@ class RecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitment>
     // 아이템 개수
     override fun getItemCount(): Int = recruitment_list.size
 
-
-    data class heartSelected(val position: Int, var isSelected : Boolean)
-
-    fun isHeartSelected(position: Int) : Boolean{
-        return announceCheck.get(position, false)
-    }
-
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(recruitment_list[position])
-
-        ////////// ** 이미지 변경해주는 부분 추가
-        if(isHeartSelected(position)){
-            holder.binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
-        }else{
-            holder.binding.btnHeart.setBackgroundResource(R.drawable.img_heart_notfill)
-        }
-        /////////
-
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(recruitment_list[position])
             notifyItemChanged(position)
@@ -57,44 +42,66 @@ class RecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitment>
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemAnnouncementPersonalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(recruitment: Recruitment) {
+        var scrap_id_get : Int = -1
 
-            ////////// ** 처음 상태(sparseBooleanArray 해당 포지션 안에 아무것도 안 넣었을 때)
-            if(announceCheck[adapterPosition] == null){
-                announceCheck.put(adapterPosition, false)
-            }
-            //////////
+        fun bind(recruitment: getResult) {
+            binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
+//            scrap_list.forEach {
+//                if(recruitment.recruitment_id == it.recruitment_id) {
+//                    binding.btnHeart.isSelected = true
+//                    checkStatus.put(adapterPosition, true)
+//                    binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
+//                    scrap_id_get = it.scrap_id
+//                }
+//            }
+//
+//            binding.btnHeart.setOnClickListener {
+//                binding.btnHeart.isSelected = !binding.btnHeart.isSelected
+//                if(!binding.btnHeart.isSelected) { // 스크랩 취소
+//                    val scrapService = ScrapService()
+//                    scrapService.setScrapDeleteResult(this)
+//                    scrapService.deleteScrap(scrap_id_get)
+//                }
+//                else { // 스크랩 등록
+//                    // 버튼 클릭상태
+//                    val scrapService = ScrapService()
+//                    scrapService.setScrapPostResult(this)
+//                    scrapService.postScrap(recruitment.recruitment_id)
+//                }
+//                notifyDataSetChanged()
+//            }
 
-
-            ////////// ** setOnClickListener 상태 변경
-            binding.btnHeart.setOnClickListener {
-                if(announceCheck.get(adapterPosition, false)) {
-                    Log.d("파랑", announceCheck.get(adapterPosition, false).toString())
-                    Log.d("adapterPosition : ", adapterPosition.toString())
-                    announceCheck.put(adapterPosition, false)
-                    binding.btnHeart.setBackgroundResource(R.drawable.img_heart_notfill)
-                }
-                else {
-                    Log.d("하양", announceCheck.get(adapterPosition, false).toString())
-                    Log.d("adapterPosition : ", adapterPosition.toString())
-                    announceCheck.put(adapterPosition, true)
-                    binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
-                }
-                notifyDataSetChanged()
-            }
-
-            //////////
-
-
-            binding.itemAnnounceDetail.text = recruitment.content
+            binding.itemAnnounceDetail.text = recruitment.crew_name
             binding.itemAnnounceTitle.text = recruitment.title
-            // 날짜 적용도 추가하기
         }
+
+
+//        // 스크랩 등록
+//        override fun scrapPostSuccess(code: Int, scrap_id: Int) {
+//            Log.d("스크랩 넣기" , "")
+//            checkStatus.put(adapterPosition, true)
+//            binding.btnHeart.setBackgroundResource(R.drawable.img_heart_fill)
+//            scrap_id_get = scrap_id
+//        }
+//
+//        override fun scrapPostFailure(code: Int) {
+//            Log.d("스크랩 등록 실패" , "")
+//        }
+//
+//        // 스크랩 취소
+//        override fun scrapDeleteSuccess(code: Int, data: Any?) {
+//            Log.d("스크랩 취소" , "")
+//            checkStatus.put(adapterPosition, false)
+//            binding.btnHeart.setBackgroundResource(R.drawable.img_heart_notfill)
+//        }
+//
+//        override fun scrapDeleteFailure(code: Int) {
+//            Log.d("스크랩 취소 실패" , "")
+//        }
     }
 
-
     interface OnItemClickListener {
-        fun onItemClick(recruitment: Recruitment)
+        fun onItemClick(recruitment: getResult)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
@@ -102,6 +109,7 @@ class RecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitment>
     }
 
     private lateinit var itemClickListener: OnItemClickListener
+
 
 
 }

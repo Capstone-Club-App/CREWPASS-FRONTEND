@@ -8,13 +8,14 @@ import retrofit2.http.Part
 
 interface SignUpRetrofitInterface {
 
-//    @Multipart
-//    @POST("/user/new/name")
-//    fun checkDuplicateEmail(@Part("email") email : String) : Call<SignUpResponse>
 
     @Multipart
     @POST("/user/new/loginId")
     fun checkDuplicateID(@Part("loginId") loginId: String) : Call<SignUpResponse>
+
+    @Multipart
+    @POST("/user/new/email")
+    fun checkDuplicateEmail(@Part("email") email: String) : Call<SignUpResponse>
 
     @Multipart
     @POST("/user/new")

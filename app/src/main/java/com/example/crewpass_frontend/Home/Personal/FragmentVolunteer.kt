@@ -12,7 +12,10 @@ import com.example.crewpass_frontend.Home.HomeImminentRVAdapter
 import com.example.crewpass_frontend.Home.HomeRecentRVAdapter
 import com.example.crewpass_frontend.Home.Personal.List.RecruitmentDetailActivity
 import com.example.crewpass_frontend.Home.Personal.List.PersonalRecruitmentListActivity
+import com.example.crewpass_frontend.Login.logined_id
 import com.example.crewpass_frontend.Retrofit.Club.Recruitment.RecruitmentGetResult
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapGetAllResult
+import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapService
 import com.example.crewpass_frontend.Retrofit.Personal.Scrap.getResult
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.Recruitment
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentAllService
@@ -20,7 +23,7 @@ import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetAllR
 import com.example.crewpass_frontend.Retrofit.RecruitmentBoth.RecruitmentGetDeadlineResult
 import com.example.crewpass_frontend.databinding.FragmentVolunteerBinding
 
-class FragmentVolunteer : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadlineResult {
+class FragmentVolunteer : Fragment(), RecruitmentGetAllResult, RecruitmentGetDeadlineResult, ScrapGetAllResult {
     lateinit var binding: FragmentVolunteerBinding
 
     lateinit var homeRecentRVAdapter: HomeRecentRVAdapter
@@ -56,7 +59,23 @@ class FragmentVolunteer : Fragment(), RecruitmentGetAllResult, RecruitmentGetDea
 
     override fun onResume() {
         super.onResume()
+        getScrap()
+    }
+
+    // 스크랩 목록 가져오기
+    fun getScrap(){
+        val scrapService = ScrapService()
+        scrapService.setScrapGetAllResult(this)
+        scrapService.getScrap(logined_id)
+    }
+
+    override fun scrapGetAllSuccess(code: Int, data: ArrayList<getResult>) {
+        scrap_list = data
         getRecruitment_recent()
+    }
+
+    override fun scrapGetAllFailure(code: Int) {
+        Log.d("스크랩 목록 가져오기 실패", "")
     }
 
 

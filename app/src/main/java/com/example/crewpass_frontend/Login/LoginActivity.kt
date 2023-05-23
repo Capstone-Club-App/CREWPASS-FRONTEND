@@ -37,7 +37,6 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
         setContentView(binding.root)
 
         context = this
-        pref = PreferenceManager.getDefaultSharedPreferences(this)
 
         binding.personalBtn.setOnClickListener {
             if(personal_clicked){
