@@ -32,6 +32,10 @@ class IDPWFindActivity : AppCompatActivity(),
                 binding.IDBtn.setBackgroundColor(Color.parseColor("#6DA4FE"))
                 binding.layoutId.visibility = View.VISIBLE
                 binding.layoutPw.visibility = View.INVISIBLE
+                binding.txtCotentPw1.visibility = View.INVISIBLE
+                binding.txtCotentPw2.visibility = View.INVISIBLE
+                binding.txtPwFindDone.visibility = View.INVISIBLE
+                binding.txtResultPw.visibility = View.INVISIBLE
                 if(pw_clicked){
                     pw_clicked = !pw_clicked // 동아리 회원 클릭상태일 때 변경해주기!!
                     binding.PWBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
@@ -49,6 +53,9 @@ class IDPWFindActivity : AppCompatActivity(),
                 binding.PWBtn.setBackgroundColor(Color.parseColor("#6DA4FE"))
                 binding.layoutId.visibility = View.INVISIBLE
                 binding.layoutPw.visibility = View.VISIBLE
+                binding.txtCotentId.visibility = View.INVISIBLE
+                binding.txtPwFindDone.visibility = View.INVISIBLE
+                binding.txtResultId.visibility = View.INVISIBLE
                 if(id_clicked){
                     id_clicked = !id_clicked // 동아리 회원 클릭상태일 때 변경해주기!!
                     binding.IDBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
@@ -148,7 +155,7 @@ class IDPWFindActivity : AppCompatActivity(),
         binding.txtCotentPw1.visibility = View.VISIBLE
         binding.txtCotentPw2.visibility = View.VISIBLE
         binding.txtResultPw.text = data.password
-        binding.txtResultId.visibility = View.VISIBLE
+        binding.txtResultPw.visibility = View.VISIBLE
         binding.txtFindDone.visibility = View.VISIBLE
     }
 
