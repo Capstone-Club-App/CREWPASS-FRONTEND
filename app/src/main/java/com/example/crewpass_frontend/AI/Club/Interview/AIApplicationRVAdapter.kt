@@ -2,17 +2,22 @@ package com.example.crewpass_frontend.AI.Club.Interview
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crewpass_frontend.Data.Application
+import com.example.crewpass_frontend.Retrofit.Club.Application.ApplicationData
 import com.example.crewpass_frontend.Retrofit.FindSchool.Data
+import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationGetResult
+import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationService
 import com.example.crewpass_frontend.Timestamp_to_SDF
 import com.example.crewpass_frontend.databinding.ItemClubApplicationCheckboxBinding
 
-class AIApplicationRVAdapter (private val application_list: ArrayList<Application>) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
+class AIApplicationRVAdapter (private val application_list: ArrayList<ApplicationData>) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
 
-    private var items : List<Application> = ArrayList()
+    private var items : List<ApplicationData> = ArrayList()
+    var user_name = ""
+    var application_id_selected = -1
 
     // 아이템 레이아웃 결합
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -28,7 +33,7 @@ class AIApplicationRVAdapter (private val application_list: ArrayList<Applicatio
 
     private var mSelectedItem = -1
 
-    fun setItem(item: List<Application>) {
+    fun setItem(item: List<ApplicationData>) {
         items = item
         mSelectedItem = -1
         notifyDataSetChanged()
@@ -46,24 +51,42 @@ class AIApplicationRVAdapter (private val application_list: ArrayList<Applicatio
 
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemClubApplicationCheckboxBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(application: Application) {
-            binding.txtClubName.text = "동아리 이름"
+        RecyclerView.ViewHolder(binding.root), ApplicationGetResult {
+        fun bind(application: ApplicationData) {
+            binding.txtClubName.text = application.user_name
+
+            val applicationService = ApplicationService()
+            applicationService.setApplicationGetResult(this)
+            applicationService.getApplication(application.application_id)
 
             val timestampToSdf = Timestamp_to_SDF()
             binding.itemDateTxt.text = timestampToSdf.convert(application.submit_time)
 
             binding.itemCheckBox.setOnClickListener {
                 mSelectedItem = adapterPosition
+                if(binding.itemCheckBox.isChecked){
+                    application_id_selected = application.application_id
+                    user_name = application.user_name
+                }
                 notifyItemRangeChanged(0, items.size)
             }
-            // 날짜 적용도 추가하기
+        }
+
+        override fun applicationGetSuccess(
+            code: Int,
+            data: ArrayList<com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationData>
+        ) {
+            binding.itemContentTxt.text = data[0].answer1
+        }
+
+        override fun applicationGetFailure(code: Int) {
+            Log.d("상세 조회 실패", "")
         }
     }
 
 
     interface OnItemClickListener {
-        fun onItemClick(application: Application)
+        fun onItemClick(application: ApplicationData)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {

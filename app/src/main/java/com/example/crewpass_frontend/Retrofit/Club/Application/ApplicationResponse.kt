@@ -6,7 +6,7 @@ data class ApplicationGetResponse (
     @SerializedName(value ="statusCode") val statusCode : Int,
     @SerializedName(value = "responseMessage") val responseMessage : Any?,
     @SerializedName(value = "data") val data : ArrayList<ApplicationData>
-    )
+)
 
 data class ApplicationData(
     @SerializedName("submit_time") val submit_time : Timestamp,
