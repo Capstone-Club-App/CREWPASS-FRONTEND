@@ -1,18 +1,16 @@
 package com.example.crewpass_frontend.AI.Personal
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crewpass_frontend.Data.Application
-import com.example.crewpass_frontend.Retrofit.FindSchool.Data
+import com.example.crewpass_frontend.Retrofit.Personal.Application.Application
 import com.example.crewpass_frontend.Timestamp_to_SDF
 import com.example.crewpass_frontend.databinding.ItemPersonalApplicationCheckboxBinding
 
 class AIApplicationRVAdapter (private val application_list: ArrayList<Application>) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
 
     private var items : List<Application> = ArrayList()
+    var application_id_selected = -1
 
     // 아이템 레이아웃 결합
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -48,16 +46,19 @@ class AIApplicationRVAdapter (private val application_list: ArrayList<Applicatio
     inner class ViewHolder(val binding: ItemPersonalApplicationCheckboxBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(application: Application) {
-            binding.txtClubName.text = "동아리 이름"
+            binding.txtClubName.text = application.crew_name
 
             val timestampToSdf = Timestamp_to_SDF()
             binding.itemDateTxt.text = timestampToSdf.convert(application.submit_time)
 
             binding.itemCheckBox.setOnClickListener {
                 mSelectedItem = adapterPosition
+                if(binding.itemCheckBox.isChecked){
+                    application_id_selected = application.application_id
+
+                }
                 notifyItemRangeChanged(0, items.size)
             }
-            // 날짜 적용도 추가하기
         }
     }
 

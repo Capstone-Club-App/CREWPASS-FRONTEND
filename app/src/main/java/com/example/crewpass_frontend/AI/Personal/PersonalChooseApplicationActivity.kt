@@ -3,65 +3,70 @@ package com.example.crewpass_frontend.AI.Personal
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.crewpass_frontend.Data.Application
+import com.example.crewpass_frontend.Login.logined_id
+import com.example.crewpass_frontend.MyPage.Personal.ApplicationDetailActivity
+import com.example.crewpass_frontend.MyPage.Personal.ApplicationRVAdapter
+import com.example.crewpass_frontend.Retrofit.Personal.Application.Application
+import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationGetListResult
+import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationService
 import com.example.crewpass_frontend.databinding.ActivityPersonalChooseAnnouncementBinding
 import java.sql.Timestamp
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PersonalChooseApplicationActivity:AppCompatActivity() {
+class PersonalChooseApplicationActivity:AppCompatActivity(), ApplicationGetListResult {
     lateinit var binding: ActivityPersonalChooseAnnouncementBinding
     lateinit var context: Context
-    var application_list = ArrayList<Application>()
     lateinit var aiApplicationRVAdapter: AIApplicationRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
 
+        getApplicationList()
+
         binding = ActivityPersonalChooseAnnouncementBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initRecyclerView()
-
         binding.btnNext.setOnClickListener {
             val intent = Intent(this, PersonalPrepareInterviewActivity::class.java)
+            intent.putExtra("application_id", aiApplicationRVAdapter.application_id_selected)
             startActivity(intent)
         }
     }
 
-    fun initRecyclerView() {
-        var timestamp = Timestamp(Date().time)
-        application_list.apply {
-            add(
-                Application(
-                    1, timestamp,
-                    "...", "...", "11", " ", " ", " ", " ",
-                    3, 3, 2, 1, 1, 1, 1,
-                    1, 1
-                )
-            )
-            add(
-                Application(
-                    1, timestamp,
-                    "...", "...", "11", " ", " ", " ", " ",
-                    3, 3, 2, 1, 1, 1, 1,
-                    1, 1
-                )
-            )
-            add(
-                Application(
-                    1, timestamp,
-                    "...", "...", "11", " ", " ", " ", " ",
-                    3, 3, 2, 1, 1, 1, 1,
-                    1, 1
-                )
-            )
+    fun getApplicationList(){
+        val applicationService = ApplicationService()
+        applicationService.setApplicationGetListResult(this)
+        applicationService.getApplicationList(logined_id)
+    }
 
-            aiApplicationRVAdapter = AIApplicationRVAdapter(application_list)
-            binding.announcementListRv.adapter = aiApplicationRVAdapter
-            binding.announcementListRv.layoutManager = LinearLayoutManager(context)
-        }
+    fun initRecyclerView(data : ArrayList<Application>) {
+        aiApplicationRVAdapter = AIApplicationRVAdapter(data)
+        binding.announcementListRv.adapter = aiApplicationRVAdapter
+        binding.announcementListRv.layoutManager = LinearLayoutManager(context)
+        aiApplicationRVAdapter.setItemClickListener(object :
+            AIApplicationRVAdapter.OnItemClickListener {
+            override fun onItemClick(application: Application) {
+                val intent = Intent(context, ApplicationDetailActivity::class.java)
+                intent.putExtra("application_id", application.application_id)
+                startActivity(intent) // 지원서 작성으로 이동
+            }
+        })
+
+    }
+
+    override fun applicationGetListSuccess(
+        code: Int,
+        data: ArrayList<Application>
+    ) {
+        Log.d("지원서 목록 가져오기 성공","")
+        initRecyclerView(data)
+    }
+
+    override fun applicationGetListFailure(code: Int) {
+        Log.d("지원서 목록 가져오기 실패","")
     }
 }

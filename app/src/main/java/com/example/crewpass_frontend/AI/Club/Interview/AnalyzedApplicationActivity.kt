@@ -19,7 +19,6 @@ import com.example.crewpass_frontend.databinding.ActivityAnalyzedApplicationBind
 
 class AnalyzedApplicationActivity: AppCompatActivity(), AnalyzeApplicationResult {
     lateinit var binding : ActivityAnalyzedApplicationBinding
-    lateinit var anim : Animation
     lateinit var progressDialog: AppCompatDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +56,7 @@ class AnalyzedApplicationActivity: AppCompatActivity(), AnalyzeApplicationResult
             }
         })
     }
+
     fun progressOFF(){
         if(progressDialog != null && progressDialog.isShowing()){
             progressDialog.dismiss()
