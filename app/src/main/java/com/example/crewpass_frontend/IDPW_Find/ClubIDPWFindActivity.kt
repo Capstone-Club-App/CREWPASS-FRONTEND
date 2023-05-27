@@ -4,30 +4,29 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.crewpass_frontend.Retrofit.Personal.FindPWID.*
-import com.example.crewpass_frontend.databinding.ActivityIdPwFindBinding
+import com.example.crewpass_frontend.Retrofit.Club.FindPWID.*
+import com.example.crewpass_frontend.databinding.ActivityClubIdPwFindBinding
 
-class IDPWFindActivity : AppCompatActivity(),
-    FindIDEmailResult, FindIDNumbResult, FindPWEmailResult, FindPWNumbResult {
-    var current_state = ""
-    lateinit var binding: ActivityIdPwFindBinding
+class ClubIDPWFindActivity : AppCompatActivity(),
+    FindIDEmailClubNameResult, FindIDNumbResult, FindPWEmailResult, FindPWNumbResult {
+    lateinit var binding: ActivityClubIdPwFindBinding
     lateinit var findIDPWService: FindIDPWService
     var certificateNumberGet = -1
     var id_clicked = false
     var pw_clicked = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityIdPwFindBinding.inflate(layoutInflater)
+        binding = ActivityClubIdPwFindBinding.inflate(layoutInflater)
         setContentView(binding.root)
         findIDPWService = FindIDPWService()
 
         binding.IDBtn.setOnClickListener {
-            if(id_clicked){
+            if (id_clicked) {
                 id_clicked = !id_clicked // 클릭 취소 상태로 변경해주기
                 binding.IDBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
-            }
-            else{ // false
+            } else { // false
                 id_clicked = !id_clicked // 클릭 상태로 변경해주기
                 binding.IDBtn.setBackgroundColor(Color.parseColor("#6DA4FE"))
                 binding.layoutId.visibility = View.VISIBLE
@@ -36,7 +35,7 @@ class IDPWFindActivity : AppCompatActivity(),
                 binding.txtCotentPw2.visibility = View.INVISIBLE
                 binding.txtPwFindDone.visibility = View.INVISIBLE
                 binding.txtResultPw.visibility = View.INVISIBLE
-                if(pw_clicked){
+                if (pw_clicked) {
                     pw_clicked = !pw_clicked // 동아리 회원 클릭상태일 때 변경해주기!!
                     binding.PWBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
                 }
@@ -44,11 +43,10 @@ class IDPWFindActivity : AppCompatActivity(),
         }
 
         binding.PWBtn.setOnClickListener {
-            if(pw_clicked){ // 이미 누른 상태에서 다시 눌렀을 때
+            if (pw_clicked) { // 이미 누른 상태에서 다시 눌렀을 때
                 pw_clicked = !pw_clicked // 클릭 취소 상태로 변경해주기
                 binding.PWBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
-            }
-            else{
+            } else {
                 pw_clicked = !pw_clicked // 클릭 상태로 변경해주기
                 binding.PWBtn.setBackgroundColor(Color.parseColor("#6DA4FE"))
                 binding.layoutId.visibility = View.INVISIBLE
@@ -56,7 +54,7 @@ class IDPWFindActivity : AppCompatActivity(),
                 binding.txtCotentId.visibility = View.INVISIBLE
                 binding.txtPwFindDone.visibility = View.INVISIBLE
                 binding.txtResultId.visibility = View.INVISIBLE
-                if(id_clicked){
+                if (id_clicked) {
                     id_clicked = !id_clicked // 동아리 회원 클릭상태일 때 변경해주기!!
                     binding.IDBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
                 }
@@ -64,11 +62,11 @@ class IDPWFindActivity : AppCompatActivity(),
         }
 
         // 아이디 찾기
-        binding.btnSendNumber.setOnClickListener {
+        binding.btnSendNumberId.setOnClickListener {
             findIdSendEmail()
         }
 
-        binding.btnAccept.setOnClickListener {
+        binding.btnFindId.setOnClickListener {
             findId()
         }
 
@@ -89,16 +87,19 @@ class IDPWFindActivity : AppCompatActivity(),
     }
 
     fun findIdSendEmail() {
-        findIDPWService.setFindIDEmailResult(this)
-        findIDPWService.findIDByEmail(binding.edittextEmail.text.toString())
+        findIDPWService.setFindIDEmailClubNameResult(this)
+        findIDPWService.findIDByEmailClubName(
+            binding.edittextClubName.text.toString(),
+            binding.edittextEmailId.text.toString()
+        )
     }
 
-    override fun findIdEmailSuccess(code: Int, data: ResultEmail) {
+    override fun findIdEmailClubNameSuccess(code: Int, data: ResultEmail) {
         Log.d("certificateNumberGet : ${data.certificateNumb}", "")
         certificateNumberGet = data.certificateNumb
     }
 
-    override fun findIdEmailFailure(code: Int) {
+    override fun findIdEmailClubNameFailure(code: Int) {
         Log.d("아이디 이메일 인증번호 전송 실패", "")
     }
 
@@ -106,9 +107,10 @@ class IDPWFindActivity : AppCompatActivity(),
     fun findId() {
         findIDPWService.setFindIDNumbResult(this)
         findIDPWService.findIDByNumb(
-            binding.edittextEmail.text.toString(),
+            binding.edittextClubName.text.toString(),
+            binding.edittextEmailId.text.toString(),
             certificateNumberGet,
-            binding.edittextNumber.text.toString().toInt()
+            binding.edittextNumberId.text.toString().toInt()
         )
     }
 
@@ -116,8 +118,7 @@ class IDPWFindActivity : AppCompatActivity(),
         binding.txtCotentId.visibility = View.VISIBLE
         binding.txtResultId.text = data.loginId
         binding.txtResultId.visibility = View.VISIBLE
-        binding.txtFindDone.visibility = View.VISIBLE
-        binding.txtFindDone.visibility = View.VISIBLE
+        binding.txtIdFindDone.visibility = View.VISIBLE
     }
 
     override fun findIdNumbFailure(code: Int) {
@@ -156,11 +157,12 @@ class IDPWFindActivity : AppCompatActivity(),
         binding.txtCotentPw2.visibility = View.VISIBLE
         binding.txtResultPw.text = data.password
         binding.txtResultPw.visibility = View.VISIBLE
-        binding.txtFindDone.visibility = View.VISIBLE
+        binding.txtPwFindDone.visibility = View.VISIBLE
     }
 
     override fun findNumbPWFailure(code: Int) {
         Log.d("비밀번호 찾기 실패", "")
+        Toast.makeText(this, "인증번호가 맞지 않습니다", Toast.LENGTH_SHORT)
     }
 
 }

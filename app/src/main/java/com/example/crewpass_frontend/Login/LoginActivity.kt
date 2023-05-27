@@ -5,14 +5,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.crewpass_frontend.IDPW_Find.IDPWFindActivity
+import com.example.crewpass_frontend.IDPW_Find.ClubIDPWFindActivity
+import com.example.crewpass_frontend.IDPW_Find.FindIDPWDialog
+import com.example.crewpass_frontend.IDPW_Find.PersonalIDPWFindActivity
 import com.example.crewpass_frontend.MainActivity
-import com.example.crewpass_frontend.Retrofit.Club.Club.ClubGetResult
-import com.example.crewpass_frontend.Retrofit.Club.Club.ClubService
 import com.example.crewpass_frontend.Retrofit.Club.LogIn.*
 import com.example.crewpass_frontend.Retrofit.Personal.LogIn.Data
 import com.example.crewpass_frontend.Retrofit.Club.LogIn.ClubLoginService
@@ -22,14 +21,16 @@ import com.example.crewpass_frontend.SignUp.Personal.PersonalSignUpActivity
 import com.example.crewpass_frontend.SignUp.SignUpDialog
 import com.example.crewpass_frontend.databinding.ActivityLoginBinding
 
-class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.SignUpDialogInterface, PersonalLoginResult, ClubLoginResult{
+class LoginActivity : AppCompatActivity(), MyCustomDialogInterface,
+    FindIDPWDialog.FindIDPWDialogInterface,
+    SignUpDialog.SignUpDialogInterface, PersonalLoginResult, ClubLoginResult {
     lateinit var binding: ActivityLoginBinding
-    lateinit var pref : SharedPreferences
+    lateinit var pref: SharedPreferences
     var string = ""
     var club_clicked = false
     var personal_clicked = false
-    var choice_type : String = ""
-    lateinit var context : Context
+    var choice_type: String = ""
+    lateinit var context: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +40,13 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
         context = this
 
         binding.personalBtn.setOnClickListener {
-            if(personal_clicked){
+            if (personal_clicked) {
                 personal_clicked = !personal_clicked // 클릭 취소 상태로 변경해주기
                 binding.personalBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
-            }
-            else{ // false
+            } else { // false
                 personal_clicked = !personal_clicked // 클릭 상태로 변경해주기
                 binding.personalBtn.setBackgroundColor(Color.parseColor("#6DA4FE"))
-                if(club_clicked){
+                if (club_clicked) {
                     club_clicked = !club_clicked // 동아리 회원 클릭상태일 때 변경해주기!!
                     binding.clubBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
                 }
@@ -56,14 +56,13 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
         }
 
         binding.clubBtn.setOnClickListener {
-            if(club_clicked){ // 이미 누른 상태에서 다시 눌렀을 때
+            if (club_clicked) { // 이미 누른 상태에서 다시 눌렀을 때
                 club_clicked = !club_clicked // 클릭 취소 상태로 변경해주기
                 binding.clubBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
-            }
-            else{
+            } else {
                 club_clicked = !club_clicked // 클릭 상태로 변경해주기
                 binding.clubBtn.setBackgroundColor(Color.parseColor("#6DA4FE"))
-                if(personal_clicked){
+                if (personal_clicked) {
                     personal_clicked = !personal_clicked // 동아리 회원 클릭상태일 때 변경해주기!!
                     binding.personalBtn.setBackgroundColor(Color.parseColor("#F4F4F4"))
                 }
@@ -75,19 +74,23 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
 
         // 로그인 버튼
         binding.btnLogin.setOnClickListener {
-            if(club_clicked == false && personal_clicked == false){
+            if (club_clicked == false && personal_clicked == false) {
                 Toast.makeText(this, "로그인 타입을 선택해주세요(일반/동아리)", Toast.LENGTH_LONG)
-            }
-            else{
-                if(string.equals("Personal")){
+            } else {
+                if (string.equals("Personal")) {
                     val personalLoginService = PersonalLoginService()
                     personalLoginService.setLoginResult(this)
-                    personalLoginService.login(binding.edittextId.text.toString(), binding.edittextPassword.text.toString())
-                }
-                else{
+                    personalLoginService.login(
+                        binding.edittextId.text.toString(),
+                        binding.edittextPassword.text.toString()
+                    )
+                } else {
                     val clubLoginService = ClubLoginService()
                     clubLoginService.setLoginResult(this)
-                    clubLoginService.login(binding.edittextId.text.toString(), binding.edittextPassword.text.toString())
+                    clubLoginService.login(
+                        binding.edittextId.text.toString(),
+                        binding.edittextPassword.text.toString()
+                    )
                 }
             }
 
@@ -100,9 +103,10 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
             signUpDialog.start()
         }
 
-        binding.textFind.setOnClickListener{
-            val intent = Intent(this, IDPWFindActivity::class.java)
-            startActivity(intent)
+        // 아이디 비밀번호 찾기
+        binding.textFind.setOnClickListener {
+            val findIDPWDialog = FindIDPWDialog(this, this)
+            findIDPWDialog.start()
         }
 
     }
@@ -124,38 +128,17 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
         startActivity(intent)
     }
 
-    override fun clubLoginSuccess(code: Int, data : ClubData) {
+    override fun clubLoginSuccess(code: Int, data: ClubData) {
 //        get_club()
         logined_id = data.crew_user_id
         Log.d("logined_id : ", logined_id.toString())
         val dlg = MyCustomDialog(this, this)
         dlg.show()
-
-//        val intent = Intent(this, MainActivity::class.java)
-//        intent.putExtra("Key", string)
-//        startActivity(intent)
     }
 
     override fun clubLoginUpFailure(code: Int) {
         Log.d("LOGIN-FAILURE", "로그인 실패")
     }
-
-//    fun get_club(){
-//        val clubService = ClubService()
-//        clubService.setRecruitmentResult(this)
-//        clubService.getClub()
-//    }
-
-
-//    override fun clubGetSuccess(code: Int, data: com.example.crewpass_frontend.Retrofit.Club.Club.ClubData) {
-//        Log.d("동아리 정보 불러오기 성공", "")
-//        logined_id = data.crew_id
-//        Log.d("logined_id : ", logined_id.toString())
-//    }
-//
-//    override fun clubGetFailure(code: Int) {
-//        Log.d("동아리 정보 불러오기 실패", "")
-//    }
 
 
     override fun personalLoginSuccess(
@@ -165,13 +148,21 @@ class LoginActivity:AppCompatActivity(), MyCustomDialogInterface, SignUpDialog.S
         logined_id = data.crew_user_id
         val dlg = MyCustomDialog(this, this)
         dlg.show()
-//        val intent = Intent(this, MainActivity::class.java)
-//        intent.putExtra("Key", string)
-//        startActivity(intent)
     }
 
     override fun personalLoginUpFailure(code: Int) {
         Log.d("LOGIN-FAILURE", "로그인 실패")
     }
+
+    override fun onFindPersonalButtonClicked() {
+        val intent = Intent(this, PersonalIDPWFindActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onFindClubButtonClicked() {
+        val intent = Intent(this, ClubIDPWFindActivity::class.java)
+        startActivity(intent)
+    }
 }
+
 var logined_id = 0
