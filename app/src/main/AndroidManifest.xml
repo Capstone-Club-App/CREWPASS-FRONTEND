@@ -47,7 +47,8 @@
         <activity android:name=".SignUp.Personal.PersonalSignUpDoneActivity"/>
 
         <!--아이디비번 찾기-->
-        <activity android:name=".IDPW_Find.IDPWFindActivity"/>
+        <activity android:name=".IDPW_Find.PersonalIDPWFindActivity"/>
+        <activity android:name=".IDPW_Find.ClubIDPWFindActivity"/>
 
         <!--홈화면-->
         <activity android:name=".Home.Personal.List.PersonalRecruitmentListActivity"/>
