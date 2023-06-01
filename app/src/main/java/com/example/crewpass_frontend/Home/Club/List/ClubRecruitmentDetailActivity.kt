@@ -3,6 +3,7 @@ package com.example.crewpass_frontend.Home.Club.List
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -56,7 +57,7 @@ class ClubRecruitmentDetailActivity: AppCompatActivity(), RecruitmentGetDetailRe
         binding.txtDateTime.text = date
 
         binding.edittextTitle.text = data.title
-        binding.edittextContent.text = data.content
+        binding.edittextContent.text = Html.fromHtml(data.content)
 
         question_id = data.question_id
         crew_name = data.crew_name

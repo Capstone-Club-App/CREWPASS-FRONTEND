@@ -32,6 +32,8 @@
         android:layout_marginLeft="12dp"
         android:text="성신한 집사들"
         android:textColor="@color/black"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/item_profile_img"

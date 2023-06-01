@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,6 +14,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CREWPASSFRONTEND"
@@ -74,8 +75,6 @@
         <activity android:name=".AI.Personal.PersonalChooseApplicationActivity"/>
         <activity android:name=".AI.Personal.PersonalPrepareInterviewActivity"/>
 
-        <activity android:name=".AI.Club.Question.ChooseIdealActivity"/>
-        <activity android:name=".AI.Club.Question.AnalyzeApplicationActivity"/>
         <activity android:name=".AI.Club.Interview.AIClubChooseApplicationActivity"/>
         <activity android:name=".AI.Club.Interview.AIClubChooseRecruitmentActivity"/>
         <activity android:name=".AI.Club.Interview.AnalyzedApplicationActivity"/>

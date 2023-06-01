@@ -351,6 +351,7 @@ class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, Questi
         val questionService = QuestionService()
         questionService.setQuestionPostResult(this)
         questionService.postQuestion(
+            logined_id,
             recruitment_id,
             binding.edittextQuestion1.text.toString(),
             binding.edittextQuestion2.text.toString(),

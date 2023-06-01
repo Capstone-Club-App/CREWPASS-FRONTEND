@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crewpass_frontend.Data.ChatRoom
+import com.example.crewpass_frontend.Retrofit.ChatRoom.ChatRoomData
 import com.example.crewpass_frontend.databinding.ItemChatRoomBinding
 
-class ChatRoomRVAdapter (private val chatRoom_list: ArrayList<ChatRoom>) : RecyclerView.Adapter<ChatRoomRVAdapter.ViewHolder>() {
+class ChatRoomRVAdapter (private val chatRoom_list: ArrayList<ChatRoomData>) : RecyclerView.Adapter<ChatRoomRVAdapter.ViewHolder>() {
     lateinit var context: Context
 
     // 아이템 레이아웃 결합
@@ -35,15 +36,15 @@ class ChatRoomRVAdapter (private val chatRoom_list: ArrayList<ChatRoom>) : Recyc
     // 레이아웃 내 view 연결
     inner class ViewHolder(val binding: ItemChatRoomBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(chatRoom: ChatRoom) {
-            binding.txtClubName.text = chatRoom.club_name
-            binding.itemChatContentTxt.text = chatRoom.conent
-            binding.itemDateTxt.text = chatRoom.time
+        fun bind(chatRoom: ChatRoomData) {
+            binding.txtClubNameTitle.text = "[${chatRoom.crew_name}] ${chatRoom.title}"
+            //binding.itemChatContentTxt.text = chatRoom.
+            //binding.itemDateTxt.text = chatRoom.time
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(announcement: ChatRoom)
+        fun onItemClick(announcement: ChatRoomData)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {

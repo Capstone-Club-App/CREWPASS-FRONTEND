@@ -73,6 +73,7 @@ class RecruitmentRVAdapter (private val recruitment_list: ArrayList<getResult>)
 
             binding.itemAnnounceDetail.text = recruitment.crew_name
             binding.itemAnnounceTitle.text = recruitment.title
+            binding.itemDdayTxt.text = recruitment.d_day.toString()
         }
 
 

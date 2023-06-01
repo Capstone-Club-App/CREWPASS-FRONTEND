@@ -90,6 +90,7 @@ class PersonalPrepareInterviewActivity : AppCompatActivity(), AnalyzeApplication
     }
 
     override fun analyzeApplicationFailure(code: Int) {
-        TODO("Not yet implemented")
+        progressOFF()
+        Log.d("신청서 분석 실패", "")
     }
 }

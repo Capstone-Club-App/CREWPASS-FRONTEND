@@ -47,9 +47,13 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.menu_chat -> {
+                        val chatFragment = ChatFragment()
+                        val bundle = Bundle()
+                        bundle.putString("Key", key)
+                        chatFragment.arguments = bundle
                         supportFragmentManager
                             .beginTransaction()
-                            .replace(R.id.fragment_main_container, ChatFragment())
+                            .replace(R.id.fragment_main_container, chatFragment)
                             .commitAllowingStateLoss()
                     }
 
