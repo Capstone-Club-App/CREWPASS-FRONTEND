@@ -38,6 +38,7 @@ data class getResult(
     @SerializedName(value = "register_time") val register_time : Timestamp,
     @SerializedName(value = "crew_Id") val crew_id : Int,
     @SerializedName(value = "recruitment_id") val recruitment_id : Int,
+    @SerializedName(value = "d_day") val d_day : Int
 )
 
 

@@ -72,17 +72,18 @@ class WriteRecruitmentActivity: AppCompatActivity() {
         DatePickerDialog(this, DatePickerDialog.OnDateSetListener { datePicker, y, m, d->
 
 //            binding.txtDeadlineDate.text = "$y-$m-$d"
-            if(m < 10){
+            val month = m + 1
+            if(month < 10){
                 if(d<10)
-                    binding.txtDeadlineDate.text = "$y-0$m-0$d"
+                    binding.txtDeadlineDate.text = "$y-0$month-0$d"
                 else
-                    binding.txtDeadlineDate.text = "$y-0$m-$d"
+                    binding.txtDeadlineDate.text = "$y-0$month-$d"
             }
             else{
                 if(d<10)
-                    binding.txtDeadlineDate.text = "$y-$m-0$d"
+                    binding.txtDeadlineDate.text = "$y-$month-0$d"
                 else
-                    binding.txtDeadlineDate.text = "$y-$m-$d"
+                    binding.txtDeadlineDate.text = "$y-$month-$d"
             }
 
         }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)).show()

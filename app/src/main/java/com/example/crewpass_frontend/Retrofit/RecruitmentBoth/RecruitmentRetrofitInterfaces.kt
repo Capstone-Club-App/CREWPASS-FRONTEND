@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RecruitmentRetrofitInterfaces {
-    // 모집글 전체 가져오기
+    // 모집글 전체 최신순 가져오기
     @GET("/recruitment/list/{field}/recent")
     fun getRecruitmentAll(@Path("field") field : String): Call<RecruitmentResponse>
 

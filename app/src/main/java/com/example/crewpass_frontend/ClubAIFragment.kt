@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.crewpass_frontend.AI.Club.Interview.AIClubChooseRecruitmentActivity
-import com.example.crewpass_frontend.AI.Club.Question.ChooseIdealActivity
 import com.example.crewpass_frontend.databinding.FragmentClubAiBinding
 
 class ClubAIFragment : Fragment() {
@@ -23,11 +22,6 @@ class ClubAIFragment : Fragment() {
 
         binding.btnPrepareInterview.setOnClickListener {
             val intent = Intent(activity, AIClubChooseRecruitmentActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.btnQuestionRecommand.setOnClickListener {
-            val intent = Intent(activity, ChooseIdealActivity::class.java)
             startActivity(intent)
         }
 

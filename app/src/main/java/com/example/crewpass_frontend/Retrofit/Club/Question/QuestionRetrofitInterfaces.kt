@@ -12,6 +12,7 @@ interface QuestionRetrofitInterfaces {
     @Multipart
     @POST("/recruitment/new/question/new/{recruitmentId}")
     fun postQuestion(
+        @Header("crewId") crewId : Int,
         @Path("recruitmentId") recruitment_id: Int,
         @Part("question1") question1: String,
         @Part("question2") question2: String,

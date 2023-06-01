@@ -212,28 +212,28 @@ class SubmitApplicationActivity : AppCompatActivity(), QuestionGetResult, Applic
         binding.txtItemMarginTextNum3.text = data.question3Limit.toString() + "자"
         limit3 = data.question3Limit
 
-        if(data.question4.equals("") || data.question4Limit == 0){
+        if(data.question4Limit != 0){
             binding.layoutQuestion4.visibility = View.VISIBLE
             binding.txtItemQuestion4.text = data.question4
             binding.txtItemMarginTextNum4.text = data.question4Limit.toString() + "자"
             limit4 = data.question4Limit!!
         }
 
-        if(data.question5.equals("")){
+        if(data.question5Limit != 0){
             binding.layoutQuestion5.visibility = View.VISIBLE
             binding.txtItemQuestion5.text = data.question5
             binding.txtItemMarginTextNum5.text = data.question5Limit.toString() + "자"
             limit5 = data.question5Limit!!
         }
 
-        if(data.question6.equals("")){
+        if(data.question6Limit != 0){
             binding.layoutQuestion6.visibility = View.VISIBLE
             binding.txtItemQuestion6.text = data.question6
             binding.txtItemMarginTextNum6.text = data.question6Limit.toString() + "자"
             limit6 = data.question6Limit!!
         }
 
-        if(data.question7.equals("")){
+        if(data.question7Limit != 0){
             binding.layoutQuestion7.visibility = View.VISIBLE
             binding.txtItemQuestion7.text = data.question7
             binding.txtItemMarginTextNum7.text = data.question7Limit.toString() + "자"

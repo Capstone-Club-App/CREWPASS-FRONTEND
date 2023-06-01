@@ -102,12 +102,11 @@ class ChatRVAdapter(
         private val picture : ImageView = view.findViewById(R.id.your_image_iv)
 
         fun bind(chat: Chat) {
-            name.text = chat.writer
-            var timestampToSdf = Timestamp_to_SDF()
+            name.text = chat.senderName
             content.text = chat.content
-            time.text = timestampToSdf.convert_only_time(chat.created_at)
+            time.text = chat.sendTime
 
-            if(chat.writer.equals("성신한 집사들")){
+            if(chat.senderName.equals("성신한 집사들")){
                 content.setBackgroundResource(R.drawable.crew_chat_box)
             }
 
@@ -124,9 +123,8 @@ class ChatRVAdapter(
         private val image_time : TextView = view.findViewById(R.id.my_image_date_txt)
         private val picture : ImageView = view.findViewById(R.id.my_image_iv)
         fun bind(chat: Chat) {
-            var timestampToSdf = Timestamp_to_SDF()
             content.text = chat.content
-            time.text = timestampToSdf.convert_only_time(chat.created_at)
+            time.text = chat.sendTime
         }
     }
 
@@ -136,8 +134,7 @@ class ChatRVAdapter(
         private val time: TextView = view.findViewById(R.id.txt_center_time_date)
 
         fun bind(chat: Chat) {
-            var timestampToSdf = Timestamp_to_SDF()
-            time.text =  timestampToSdf.chatting_timestamp(chat.created_at)
+            time.text = chat.sendTime
         }
     }
 }

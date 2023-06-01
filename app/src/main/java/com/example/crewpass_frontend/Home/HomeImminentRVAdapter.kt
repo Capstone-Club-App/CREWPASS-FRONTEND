@@ -77,6 +77,7 @@ class HomeImminentRVAdapter (private val recruitment_list: ArrayList<Recruitment
 
             binding.itemAnnounceDetail.text = recruitment.crew_name
             binding.itemAnnounceTitle.text = recruitment.title
+            binding.itemDayTxt.text = recruitment.d_day.toString()
         }
 
 

@@ -3,6 +3,7 @@ package com.example.crewpass_frontend.Home.Personal.List
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -55,15 +56,15 @@ class RecruitmentDetailActivity : AppCompatActivity(), RecruitmentGetDetailResul
         binding.txtClubName.text = data.crew_name
 //        binding.itemAnnounceDetail.text = data.content
         var sdf_d = SimpleDateFormat("yyyy-MM-dd")
-        var date = sdf_d.format(data.register_time)
+        var date = sdf_d.format(data.deadLine)
         binding.txtDeadlineDate.text = date
 
         var sdf_t = SimpleDateFormat("HH:mm")
-        val time = sdf_t.format(data.register_time)
+        val time = sdf_t.format(data.deadLine)
         binding.txtDeadlineTime.text = time
 
         binding.edittextTitle.text = data.title
-        binding.edittextContent.text = data.content
+        binding.edittextContent.text = Html.fromHtml(data.content)
 
         question_id = data.question_id
     }
