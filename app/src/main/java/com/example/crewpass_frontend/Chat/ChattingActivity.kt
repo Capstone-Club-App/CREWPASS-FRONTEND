@@ -2,15 +2,16 @@ package com.example.crewpass_frontend.Chat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crewpass_frontend.Data.Chat
 import com.example.crewpass_frontend.Login.logined_id
-import com.example.crewpass_frontend.Retrofit.Chat.ChatData
-import com.example.crewpass_frontend.Retrofit.Chat.ChatResult
-import com.example.crewpass_frontend.Retrofit.Chat.ChatService
+import com.example.crewpass_frontend.Retrofit.Chat.*
 import com.example.crewpass_frontend.Retrofit.ChatRoom.ChatRoomInfo
 import com.example.crewpass_frontend.Retrofit.ChatRoom.ChatRoomInfoResult
 import com.example.crewpass_frontend.Retrofit.ChatRoom.ChatRoomService
@@ -20,6 +21,7 @@ import com.example.crewpass_frontend.Retrofit.Club.Club.ClubService
 import com.example.crewpass_frontend.Retrofit.Personal.Personal.PersonalData
 import com.example.crewpass_frontend.Retrofit.Personal.Personal.PersonalGetResult
 import com.example.crewpass_frontend.Retrofit.Personal.Personal.PersonalService
+import com.example.crewpass_frontend.Timestamp_to_SDF
 import com.example.crewpass_frontend.databinding.ActivityChattingBinding
 import com.example.crewpass_frontend.databinding.LayoutChattingSlideBinding
 import com.gmail.bishoybasily.stomp.lib.StompClient
@@ -32,15 +34,19 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, ChatRoomInfoResult ,ChatResult {
+class ChattingActivity : AppCompatActivity(), PersonalGetResult, ClubGetResult, ChatRoomInfoResult,
+    ChatResult, PutLastChatClubResult, PutLastChatPersonalResult {
     lateinit var binding: ActivityChattingBinding
-    lateinit var binding_drawer:LayoutChattingSlideBinding
+    lateinit var binding_drawer: LayoutChattingSlideBinding
     lateinit var chatRVAdapter: ChatRVAdapter
+    lateinit var edit_message: EditText
     var timestamp = Timestamp(Date().time)
     var chatRoom_id_get = -1
     var crewId_get = -1
     val format = SimpleDateFormat("HH:mm")
     var logined_name = ""
+    var crew_name_get = ""
+    var login_status = ""
 
     // stromp 연결
     private val url = "ws://34.64.142.47:8080/ws/chat"
@@ -53,7 +59,14 @@ class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, Ch
         setContentView(binding.root)
 
         chatRoom_id_get = intent.getIntExtra("chatRoom_id", -1)
-        if(chatRoom_id_get != -1){
+        // 이전 채팅 내역 불러오기
+        val chatService = ChatService()
+        chatService.setChatResult(this)
+        chatService.getChatAll(chatRoom_id_get)
+
+        crewId_get = intent.getIntExtra("crewId", -1)
+        crew_name_get = intent.getStringExtra("crew_name")!!
+        if (chatRoom_id_get != -1) {
             try {
                 runStomp(chatRoom_id_get, logined_id)
             } catch (e: Exception) {
@@ -62,17 +75,20 @@ class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, Ch
             }
         }
 
+        edit_message = binding.editMessage
+        edit_message!!.addTextChangedListener(textWatcher)
+
         // 현재 로그인 유저 정보 불러오기
-        val status = intent.getStringExtra("key")!! // 동아리인지 회원인지 가져오기
-        if(status.equals("Club")){
-            val personalService = PersonalService()
-            personalService.setPersonalGetResult(this)
-            personalService.getPersonal(logined_id.toString())
-        }
-        else{
+        val status = intent.getStringExtra("status")!! // 동아리인지 회원인지 가져오기
+        login_status = status
+        if (status.equals("Club")) {
             val clubService = ClubService()
             clubService.setClubGetResult(this)
             clubService.getClub(logined_id)
+        } else {
+            val personalService = PersonalService()
+            personalService.setPersonalGetResult(this)
+            personalService.getPersonal(logined_id.toString())
         }
 
         // 채팅방 정보 가져오기
@@ -82,19 +98,39 @@ class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, Ch
 
         // dummy data
         var chatDatas = mutableListOf<Chat>()
-        chatRVAdapter = ChatRVAdapter(this)
+        chatRVAdapter = ChatRVAdapter(this, crew_name_get)
         binding.recyclerMessages.adapter = chatRVAdapter
-        binding.recyclerMessages.layoutManager = LinearLayoutManager(this).apply{
+        binding.recyclerMessages.layoutManager = LinearLayoutManager(this).apply {
             this.stackFromEnd = true // 가장 최근의 대화를 표시하기 위해 맨 아래로 정렬.
         }
 
         chatRVAdapter.chatList = chatDatas
         chatRVAdapter.notifyDataSetChanged()
 
-        // 이전 채팅 내역 불러오기
-        val chatService = ChatService()
-        chatService.setChatResult(this)
-        chatService.getChatAll(chatRoom_id_get)
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    // 채팅창 설정
+    val textWatcher = object : TextWatcher {
+
+        override
+        fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+
+        }
+
+        override
+        fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+
+        }
+
+        override fun afterTextChanged(p0: Editable?) {
+            if (binding.editMessage.text == null)
+                binding.btnSubmit.isClickable = false
+            else
+                binding.btnSubmit.isClickable = true
+        }
     }
 
     // 채팅 실행
@@ -108,33 +144,80 @@ class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, Ch
                 JSONObject(topicMessage.payload).getString("senderName").toString()
             val content =
                 JSONObject(topicMessage.payload).getString("content").toString()
+
             val crewId =
-                JSONObject(topicMessage.payload).getString("crewId").toInt()
+                if (!JSONObject(topicMessage.payload).isNull("crewId"))
+                    JSONObject(topicMessage.payload).getString("crewId").toInt()
+                else
+                    null
             val userId =
-                JSONObject(topicMessage.payload).getString("userId").toInt() // 메세지 보낸 user_id 가져오기
+                if (!JSONObject(topicMessage.payload).isNull("userId"))
+                    JSONObject(topicMessage.payload).getString("userId").toInt()
+                else
+                    null
+            val chatId =
+                JSONObject(topicMessage.payload).getString("chatId").toInt()
 
-            val time = JSONObject(topicMessage.payload).getString("sendTime").toString()
-            val date = format.parse(time)
-            val calendar = Calendar.getInstance()
-            calendar.time = date
-            val extractedHour = calendar.get(Calendar.HOUR_OF_DAY) + 9
-            val extractedMinute = calendar.get(Calendar.MINUTE)
-            var sendTime = ""
-            if(extractedHour > 12){
-                sendTime = "오후 ${(extractedHour - 12)}:${extractedMinute}"
+            // sendTime 설정
+            val dateString = JSONObject(topicMessage.payload).getString("sendTime")
+            var sendTime = dateString.substring(11 until 16)
+            val hour = sendTime.substring(0 until 2)
+            val minute = sendTime.subSequence(3 until 5)
+            if(hour.toInt() >= 12) {
+                if(hour.toInt() != 12)
+                    sendTime = "오후 ${hour.toInt() - 12}:${minute}"
+                else
+                    sendTime = "오후 ${hour.toInt()}:${minute}"
             }
             else
-                sendTime = "오전 ${(extractedHour)}:${extractedMinute}"
+                sendTime = "오전 ${hour}:${minute}"
 
-            if (userId != user_id) { // 보낸 사람이 현재 로그인한 유저와 다른 사람
-                chatRVAdapter.addItem(Chat(senderName, sendTime, content, userId, crewId, chatRoom_id_get, 1))
-            }
-            else
-                chatRVAdapter.addItem(Chat(senderName, sendTime, content, userId, crewId, chatRoom_id_get, 2))
 
-            binding.recyclerMessages.layoutManager = LinearLayoutManager(this).apply{
-                this.stackFromEnd = true // 가장 최근의 대화를 표시하기 위해 맨 아래로 정렬.
+            if ((crewId == null && userId == logined_id)
+                || (userId == null && crewId == logined_id)) { // 로그인한 유저의 계정일 때
+//                chatRVAdapter.addItem(
+//                    Chat(
+//                        chatId,
+//                        senderName,
+//                        sendTime,
+//                        content,
+//                        userId,
+//                        crewId,
+//                        chatRoom_id_get,
+//                        2
+//                    )
+//                )
+            } else
+                chatRVAdapter.addItem(
+                    Chat(
+                        chatId,
+                        senderName,
+                        sendTime,
+                        content,
+                        userId,
+                        crewId,
+                        chatRoom_id_get,
+                        1
+                    )
+                )
+            runOnUiThread {
+                binding.recyclerMessages.layoutManager = LinearLayoutManager(this).apply {
+                    this.stackFromEnd = true // 가장 최근의 대화를 표시하기 위해 맨 아래로 정렬.
+                }
+                chatRVAdapter.notifyDataSetChanged()
             }
+
+            // lastChat 갱신
+            if (login_status.equals("Club")) {
+                val chatService = ChatService()
+                chatService.setPutLastChatClubResult(this)
+                chatService.putLastChatClub(logined_id, chatRoom_id_get)
+            } else {
+                val chatService = ChatService()
+                chatService.setPutLastChatPersonalResult(this)
+                chatService.putLastChatPersonal(logined_id!!, chatRoom_id_get)
+            }
+
         }
 
         stompClient.lifecycle().subscribe { lifecycleEvent ->
@@ -156,33 +239,85 @@ class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, Ch
         }
 
         binding.btnSubmit.setOnClickListener {
-            // 여기 수정하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            sendStomp(logined_name, binding.editMessage.text.toString(), chatRoom_id_get, crewId_get, logined_id)
-            binding.recyclerMessages.layoutManager = LinearLayoutManager(this).apply{
+            if (login_status.equals("Club"))
+                sendStomp(
+                    logined_name,
+                    binding.editMessage.text.toString(),
+                    chatRoom_id_get,
+                    logined_id,
+                    null
+                )
+            else
+                sendStomp(
+                    logined_name,
+                    binding.editMessage.text.toString(),
+                    chatRoom_id_get,
+                    null,
+                    logined_id
+                )
+            binding.recyclerMessages.layoutManager = LinearLayoutManager(this).apply {
                 this.stackFromEnd = true // 가장 최근의 대화를 표시하기 위해 맨 아래로 정렬.
             }
         }
     }
 
     // 채팅 보내기
-    fun sendStomp(senderName: String, content: String, chatRoomId: Int,
-    crewId : Int, userId : Int) {
+    fun sendStomp(
+        senderName: String, content: String, chatRoomId: Int,
+        crewId: Int?, userId: Int?
+    ) {
         val data = JSONObject()
         data.put("senderName", senderName)
         data.put("content", content)
         data.put("chatRoomId", chatRoomId)
-        data.put("crewId", crewId)
-        data.put("userId", userId)
+        if (crewId == null)
+            data.put("crewId", JSONObject.NULL)
+        else
+            data.put("crewId", crewId)
+        if (userId == null)
+            data.put("userId", JSONObject.NULL)
+        else
+            data.put("userId", userId)
 
         stompClient.send("/pub/chat/message", data.toString()).subscribe()
         Log.d("보낸 메세지 : ", content)
+        edit_message.text = Editable.Factory.getInstance().newEditable("") // 채팅 입력창 다시 초기화시켜주기
 
-        val time= System.currentTimeMillis()
+        val time = System.currentTimeMillis()
         val time_to_timestamp = Timestamp(time)
-        val sendTime = format.format(time_to_timestamp)
+        var sendTime = format.format(time_to_timestamp)
+        Log.d("sendTime : ", sendTime)
+        val hour = sendTime.substring(0 until 2)
+        val minute = sendTime.subSequence(3 until 5)
+        if(hour.toInt() >= 12) {
+            if(hour.toInt() != 12)
+                sendTime = "오후 ${hour.toInt() - 12}:${minute}"
+            else
+                sendTime = "오후 ${hour.toInt()}:${minute}"
+        }
+        else
+            sendTime = "오전 ${hour}:${minute}"
 
-        chatRVAdapter.addItem(Chat(senderName, sendTime, content, logined_id, crewId, chatRoomId, 2))
+        // 내가 보낸 채팅이기 때문에 유저정보 필요하지 않으니 우선 chat_id -1로 두기
+        chatRVAdapter.addItem(
+            Chat(
+                -1,
+                senderName,
+                sendTime,
+                content,
+                userId,
+                crewId,
+                chatRoomId,
+                2
+            )
+        )
 
+        runOnUiThread {
+            binding.recyclerMessages.layoutManager = LinearLayoutManager(this).apply {
+                this.stackFromEnd = true // 가장 최근의 대화를 표시하기 위해 맨 아래로 정렬.
+            }
+            chatRVAdapter.notifyDataSetChanged()
+        }
     }
 
     // 로그인 계정 정보 가져오기
@@ -203,9 +338,9 @@ class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, Ch
     }
 
     // 채팅방 정보 가져오기
-    override fun getChatRoominfoSuccess(code: Int, data: ChatRoomInfo) {
-        binding.itemClubNameTxt.text = data.crew_name
-        binding.itemMembersNumTxt.text = data.count.toString()
+    override fun getChatRoominfoSuccess(code: Int, data: ChatRoomInfo?) {
+        binding.itemClubNameTxt.text = data?.crew_name
+        binding.itemMembersNumTxt.text = data?.count.toString()
     }
 
     override fun getChatRoominfoFailure(code: Int) {
@@ -213,14 +348,23 @@ class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, Ch
     }
 
     // 채팅 내역 불러오기
-    override fun getChatRoomListSuccess(code: Int, data: ArrayList<ChatData>) {
-        for(i in 0 until data.count()){
-            val time= data[i].sendTime
-            val sdf = SimpleDateFormat("HH:mm")
-            val sendTime = sdf.format(time)
-            if(data[i].senderName.equals(logined_name)){ // 로그인한 유저의 계정일 때
+    override fun getChatAllSuccess(code: Int, data: ArrayList<ChatData>) {
+        for (i in 0 until data.count()) {
+            val dateString = data[i].sendTime
+            var sendTime = dateString.substring(11 until 16)
+            val hour = sendTime.substring(0 until 2)
+            val minute = sendTime.subSequence(3 until 5)
+            if(hour.toInt() > 12) {
+                sendTime = "오후 ${hour.toInt() - 12}:${minute}"
+            }
+            else
+                sendTime = "오전 ${hour}:${minute}"
+
+            if ((data[i].crewId == null && data[i].userId == logined_id)
+                || (data[i].userId == null && data[i].crewId == logined_id)) { // 로그인한 유저의 계정일 때
                 chatRVAdapter.addItem(
                     Chat(
+                        data[i].chatId,
                         data[i].senderName,
                         sendTime,
                         data[i].content,
@@ -230,10 +374,10 @@ class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, Ch
                         2
                     )
                 )
-            }
-            else{
+            } else {
                 chatRVAdapter.addItem(
                     Chat(
+                        data[i].chatId,
                         data[i].senderName,
                         sendTime,
                         data[i].content,
@@ -245,9 +389,38 @@ class ChattingActivity:AppCompatActivity(), PersonalGetResult, ClubGetResult, Ch
                 )
             }
         }
+        chatRVAdapter.notifyDataSetChanged()
+
+        // lastChat 갱신
+        if (login_status.equals("Club")) {
+            val chatService = ChatService()
+            chatService.setPutLastChatClubResult(this)
+            chatService.putLastChatClub(crewId_get, chatRoom_id_get)
+        } else {
+            val chatService = ChatService()
+            chatService.setPutLastChatPersonalResult(this)
+            chatService.putLastChatPersonal(crewId_get, chatRoom_id_get)
+        }
     }
 
-    override fun getChatRoomListFailure(code: Int) {
+    override fun getChatAllFailure(code: Int) {
         Log.d("채팅 내역 불러오기 실패", "")
+    }
+
+    // 최근에 읽은 채팅 수 갱신
+    override fun putLastChatClubSuccess(code: Int) {
+        Log.d("동아리 최근에 읽은 채팅 수 갱신 성공", "")
+    }
+
+    override fun putLastChatClubFailure(code: Int) {
+        Log.d("동아리 최근에 읽은 채팅 수 갱신 실패", "")
+    }
+
+    override fun putLastChatPersonalSuccess(code: Int) {
+        Log.d("회원 최근에 읽은 채팅 수 갱신 성공", "")
+    }
+
+    override fun putLastChatPersonalFailure(code: Int) {
+        Log.d("회원 최근에 읽은 채팅 수 갱신 실패", "")
     }
 }

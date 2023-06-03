@@ -21,22 +21,17 @@ class  Timestamp_to_SDF {
     }
 
     fun convert_only_time(timestamp: Timestamp) : String{
-//        // 9시간 빼줘야함,,,,나도 힘들다,,
-//        var hour = timestamp.hours
-//        var minute = timestamp.minutes
-//
-//        var hour_cal = hour - 9 // 현재 오전 3시일 때
-//        if(hour_cal < 0) // -6이 나오니까
-//            hour = 24 + hour_cal // 24데 더해서 18시가 나오게
-//        else
-//            hour = hour_cal // 계산한 거 그대로 넣어주기
-//
-//        return hour.toString() + "시 " + minute.toString() + "분"
+        var hour = timestamp.hours
+        var minute = timestamp.minutes
 
-        var sdf = SimpleDateFormat("HH시 mm분")
-        var time = sdf.format(timestamp)
-
-        return time
+        if(hour > 12)
+            return "오후 ${hour - 12}:${minute}"
+        else
+            return "오전 ${hour}:${minute}"
+//        var sdf = SimpleDateFormat("HH시 mm분")
+//        var time = sdf.format(timestamp)
+//
+//        return time
     }
 
     fun timestamp_to_String(timestamp: Long) : String{

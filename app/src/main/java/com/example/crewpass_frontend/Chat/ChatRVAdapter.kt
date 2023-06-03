@@ -1,6 +1,8 @@
 package com.example.crewpass_frontend.Chat
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +16,8 @@ import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.Timestamp_to_SDF
 
 class ChatRVAdapter(
-    val context: Context
+    val context: Context,
+    val crew_name_get : String
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -98,6 +101,7 @@ class ChatRVAdapter(
         private val content: AppCompatButton = view.findViewById(R.id.your_chat_iv)
         private val name : TextView = view.findViewById(R.id.your_name_txt)
         private val time : TextView = view.findViewById(R.id.your_chat_date_txt)
+        private val profile : ImageView = view.findViewById(R.id.your_profile_img)
         private val image_time : TextView = view.findViewById(R.id.your_image_date_txt)
         private val picture : ImageView = view.findViewById(R.id.your_image_iv)
 
@@ -106,11 +110,12 @@ class ChatRVAdapter(
             content.text = chat.content
             time.text = chat.sendTime
 
-            if(chat.senderName.equals("성신한 집사들")){
-                content.setBackgroundResource(R.drawable.crew_chat_box)
-            }
-
             // 동아리 이름 오면 ui 바꿔주는 거 추가하기!!!
+            if(chat.crew_id != null){
+                content.setBackgroundResource(R.drawable.crew_chat_box)
+                name.setTextColor(Color.parseColor("#6DA4FE"))
+                profile.setBackgroundColor(Color.parseColor("#6DA4FE"))
+            }
         }
 
     }
