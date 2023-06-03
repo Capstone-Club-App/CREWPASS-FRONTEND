@@ -6,6 +6,6 @@ interface ChatRoomResult {
 }
 
 interface ChatRoomInfoResult {
-    fun getChatRoominfoSuccess(code : Int, data : ChatRoomInfo)
+    fun getChatRoominfoSuccess(code : Int, data : ChatRoomInfo?)
     fun getChatRoominfoFailure(code : Int)
 }

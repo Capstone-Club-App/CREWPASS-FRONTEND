@@ -7,6 +7,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ChatService {
+    // 전체 채팅내역 불러오기
     private lateinit var chatResult: ChatResult
 
     fun setChatResult(chatResult: ChatResult){
@@ -23,10 +24,10 @@ class ChatService {
                     val resp: ChatResponse = response.body()!!
                     when (resp.statusCode) {
                         200 -> {
-                            chatResult.getChatRoomListSuccess(resp.statusCode, resp.data)
+                            chatResult.getChatAllSuccess(resp.statusCode, resp.data)
                         }
                         else -> {
-                            chatResult.getChatRoomListFailure(resp.statusCode)
+                            chatResult.getChatAllFailure(resp.statusCode)
                         }
                     }
                 }
@@ -37,6 +38,76 @@ class ChatService {
 
             override fun onFailure(call: Call<ChatResponse>, t: Throwable) {
                 Log.d("CHAT-GET FAILURE",t.message.toString())
+            }
+        })
+    }
+
+    // 동아리 lastChat 갱신
+    private lateinit var putLastChatClubResult: PutLastChatClubResult
+
+    fun setPutLastChatClubResult(putLastChatClubResult: PutLastChatClubResult){
+        this.putLastChatClubResult = putLastChatClubResult
+    }
+
+    fun putLastChatClub(crewId : Int, chatroomId : Int){
+        val chatService = getRetrofit().create(ChatRetrofitInterfaces::class.java)
+
+        chatService.putLastChatClub(crewId, chatroomId).enqueue(object : Callback<ChatPutResponse> {
+            override fun onResponse(call: Call<ChatPutResponse>, response: Response<ChatPutResponse>,) {
+                Log.d("CHAT-PUT-CLUB SUCCESS",response.toString())
+                if(response.body() != null) {
+                    val resp: ChatPutResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> {
+                            putLastChatClubResult.putLastChatClubSuccess(resp.statusCode)
+                        }
+                        else -> {
+                            putLastChatClubResult.putLastChatClubFailure(resp.statusCode)
+                        }
+                    }
+                }
+                else
+                    Log.d("CHAT-PUT-CLUB FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<ChatPutResponse>, t: Throwable) {
+                Log.d("CHAT-PUT-CLUB FAILURE",t.message.toString())
+            }
+        })
+    }
+
+    // 회원 lastChat 갱신
+    private lateinit var putLastChatPersonalResult: PutLastChatPersonalResult
+
+    fun setPutLastChatPersonalResult(putLastChatPersonalResult: PutLastChatPersonalResult){
+        this.putLastChatPersonalResult = putLastChatPersonalResult
+    }
+
+    fun putLastChatPersonal(userId : Int, chatroomId : Int){
+        val chatService = getRetrofit().create(ChatRetrofitInterfaces::class.java)
+
+        chatService.putLastChatPersonal(userId, chatroomId).enqueue(object : Callback<ChatPutResponse> {
+            override fun onResponse(call: Call<ChatPutResponse>, response: Response<ChatPutResponse>,) {
+                Log.d("CHAT-PUT-P SUCCESS",response.toString())
+                if(response.body() != null) {
+                    val resp: ChatPutResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> {
+                            putLastChatPersonalResult.putLastChatPersonalSuccess(resp.statusCode)
+                        }
+                        else -> {
+                            putLastChatPersonalResult.putLastChatPersonalFailure(resp.statusCode)
+                        }
+                    }
+                }
+                else
+                    Log.d("CHAT-PUT-P FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<ChatPutResponse>, t: Throwable) {
+                Log.d("CHAT-PUT-P FAILURE",t.message.toString())
             }
         })
     }

@@ -6,6 +6,7 @@ import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.Retrofit.Personal.Scrap.ScrapDeleteResult
@@ -74,6 +75,10 @@ class HomeImminentRVAdapter (private val recruitment_list: ArrayList<Recruitment
                 }
                 notifyDataSetChanged()
             }
+
+            Glide.with(context).load(recruitment.crew_profile)
+                .circleCrop()
+                .into(binding.profileImg)
 
             binding.itemAnnounceDetail.text = recruitment.crew_name
             binding.itemAnnounceTitle.text = recruitment.title

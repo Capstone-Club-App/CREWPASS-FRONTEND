@@ -21,6 +21,8 @@ class ChatFragment : Fragment(), ChatRoomResult {
     lateinit var binding : FragmentChatBinding
     lateinit var chatRoomRVAdapter: ChatRoomRVAdapter
     var status = ""
+    var key = ""
+    val chatRoomService = ChatRoomService()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,11 +32,14 @@ class ChatFragment : Fragment(), ChatRoomResult {
 
         initActionBar()
 
-        val key = arguments?.getString("Key")!! // 동아리인지 회원인지 가져오기
+        key = arguments?.getString("Key")!! // 동아리인지 회원인지 가져오기
         Log.d("key : ", key)
         status = key
+        return binding.root
+    }
 
-        val chatRoomService = ChatRoomService()
+    override fun onResume() {
+        super.onResume()
         chatRoomService.setChatRoomResult(this)
         if (key.equals("Club")){
             chatRoomService.getChatRoom_Club(logined_id)
@@ -42,8 +47,6 @@ class ChatFragment : Fragment(), ChatRoomResult {
         else{
             chatRoomService.getChatRoom_User(logined_id)
         }
-
-        return binding.root
     }
 
     fun initActionBar(){
@@ -62,7 +65,9 @@ class ChatFragment : Fragment(), ChatRoomResult {
             ChatRoomRVAdapter.OnItemClickListener {
             override fun onItemClick(chatRoom: ChatRoomData) {
                 val intent = Intent(context, ChattingActivity::class.java)
-//                intent.putExtra("crewId", chatRoom.c)
+                intent.putExtra("chatRoom_id", chatRoom.chat_room_id)  // 여기 수정!!!
+                intent.putExtra("crew_name", chatRoom.crew_name)
+                intent.putExtra("crewId", chatRoom.crew_id)
                 intent.putExtra("status", status)
                 startActivity(intent) // 지원서 작성으로 이동
             }
