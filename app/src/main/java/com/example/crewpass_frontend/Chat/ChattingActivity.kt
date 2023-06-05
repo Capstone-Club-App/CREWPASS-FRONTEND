@@ -215,7 +215,7 @@ class ChattingActivity : AppCompatActivity(), PersonalGetResult, ClubGetResult, 
             } else {
                 val chatService = ChatService()
                 chatService.setPutLastChatPersonalResult(this)
-                chatService.putLastChatPersonal(logined_id!!, chatRoom_id_get)
+                chatService.putLastChatPersonal(logined_id, chatRoom_id_get)
             }
 
         }
