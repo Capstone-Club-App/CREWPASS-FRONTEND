@@ -318,6 +318,17 @@ class ChattingActivity : AppCompatActivity(), PersonalGetResult, ClubGetResult, 
             }
             chatRVAdapter.notifyDataSetChanged()
         }
+
+        // lastChat 갱신
+        if (login_status.equals("Club")) {
+            val chatService = ChatService()
+            chatService.setPutLastChatClubResult(this)
+            chatService.putLastChatClub(logined_id, chatRoom_id_get)
+        } else {
+            val chatService = ChatService()
+            chatService.setPutLastChatPersonalResult(this)
+            chatService.putLastChatPersonal(logined_id, chatRoom_id_get)
+        }
     }
 
     // 로그인 계정 정보 가져오기

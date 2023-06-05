@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.Data.ChatRoom
+import com.example.crewpass_frontend.Login.logined_id
 import com.example.crewpass_frontend.Retrofit.Chat.*
 import com.example.crewpass_frontend.Retrofit.ChatRoom.ChatRoomData
 import com.example.crewpass_frontend.Timestamp_to_SDF
@@ -55,13 +56,15 @@ class ChatRoomRVAdapter (private val chatRoom_list: ArrayList<ChatRoomData>, pri
                 .circleCrop()
                 .into(binding.itemProfileImg)
 
+            Log.d("key : ", key)
+
             if (key.equals("Club")){
                 chatService.setGetNotReadChatClubResult(this)
-                chatService.getNotReadChatCountClub(chatRoom.crew_id, chatRoom.chat_room_id)
+                chatService.getNotReadChatCountClub(logined_id, chatRoom.chat_room_id)
             }
             else{
                 chatService.setGetNotReadChatPersonalResult(this)
-                chatService.getNotReadChatCountPersonal(chatRoom.crew_id, chatRoom.chat_room_id)
+                chatService.getNotReadChatCountPersonal(logined_id, chatRoom.chat_room_id)
             }
         }
 
@@ -88,6 +91,7 @@ class ChatRoomRVAdapter (private val chatRoom_list: ArrayList<ChatRoomData>, pri
         }
 
         override fun getNotReadChatClubSuccess(code: Int, data: NotReadChatData) {
+            Log.d("club - count : ", data.count.toString())
             if(data.count != 0){
                 binding.itemChatCountTxt.visibility = View.VISIBLE
                 binding.itemChatCountTxt.text = data.count.toString()
@@ -99,6 +103,7 @@ class ChatRoomRVAdapter (private val chatRoom_list: ArrayList<ChatRoomData>, pri
         }
 
         override fun getNotReadChatPersonalSuccess(code: Int, data: NotReadChatData) {
+            Log.d("user - count : ", data.count.toString())
             if(data.count != 0){
                 binding.itemChatCountTxt.visibility = View.VISIBLE
                 binding.itemChatCountTxt.text = data.count.toString()
