@@ -25,3 +25,13 @@ data class ChatData(
     @SerializedName(value = "crewId") val crewId : Int?,
     @SerializedName(value = "chatRoomId") val chatRoomId : Int
 )
+
+data class ChatGetNotReadResponse (
+    @SerializedName(value ="statusCode") val statusCode : Int,
+    @SerializedName(value = "responseMessage") val responseMessage : Any?,
+    @SerializedName(value = "data") val data : NotReadChatData
+)
+
+data class NotReadChatData(
+    @SerializedName(value = "count") val count : Int
+)

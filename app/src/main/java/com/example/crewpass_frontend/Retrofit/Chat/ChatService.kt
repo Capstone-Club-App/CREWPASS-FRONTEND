@@ -111,4 +111,74 @@ class ChatService {
             }
         })
     }
+
+    // 읽지 않은 채팅 개수 불러오기 - 유저
+    private lateinit var getNotReadChatPersonalResult: GetNotReadChatPersonalResult
+
+    fun setGetNotReadChatPersonalResult(getNotReadChatPersonalResult: GetNotReadChatPersonalResult){
+        this.getNotReadChatPersonalResult = getNotReadChatPersonalResult
+    }
+
+    fun getNotReadChatCountPersonal(userId: Int, chatroomId : Int){
+        val chatService = getRetrofit().create(ChatRetrofitInterfaces::class.java)
+
+        chatService.getNotReadChatPersonal(userId, chatroomId).enqueue(object : Callback<ChatGetNotReadResponse> {
+            override fun onResponse(call: Call<ChatGetNotReadResponse>, response: Response<ChatGetNotReadResponse>,) {
+                Log.d("CHAT-GET SUCCESS",response.toString())
+                if(response.body() != null) {
+                    val resp: ChatGetNotReadResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> {
+                            getNotReadChatPersonalResult.getNotReadChatPersonalSuccess(resp.statusCode, resp.data)
+                        }
+                        else -> {
+                            getNotReadChatPersonalResult.getNotReadChatPersonalFailure(resp.statusCode)
+                        }
+                    }
+                }
+                else
+                    Log.d("CHAT-COUNT FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<ChatGetNotReadResponse>, t: Throwable) {
+                Log.d("CHAT-COUNT FAILURE",t.message.toString())
+            }
+        })
+    }
+
+    // 읽지 않은 채팅 개수 불러오기 - 동아리
+    private lateinit var getNotReadChatClubResult: GetNotReadChatClubResult
+
+    fun setGetNotReadChatClubResult(getNotReadChatClubResult: GetNotReadChatClubResult){
+        this.getNotReadChatClubResult = getNotReadChatClubResult
+    }
+
+    fun getNotReadChatCountClub(crewId: Int, chatroomId : Int){
+        val chatService = getRetrofit().create(ChatRetrofitInterfaces::class.java)
+
+        chatService.getNotReadChatClub(crewId, chatroomId).enqueue(object : Callback<ChatGetNotReadResponse> {
+            override fun onResponse(call: Call<ChatGetNotReadResponse>, response: Response<ChatGetNotReadResponse>,) {
+                Log.d("CHAT-COUNT SUCCESS",response.toString())
+                if(response.body() != null) {
+                    val resp: ChatGetNotReadResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> {
+                            getNotReadChatClubResult.getNotReadChatClubSuccess(resp.statusCode, resp.data)
+                        }
+                        else -> {
+                            getNotReadChatClubResult.getNotReadChatClubFailure(resp.statusCode)
+                        }
+                    }
+                }
+                else
+                    Log.d("CHAT-COUNT FAILURE", "NULL")
+
+            }
+
+            override fun onFailure(call: Call<ChatGetNotReadResponse>, t: Throwable) {
+                Log.d("CHAT-COUNT FAILURE",t.message.toString())
+            }
+        })
+    }
 }

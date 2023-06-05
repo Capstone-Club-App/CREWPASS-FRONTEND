@@ -12,4 +12,10 @@ interface ChatRetrofitInterfaces {
 
     @PUT("/chat/history/{chatRoomId}/user")
     fun putLastChatPersonal(@Header("userId") crewId : Int, @Path("chatRoomId") chatroomId : Int): Call<ChatPutResponse>
+
+    @GET("/chat/count/{chatRoomId}/crew")
+    fun getNotReadChatClub(@Header("crewId") crewId : Int, @Path("chatRoomId") chatroomId : Int): Call<ChatGetNotReadResponse>
+
+    @GET("/chat/count/{chatRoomId}/user")
+    fun getNotReadChatPersonal(@Header("userId") userId : Int, @Path("chatRoomId") chatroomId : Int): Call<ChatGetNotReadResponse>
 }

@@ -58,7 +58,7 @@ class ChatFragment : Fragment(), ChatRoomResult {
 
 
     override fun getChatRoomListSuccess(code: Int, data: ArrayList<ChatRoomData>) {
-        chatRoomRVAdapter = ChatRoomRVAdapter(data)
+        chatRoomRVAdapter = ChatRoomRVAdapter(data, key)
         binding.rvChatroom.adapter = chatRoomRVAdapter
         binding.rvChatroom.layoutManager = LinearLayoutManager(context)
         chatRoomRVAdapter.setItemClickListener(object :

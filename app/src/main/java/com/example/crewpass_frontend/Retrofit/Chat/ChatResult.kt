@@ -14,3 +14,13 @@ interface PutLastChatPersonalResult {
     fun putLastChatPersonalSuccess(code : Int)
     fun putLastChatPersonalFailure(code : Int)
 }
+
+interface GetNotReadChatClubResult {
+    fun getNotReadChatClubSuccess(code : Int, data : NotReadChatData)
+    fun getNotReadChatClubFailure(code : Int)
+}
+
+interface GetNotReadChatPersonalResult {
+    fun getNotReadChatPersonalSuccess(code : Int, data : NotReadChatData)
+    fun getNotReadChatPersonalFailure(code : Int)
+}

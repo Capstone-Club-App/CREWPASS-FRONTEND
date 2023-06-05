@@ -125,7 +125,7 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
         applicationService.postPassNpass(crew_name, userId, msg)
     }
 
-    //    fun checkPass(check_list : ArrayList<String>){
+//    fun checkPass(check_list : ArrayList<String>){
 //        for (application in application_list) {
 //            if(check_list.contains(application.user_id.toString())){
 //                var position = findItemPositionByName(application.user_id)
@@ -145,30 +145,36 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
 
     override fun passNpassSuccess(code: Int) {
         Log.d("합불통보 성공", "")
-//        clubApplicationRVAdapter.checkPass(check_list)
-//
-//        val layoutManager = binding.announcementListRv.layoutManager as LinearLayoutManager
-//        val adapter = binding.announcementListRv.adapter as ClubApplicationRVAdapter
-//
-//        val itemCount = adapter.itemCount
-//        for(position in 0 until itemCount){
-//            val viewHolder =
-//                binding.announcementListRv.findViewHolderForAdapterPosition(position) as ClubApplicationRVAdapter.ViewHolder
-//            if(viewHolder != null){
-//                if(pass_npass.equals("pass")){
+        clubApplicationRVAdapter.checkPass(check_list)
+
+        val layoutManager = binding.announcementListRv.layoutManager as LinearLayoutManager
+        val adapter = binding.announcementListRv.adapter as ClubApplicationRVAdapter
+
+        val itemCount = adapter.itemCount
+        for(position in 0 until itemCount){
+            val viewHolder =
+                binding.announcementListRv.findViewHolderForAdapterPosition(position) as ClubApplicationRVAdapter.ViewHolder
+            if(viewHolder != null){
+                if(pass_npass.equals("pass")){
+                    for(pos in clubApplicationRVAdapter.position_list){
+                        if (viewHolder.adapterPosition == pos){
+                            viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
+                            viewHolder.binding.itemTxtPass.visibility = View.VISIBLE
+                        }
+                    }
 //                    if(check_list.contains(application_list[position].user_id.toString())) {
 //                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
 //                        viewHolder.binding.itemTxtPass.visibility = View.VISIBLE
 //                    }
-//                }
-//                else{
-//                    if(!check_list.contains(application_list[position].user_id.toString())) {
-//                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
-//                        viewHolder.binding.itemTxtNpass.visibility = View.VISIBLE
-//                    }
-//                }
-//            }
-//        }
+                }
+                else{
+                    if(!check_list.contains(application_list[position].user_id.toString())) {
+                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
+                        viewHolder.binding.itemTxtNpass.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
     }
 
     override fun passNpassFailure(code: Int) {
