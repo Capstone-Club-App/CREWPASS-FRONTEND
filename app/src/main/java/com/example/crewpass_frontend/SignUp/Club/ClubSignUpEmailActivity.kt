@@ -25,6 +25,7 @@ import java.io.InputStream
 
 class ClubSignUpEmailActivity : AppCompatActivity(), SignUpResult {
     lateinit var binding: ActivityClubSignupEmailBinding
+    lateinit var file : File
     var club_name = ""
     var club_id = ""
     var club_passwd = ""
@@ -60,7 +61,12 @@ class ClubSignUpEmailActivity : AppCompatActivity(), SignUpResult {
         Log.d("profile_uri : ", profile.toString())
 
         var body : MultipartBody.Part? = null
-        val file = File(absolutelyPath(profile, this))
+        if(profile.toString().substring(0 until 16).equals("android.resource")){
+            file = File("res/drawable/img_basic_profile.jpg")
+        }else{
+            file = File(absolutelyPath(profile, this))
+        }
+
         val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
         body = MultipartBody.Part.createFormData("profile", file.name, requestFile)
 
