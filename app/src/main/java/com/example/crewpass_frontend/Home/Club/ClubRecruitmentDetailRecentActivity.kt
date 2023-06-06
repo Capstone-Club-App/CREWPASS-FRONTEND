@@ -49,7 +49,8 @@ class ClubRecruitmentDetailRecentActivity: AppCompatActivity(), RecruitmentGetDe
         binding.txtDateTime.text = date
 
         binding.edittextTitle.text = data.title
-        binding.edittextContent.text = Html.fromHtml(data.content)
+        val content = data.content.replace("\\n", "\n")
+        binding.edittextContent.text = content
     }
 
     override fun recruitmentGetDetailFailure(code: Int) {

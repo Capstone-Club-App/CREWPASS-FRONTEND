@@ -66,7 +66,7 @@ class PersonalPrepareInterviewActivity : AppCompatActivity(), AnalyzeApplication
     }
 
     fun initActionBar(){
-        binding.innerPageTop.appbarBackBtn.visibility = View.INVISIBLE
+        binding.innerPageTop.appbarBackBtn.visibility = View.VISIBLE
         binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
         binding.innerPageTop.appbarPageNameLeftTv.text = "면접 준비"
 

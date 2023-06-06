@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.Login.logined_id
 import com.example.crewpass_frontend.MyPage.Club.ClubEditInfoActivity
 import com.example.crewpass_frontend.MyPage.Club.ClubEditRecruitmentActivity
@@ -43,11 +44,6 @@ class ClubMyPageFragment : Fragment(), ClubGetResult{
 
         binding.btnEditInfo.setOnClickListener {
             val intent = Intent(activity, ClubEditInfoActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.btnEditAnnouncement.setOnClickListener {
-            val intent = Intent(activity, ClubEditRecruitmentActivity::class.java)
             intent.putExtra("crewLoginId", crewLoginId)
             intent.putExtra("crewPw", crewPw)
             intent.putExtra("crewName", crewName)
@@ -58,7 +54,11 @@ class ClubMyPageFragment : Fragment(), ClubGetResult{
             intent.putExtra("crewMasterEmail", crewMasterEmail)
             intent.putExtra("crewSubEmail", crewSubEmail)
             intent.putExtra("profile", profile)
+            startActivity(intent)
+        }
 
+        binding.btnEditAnnouncement.setOnClickListener {
+            val intent = Intent(activity, ClubEditRecruitmentActivity::class.java)
             startActivity(intent)
         }
 
@@ -94,6 +94,10 @@ class ClubMyPageFragment : Fragment(), ClubGetResult{
         crewMasterEmail = data.crewMasterEmail
         crewSubEmail = data.crewSubEmail
         profile = data.crew_profile
+
+        Glide.with(this).load(data.crew_profile)
+            .circleCrop()
+            .into(binding.imgProfile)
     }
 
     override fun clubGetFailure(code: Int) {
