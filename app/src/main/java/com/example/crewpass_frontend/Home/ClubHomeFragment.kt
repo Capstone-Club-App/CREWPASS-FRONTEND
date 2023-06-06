@@ -77,6 +77,7 @@ class ClubHomeFragment:Fragment(), RecruitmentGetResult, RecruitmentGetAllResult
 
     fun initRecyclerView_my(result : ArrayList<RecruitmentData>){
         if (result.size != 0){
+            binding.txtRecruitmentNone.visibility = View.INVISIBLE
             announcementRVAdapter = ClubRecruitmentRVAdapter(result)
             binding.myRecruitmentRv.adapter = announcementRVAdapter
             binding.myRecruitmentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -129,8 +130,10 @@ class ClubHomeFragment:Fragment(), RecruitmentGetResult, RecruitmentGetAllResult
     ) {
         val size = data.size
         Log.d("동아리 모집글 정보 불러오기 성공", "size : $size")
-        if (data.size != 0)
+        if (data.size != 0) {
+            binding.txtRecruitmentNone.visibility = View.INVISIBLE
             initRecyclerView_recent(data)
+        }
         else
             binding.txtRecruitmentTotalNone.visibility = View.VISIBLE
     }

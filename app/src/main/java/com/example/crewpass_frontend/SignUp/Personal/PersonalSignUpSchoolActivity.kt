@@ -21,7 +21,7 @@ import java.io.File
 
 class PersonalSignUpSchoolActivity : AppCompatActivity(), FindSchoolDialog.CustomDialogInterface, SignUpResult {
     lateinit var binding: ActivityPersonalSignupSchoolBinding
-
+    lateinit var file: File
     var personal_name = ""
     var personal_id = ""
     var personal_passwd = ""
@@ -63,7 +63,11 @@ class PersonalSignUpSchoolActivity : AppCompatActivity(), FindSchoolDialog.Custo
 
         var body : MultipartBody.Part? = null
 
-        val file = File(absolutelyPath(profile, this))
+        if(profile.toString().substring(0 until 16).equals("android.resource")){
+            file = File("res/drawable/img_basic_profile.jpg")
+        }else{
+            file = File(absolutelyPath(profile, this))
+        }
 
         val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
         body = MultipartBody.Part.createFormData("profile", file.name, requestFile)

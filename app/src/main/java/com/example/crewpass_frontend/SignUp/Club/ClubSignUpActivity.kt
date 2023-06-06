@@ -1,6 +1,7 @@
 package com.example.crewpass_frontend.SignUp.Club
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -19,6 +20,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.Retrofit.Club.SignUp.CheckDuplicateCrewIDResult
 import com.example.crewpass_frontend.Retrofit.Club.SignUp.CheckDuplicateCrewNameResult
 import com.example.crewpass_frontend.Retrofit.Club.SignUp.SignUpService
@@ -83,7 +85,11 @@ class ClubSignUpActivity : AppCompatActivity(), CheckDuplicateCrewNameResult, Ch
             intent.putExtra("club_name", binding.edittextName.text.toString())
             intent.putExtra("club_id", binding.edittextId.text.toString())
             intent.putExtra("club_passwd", binding.edittextPassword.text.toString())
-            intent.putExtra("profile", profile_uri)
+            if(profile_uri == null){
+                profile_uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.img_basic_profile);
+            }else{
+                intent.putExtra("profile", profile_uri)
+            }
 
             startActivity(intent)
             overridePendingTransition(0,0)

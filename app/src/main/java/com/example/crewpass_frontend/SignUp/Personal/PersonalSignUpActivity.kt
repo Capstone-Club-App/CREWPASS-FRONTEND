@@ -82,7 +82,11 @@ class PersonalSignUpActivity : AppCompatActivity(), CheckDuplicateIDResult, Chec
             intent.putExtra("personal_email", binding.edittextEmail.text.toString())
             intent.putExtra("personal_id", binding.edittextId.text.toString())
             intent.putExtra("personal_passwd", binding.edittextPassword.text.toString())
-            intent.putExtra("profile", profile_uri)
+            if(profile_uri == null){
+                profile_uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.img_basic_profile);
+            }else{
+                intent.putExtra("profile", profile_uri)
+            }
 
             startActivity(intent)
             overridePendingTransition(0,0)
