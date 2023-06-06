@@ -64,7 +64,9 @@ class RecruitmentDetailActivity : AppCompatActivity(), RecruitmentGetDetailResul
         binding.txtDeadlineTime.text = time
 
         binding.edittextTitle.text = data.title
-        binding.edittextContent.text = Html.fromHtml(data.content)
+
+        val content = data.content.replace("\\n", "\n")
+        binding.edittextContent.text = content
 
         question_id = data.question_id
     }

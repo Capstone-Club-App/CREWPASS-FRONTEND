@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.crewpass_frontend.Login.logined_id
 import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationData
 import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationGetResult
 import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationService
@@ -17,6 +18,7 @@ class ApplicationDetailActivity: AppCompatActivity(), ApplicationGetResult {
         setContentView(binding.root)
 
         val application_id = intent.getIntExtra("application_id", -1)
+        Log.d("user : ${logined_id}, app : ${application_id}", "")
         if(application_id != -1)
             getApplicationDetail(application_id)
 

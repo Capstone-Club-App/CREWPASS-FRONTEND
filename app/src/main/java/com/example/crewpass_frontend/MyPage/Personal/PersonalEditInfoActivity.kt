@@ -37,6 +37,7 @@ class PersonalEditInfoActivity : AppCompatActivity(), PersonalPutResult {
 
         personalService = PersonalService()
         Glide.with(this).load(intent.getStringExtra("profile"))
+            .centerCrop()
             .into(binding.profileImg)
         binding.edittextId.setText(intent.getStringExtra("userLoginId"))
         binding.edittextPassword.setText(intent.getStringExtra("userPw"))

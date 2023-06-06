@@ -44,6 +44,15 @@ class ClubEditInfoActivity : AppCompatActivity(), ClubPutResult {
         binding = ActivityClubEditInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Glide.with(this).load(intent.getStringExtra("profile"))
+            .centerCrop()
+            .into(binding.profileImg)
+        binding.edittextId.setText(intent.getStringExtra("crewLoginId"))
+        binding.edittextPassword.setText(intent.getStringExtra("crewPw"))
+        binding.edittextName.setText(intent.getStringExtra("crewName"))
+        binding.edittextChairman.setText(intent.getStringExtra("crewMasterEmail"))
+        binding.edittextViceChairman.setText(intent.getStringExtra("crewSubEmail"))
+
         fieldMap = hashMapOf(
             "문화,예술,교양" to binding.btnAllRegion,
             "봉사,사회활동" to binding.btnVolunteer,
@@ -93,16 +102,6 @@ class ClubEditInfoActivity : AppCompatActivity(), ClubPutResult {
             if(i.key.equals(field2_key))
                 i.value.isSelected = true
         }
-
-
-        Glide.with(this).load(intent.getStringExtra("profile"))
-            .into(binding.profileImg)
-        binding.edittextId.setText(intent.getStringExtra("crewLoginId"))
-        binding.edittextPassword.setText(intent.getStringExtra("crewPw"))
-        binding.edittextName.setText(intent.getStringExtra("crewName"))
-        binding.edittextChairman.setText(intent.getStringExtra("crewMasterEmail"))
-        binding.edittextViceChairman.setText(intent.getStringExtra("crewSubEmail"))
-
 
         setRegion()
         setField()

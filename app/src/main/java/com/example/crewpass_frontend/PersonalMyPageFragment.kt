@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.Login.logined_id
 import com.example.crewpass_frontend.MyPage.Personal.PersonalEditInfoActivity
 import com.example.crewpass_frontend.MyPage.Personal.PersonalScrapActivity
@@ -78,6 +79,10 @@ class PersonalMyPageFragment : Fragment(), PersonalGetResult{
         job = data.job
         school = data.school
         profile = data.userProfile
+
+        Glide.with(this).load(data.userProfile)
+            .circleCrop()
+            .into(binding.imgProfile)
     }
 
     override fun personalGetFailure(code: Int) {
