@@ -33,6 +33,12 @@ android {
     buildFeatures{
         viewBinding = true
     }
+    signingConfigs{
+        release{
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
 }
 
 dependencies {
