@@ -45,7 +45,7 @@ class AIApplicationRVAdapter (private val application_list: ArrayList<Applicatio
         holder.bind(application_list[position])
 
         holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(items[position])
+            itemClickListener.onItemClick(application_list[position])
             notifyItemChanged(position)
         }
     }
