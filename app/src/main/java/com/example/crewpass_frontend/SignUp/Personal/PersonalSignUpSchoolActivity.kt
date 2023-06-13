@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.Retrofit.Personal.SignUp.SignUpResult
 import com.example.crewpass_frontend.Retrofit.Personal.SignUp.SignUpService
@@ -49,7 +50,15 @@ class PersonalSignUpSchoolActivity : AppCompatActivity(), FindSchoolDialog.Custo
         }
 
         binding.btnNext.setOnClickListener {
-            signUp(profile)
+            if (binding.edittextSchool.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "학교를 선택해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                signUp(profile)
+            }
+        }
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
         }
 
     }

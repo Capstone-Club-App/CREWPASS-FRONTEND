@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.system.StructCmsghdr
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crewpass_frontend.Data.Application
@@ -104,7 +105,7 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
         }
         userId = userId.substring(0, userId.length - 2)
         val msg = binding.edittextPass.text.toString()
-        Log.d("msg : $msg", "")
+        Log.d("msg : $msg,  userId : ${userId}", "")
 
         val applicationService = ApplicationService()
         applicationService.setPassNpassResult(this)
@@ -118,6 +119,7 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
             userId += it + ", "
         }
         userId = userId.substring(0, userId.length - 2)
+
         var msg = binding.edittextFail.text.toString()
 
         val applicationService = ApplicationService()
@@ -145,39 +147,41 @@ class CheckApplicationActivity : AppCompatActivity(), ApplicationGetResult, Pass
 
     override fun passNpassSuccess(code: Int) {
         Log.d("합불통보 성공", "")
-        clubApplicationRVAdapter.checkPass(check_list)
-
-        val layoutManager = binding.announcementListRv.layoutManager as LinearLayoutManager
-        val adapter = binding.announcementListRv.adapter as ClubApplicationRVAdapter
-
-        val itemCount = adapter.itemCount
-        for(position in 0 until itemCount){
-            val viewHolder =
-                binding.announcementListRv.findViewHolderForAdapterPosition(position) as ClubApplicationRVAdapter.ViewHolder
-            if(viewHolder != null){
-                if(pass_npass.equals("pass")){
-                    for(pos in clubApplicationRVAdapter.position_list){
-                        if (viewHolder.adapterPosition == pos){
-                            viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
-                            viewHolder.binding.itemTxtPass.visibility = View.VISIBLE
-                        }
-                    }
-//                    if(check_list.contains(application_list[position].user_id.toString())) {
-//                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
-//                        viewHolder.binding.itemTxtPass.visibility = View.VISIBLE
+        Toast.makeText(this, "메세지 전송이 완료되었습니다.", Toast.LENGTH_LONG).show()
+//        clubApplicationRVAdapter.checkPass(check_list)
+//
+//        val layoutManager = binding.announcementListRv.layoutManager as LinearLayoutManager
+//        val adapter = binding.announcementListRv.adapter as ClubApplicationRVAdapter
+//
+//        val itemCount = adapter.itemCount
+//        for(position in 0 until itemCount){
+//            val viewHolder =
+//                binding.announcementListRv.findViewHolderForAdapterPosition(position) as ClubApplicationRVAdapter.ViewHolder
+//            if(viewHolder != null){
+//                if(pass_npass.equals("pass")){
+//                    for(pos in clubApplicationRVAdapter.position_list){
+//                        if (viewHolder.adapterPosition == pos){
+//                            viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
+//                            viewHolder.binding.itemTxtPass.visibility = View.VISIBLE
+//                        }
 //                    }
-                }
-                else{
-                    if(!check_list.contains(application_list[position].user_id.toString())) {
-                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
-                        viewHolder.binding.itemTxtNpass.visibility = View.VISIBLE
-                    }
-                }
-            }
-        }
+////                    if(check_list.contains(application_list[position].user_id.toString())) {
+////                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
+////                        viewHolder.binding.itemTxtPass.visibility = View.VISIBLE
+////                    }
+//                }
+//                else{
+//                    if(!check_list.contains(application_list[position].user_id.toString())) {
+//                        viewHolder.binding.itemCheckBox.visibility = View.INVISIBLE
+//                        viewHolder.binding.itemTxtNpass.visibility = View.VISIBLE
+//                    }
+//                }
+//            }
+//        }
     }
 
     override fun passNpassFailure(code: Int) {
+        Toast.makeText(this, "메세지 전송에 실패하였습니다.", Toast.LENGTH_LONG).show()
         Log.d("합불통보 실패", "")
     }
 }

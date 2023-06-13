@@ -1,13 +1,15 @@
 package com.example.crewpass_frontend.AI.Personal
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.Retrofit.Personal.Application.Application
 import com.example.crewpass_frontend.Timestamp_to_SDF
 import com.example.crewpass_frontend.databinding.ItemPersonalApplicationCheckboxBinding
 
-class AIApplicationRVAdapter (private val application_list: ArrayList<Application>) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
+class AIApplicationRVAdapter (private val application_list: ArrayList<Application>, private val context: Context) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
 
     private var items : List<Application> = ArrayList()
     var application_id_selected = -1
@@ -50,6 +52,10 @@ class AIApplicationRVAdapter (private val application_list: ArrayList<Applicatio
 
             val timestampToSdf = Timestamp_to_SDF()
             binding.itemDateTxt.text = timestampToSdf.convert(application.submit_time)
+
+            Glide.with(context).load(application.crew_profile)
+                .circleCrop()
+                .into(binding.itemProfileImg)
 
             binding.itemCheckBox.setOnClickListener {
                 mSelectedItem = adapterPosition

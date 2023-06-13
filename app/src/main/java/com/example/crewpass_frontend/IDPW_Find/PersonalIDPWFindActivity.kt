@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.Retrofit.Personal.FindPWID.*
 import com.example.crewpass_frontend.databinding.ActivityPersonalIdPwFindBinding
@@ -64,21 +65,53 @@ class PersonalIDPWFindActivity : AppCompatActivity(),
 
         // 아이디 찾기
         binding.btnSendNumber.setOnClickListener {
-            findIdSendEmail()
+            if(binding.edittextEmail.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                findIdSendEmail()
+            }
         }
 
         binding.btnAccept.setOnClickListener {
-            findId()
+            if(binding.edittextEmail.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                if(binding.edittextNumber.text.toString().trim().isEmpty()){
+                    Toast.makeText(this, "인증번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                }else {
+                    findId()
+                }
+            }
         }
 
 
         // 패스워드 찾기
         binding.btnSendNumberPw.setOnClickListener {
-            findPWSendEmail()
+            if(binding.edittextId.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                if(binding.edittextEmailPw.text.toString().trim().isEmpty()){
+                    Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                }else{
+                    findPWSendEmail()
+                }
+            }
         }
 
         binding.btnFindPw.setOnClickListener {
-            findPW()
+            if(binding.edittextId.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                if(binding.edittextEmailPw.text.toString().trim().isEmpty()){
+                    Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                }else{
+                    if(binding.edittextNumberPw.text.toString().trim().isEmpty()) {
+                        Toast.makeText(this, "인증번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    }else{
+                        findPW()
+                    }
+                }
+            }
         }
 
 
@@ -93,11 +126,13 @@ class PersonalIDPWFindActivity : AppCompatActivity(),
     }
 
     override fun findIdEmailSuccess(code: Int, data: ResultEmail) {
+        Toast.makeText(this, "인증번호가 전송되었습니다. 이메일을 확인해주세요.", Toast.LENGTH_SHORT).show()
         Log.d("certificateNumberGet : ${data.certificateNumb}", "")
         certificateNumberGet = data.certificateNumb
     }
 
     override fun findIdEmailFailure(code: Int) {
+        Toast.makeText(this, "인증번호가 전송에 실패하였습니다. 정확한 정보를 입력했는지 확인해주시길 바랍니다.", Toast.LENGTH_SHORT).show()
         Log.d("아이디 이메일 인증번호 전송 실패", "")
     }
 
@@ -120,6 +155,7 @@ class PersonalIDPWFindActivity : AppCompatActivity(),
     }
 
     override fun findIdNumbFailure(code: Int) {
+        Toast.makeText(this, "인증번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
         Log.d("아이디 찾기 실패", "")
     }
 
@@ -133,10 +169,12 @@ class PersonalIDPWFindActivity : AppCompatActivity(),
     }
 
     override fun findIdPWSuccess(code: Int, data: ResultEmail) {
+        Toast.makeText(this, "인증번호가 전송되었습니다. 이메일을 확인해주세요.", Toast.LENGTH_SHORT).show()
         certificateNumberGet = data.certificateNumb
     }
 
     override fun findIdPWFailure(code: Int) {
+        Toast.makeText(this, "인증번호가 전송에 실패하였습니다. 정확한 정보를 입력했는지 확인해주시길 바랍니다.", Toast.LENGTH_SHORT).show()
         Log.d("비밀번호 이메일 인증번호 전송 실패", "")
     }
 
@@ -159,6 +197,7 @@ class PersonalIDPWFindActivity : AppCompatActivity(),
     }
 
     override fun findNumbPWFailure(code: Int) {
+        Toast.makeText(this, "인증번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
         Log.d("비밀번호 찾기 실패", "")
     }
 

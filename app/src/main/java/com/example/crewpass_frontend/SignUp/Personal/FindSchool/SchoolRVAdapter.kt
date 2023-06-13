@@ -37,10 +37,10 @@ class SchoolRVAdapter () : RecyclerView.Adapter<SchoolRVAdapter.ViewHolder>() {
     // view에 내용 입력
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
-        holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(items[position])
-            notifyItemChanged(position)
-        }
+//        holder.itemView.setOnClickListener {
+//            itemClickListener.onItemClick(items[position])
+//            notifyItemChanged(position)
+//        }
     }
 
     // 레이아웃 내 view 연결

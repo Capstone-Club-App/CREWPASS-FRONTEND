@@ -39,7 +39,7 @@ class ClubRecruitmentListActivity : AppCompatActivity(), RecruitmentGetResult {
     fun initActionBar() {
 
             binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
-            binding.innerPageTop.appbarPageNameLeftTv.text = "최신순"
+            binding.innerPageTop.appbarPageNameLeftTv.text = "게시한 모집글"
             binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
 
     }

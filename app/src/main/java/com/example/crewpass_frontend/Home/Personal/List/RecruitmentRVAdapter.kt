@@ -6,6 +6,7 @@ import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.R
 import com.example.crewpass_frontend.Retrofit.Personal.Scrap.getResult
 import com.example.crewpass_frontend.databinding.ItemAnnouncementPersonalBinding
@@ -74,6 +75,20 @@ class RecruitmentRVAdapter (private val recruitment_list: ArrayList<getResult>)
             binding.itemAnnounceDetail.text = recruitment.crew_name
             binding.itemAnnounceTitle.text = recruitment.title
             binding.itemDayTxt.text = recruitment.d_day.toString()
+
+            var hashTagList = ArrayList<String>()
+            hashTagList.add(recruitment.field1)
+            if(!recruitment.field2.equals("null"))
+                hashTagList.add(recruitment.field2)
+
+            var hashString = ""
+            hashTagList.forEach {
+                hashString += "#$it "
+            }
+
+            Glide.with(context).load(recruitment.crew_profile)
+                .circleCrop()
+                .into(binding.profileImg)
         }
 
 

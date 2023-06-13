@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.crewpass_frontend.Login.logined_id
@@ -95,9 +96,36 @@ class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, Questi
         setupSpinnerHandler()
 
         binding.btnSubmit.setOnClickListener {
-            postRecruitment(image!!)
+            if (binding.edittextQuestion1.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "질문1을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                if(binding.edittextQuestion2.text.toString().trim().isEmpty()){
+                    Toast.makeText(this, "질문2를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                }else{
+                    if(binding.edittextQuestion3.text.toString().trim().isEmpty()){
+                        Toast.makeText(this, "질문3을 입력해주세요.", android.widget.Toast.LENGTH_SHORT).show()
+                    }else{
+                        if(binding.edittextQuestion4.text.toString().trim().isEmpty()){
+                            Toast.makeText(this, "질문4를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                        }else{
+                            if(binding.edittextQuestion5.visibility == View.VISIBLE && binding.edittextQuestion5.text.toString().trim().isEmpty()){
+                                Toast.makeText(this, "질문5를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                            }else{
+                                if(binding.edittextQuestion6.visibility == View.VISIBLE && binding.edittextQuestion6.text.toString().trim().isEmpty()){
+                                    Toast.makeText(this, "질문6을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                                }else{
+                                    if(binding.edittextQuestion7.visibility == View.VISIBLE && binding.edittextQuestion7.text.toString().trim().isEmpty()){
+                                        Toast.makeText(this, "질문7을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                                    }else{
+                                        postRecruitment(image!!)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-
     }
 
     private fun setupSpinnerText() {
@@ -322,6 +350,7 @@ class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, Questi
     override fun clubRecruitmentPostSuccess(code: Int, data: PostResult) {
         recruitment_id = data.recruitment_id
         Log.d("recruitment_id :", recruitment_id.toString())
+        Toast.makeText(this, "모집글 등록이 완료되었습니다. 잠시 후에 질문 등록이 완료됩니다.", Toast.LENGTH_SHORT).show()
         postQuestion()
     }
 
@@ -368,6 +397,7 @@ class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, Questi
 
     override fun questionPostSuccess(code: Int) {
         intent.putExtra("finish", "finish")
+        Toast.makeText(this, "질문 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
         setResult(RESULT_OK, intent)
         finish()
     }

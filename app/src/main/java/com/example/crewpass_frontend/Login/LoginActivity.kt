@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity(), MyCustomDialogInterface,
         // 로그인 버튼
         binding.btnLogin.setOnClickListener {
             if (club_clicked == false && personal_clicked == false) {
-                Toast.makeText(this, "로그인 타입을 선택해주세요(일반/동아리)", Toast.LENGTH_LONG)
+                Toast.makeText(this, "로그인 타입을 선택해주세요(일반/동아리)", Toast.LENGTH_LONG).show()
             } else {
                 if (string.equals("Personal")) {
                     val personalLoginService = PersonalLoginService()
@@ -114,7 +114,7 @@ class LoginActivity : AppCompatActivity(), MyCustomDialogInterface,
     override fun onbtnGotoMainClicked() {
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("Key", string)
-//        finish()
+        finish()
         startActivity(intent)
     }
 

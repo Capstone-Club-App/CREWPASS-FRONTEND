@@ -46,16 +46,13 @@ class ClubRecruitmentRVAdapter (private val recruitment_list: ArrayList<Recruitm
 
 
             var hashTagList = ArrayList<String>()
-            hashTagList.add(recruitment.region1)
-            if(!recruitment.region2.equals("null"))
-                hashTagList.add(recruitment.region2)
             hashTagList.add(recruitment.field1)
             if(!recruitment.field2.equals("null"))
                 hashTagList.add(recruitment.field2)
 
             var hashString = ""
             hashTagList.forEach {
-                hashString = "#$it "
+                hashString += "#$it "
             }
 
             binding.itemHashtags.text = hashString

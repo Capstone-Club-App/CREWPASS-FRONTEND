@@ -41,14 +41,14 @@ class ClubApplicationRVAdapter  (private val application_list: ArrayList<Applica
         }
         holder.binding.itemCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                check_list.add(application_list[position].application_id.toString())
+                check_list.add(application_list[position].user_id.toString())
                 Toast.makeText(
                     context,
                     "${application_list[position].user_name} 지원자 선택",
                     Toast.LENGTH_LONG
                 )
             } else {
-                check_list.remove(application_list[position].application_id.toString())
+                check_list.remove(application_list[position].user_id.toString())
             }
         }
     }

@@ -9,6 +9,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.util.Patterns
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.Data.SignUp_Club
 import com.example.crewpass_frontend.Retrofit.Club.SignUp.SignUpResult
@@ -53,7 +55,27 @@ class ClubSignUpEmailActivity : AppCompatActivity(), SignUpResult {
                 ", field1: ${field1}, field2: ${field2}")
 
         binding.btnNext.setOnClickListener {
-            signUp(profile)
+            if(binding.edittextChairman.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "회장의 이메일을 작성해주세요", Toast.LENGTH_SHORT).show()
+            }else{
+                if(!Patterns.EMAIL_ADDRESS.matcher(binding.edittextChairman.text.toString()).matches()){
+                    Toast.makeText(this, "회장 이메일이 형식에 맞지 않습니다.", Toast.LENGTH_SHORT).show()
+                }else{
+                    if(binding.edittextViceChairman.text.toString().trim().isEmpty()){
+                        Toast.makeText(this,"부회장의 이메일을 작성해주세요", Toast.LENGTH_SHORT).show()
+                    }else{
+                        if(!Patterns.EMAIL_ADDRESS.matcher(binding.edittextViceChairman.text.toString()).matches()){
+                            Toast.makeText(this, "부회장의 이메일이 형식에 맞지 않습니다.", Toast.LENGTH_SHORT).show()
+                        }else{
+                            signUp(profile)
+                        }
+                    }
+                }
+            }
+        }
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
         }
     }
 

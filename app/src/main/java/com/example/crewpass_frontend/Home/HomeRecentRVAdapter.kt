@@ -76,6 +76,18 @@ class HomeRecentRVAdapter (private val recruitment_list: ArrayList<Recruitment>,
                 notifyDataSetChanged()
             }
 
+            var hashTagList = ArrayList<String>()
+            hashTagList.add(recruitment.field1)
+            if(!recruitment.field2.equals("null"))
+                hashTagList.add(recruitment.field2)
+
+            var hashString = ""
+            hashTagList.forEach {
+                hashString += "#$it "
+            }
+
+            binding.itemHashtags.text = hashString
+
             Glide.with(context).load(recruitment.crew_profile)
                 .circleCrop()
                 .into(binding.profileImg)
