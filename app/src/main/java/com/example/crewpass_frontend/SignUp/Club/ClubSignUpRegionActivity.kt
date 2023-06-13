@@ -50,7 +50,7 @@ class ClubSignUpRegionActivity : AppCompatActivity() {
                     binding.btnJeju.isSelected = false
 
                     region_list.remove("서울")
-                    region_list.remove("경기")
+                    region_list.remove("경기도")
                     region_list.remove("강원도")
                     region_list.remove("충청남도")
                     region_list.remove("충청북도")
@@ -300,21 +300,29 @@ class ClubSignUpRegionActivity : AppCompatActivity() {
 
 
         binding.btnNext.setOnClickListener {
-            for(i in 0..region_list.size-1){
-                Log.d("region_list : ", i.toString() + ": " +region_list[i] )
+            if (region_list.size == 0){
+                Toast.makeText(this, "지역을 선택해주세요.(최소 1개, 최대 2개)", Toast.LENGTH_SHORT).show()
+            }else{
+                for(i in 0..region_list.size-1){
+                    Log.d("region_list : ", i.toString() + ": " +region_list[i] )
+                }
+                val intent = Intent(this, ClubSignUpFieldActivity::class.java)
+                intent.putExtra("club_name", club_name)
+                intent.putExtra("club_id", club_id)
+                intent.putExtra("club_passwd", club_passwd)
+                intent.putExtra("region1", region_list[0])
+                if(region_list.size != 1)
+                    intent.putExtra("region2", region_list[1])
+                else
+                    intent.putExtra("region2", "null")
+                intent.putExtra("profile", profile)
+                startActivity(intent)
+                overridePendingTransition(0,0)
             }
-            val intent = Intent(this, ClubSignUpFieldActivity::class.java)
-            intent.putExtra("club_name", club_name)
-            intent.putExtra("club_id", club_id)
-            intent.putExtra("club_passwd", club_passwd)
-            intent.putExtra("region1", region_list[0])
-            if(region_list.size != 1)
-                intent.putExtra("region2", region_list[1])
-            else
-                intent.putExtra("region2", "null")
-            intent.putExtra("profile", profile)
-            startActivity(intent)
-            overridePendingTransition(0,0)
+        }
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
         }
     }
 }

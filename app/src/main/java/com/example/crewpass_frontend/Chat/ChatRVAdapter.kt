@@ -115,6 +115,9 @@ class ChatRVAdapter(
                 content.setBackgroundResource(R.drawable.crew_chat_box)
                 name.setTextColor(Color.parseColor("#6DA4FE"))
                 profile.setBackgroundColor(Color.parseColor("#6DA4FE"))
+//                Glide.with(context).load(chat)
+//                    .circleCrop()
+//                    .into(profile)
             }
         }
 

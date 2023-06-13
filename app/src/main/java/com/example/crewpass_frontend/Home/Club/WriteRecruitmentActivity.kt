@@ -53,17 +53,29 @@ class WriteRecruitmentActivity: AppCompatActivity() {
         }
 
         binding.btnWriteQuestion.setOnClickListener {
-            val intent = Intent(this, WriteQuestionActivity::class.java)
+            if(binding.edittextTitle.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "제목을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                if (binding.edittextContent.text.toString().trim().isEmpty()){
+                    Toast.makeText(this, "상세 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                }else{
+                    if(picture == null){
+                        Toast.makeText(this, "이미지를 업로드해주세요.", Toast.LENGTH_SHORT).show()
+                    }else{
+                        val intent = Intent(this, WriteQuestionActivity::class.java)
+                        val time = binding.txtDeadlineDate.text.toString() + " "+binding.txtDeadlineTime.text.toString() + ":30"
 
-            val time = binding.txtDeadlineDate.text.toString() + " "+binding.txtDeadlineTime.text.toString() + ":30"
+                        intent.putExtra("isDeleted", 0)
+                        intent.putExtra("title", binding.edittextTitle.text.toString())
+                        intent.putExtra("deadline", time)
+                        intent.putExtra("content", binding.edittextContent.text.toString())
+                        intent.putExtra("image", image_uri)
 
-            intent.putExtra("isDeleted", 0)
-            intent.putExtra("title", binding.edittextTitle.text.toString())
-            intent.putExtra("deadline", time)
-            intent.putExtra("content", binding.edittextContent.text.toString())
-            intent.putExtra("image", image_uri)
+                        startActivityForResult(intent, RESULT_FINISH)
+                    }
+                }
+            }
 
-            startActivityForResult(intent, RESULT_FINISH)
         }
     }
 
@@ -141,7 +153,7 @@ class WriteRecruitmentActivity: AppCompatActivity() {
                 Glide.with(this).load(imagePath)
                     .into(binding.imageViewImage)
             }
-            else if(resultCode == 300)
+            else if(resultCode == RESULT_FINISH)
                 finish()
         }
     }

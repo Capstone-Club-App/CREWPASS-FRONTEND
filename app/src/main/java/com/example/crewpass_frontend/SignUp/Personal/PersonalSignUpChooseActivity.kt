@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crewpass_frontend.databinding.ActivityPersonalSignupChooseBinding
 
@@ -91,41 +92,47 @@ class PersonalSignUpChooseActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            if (adult_isSelected){ // 성인 선택
-                val intent = Intent(this, PersonalSignUpDoneActivity::class.java)
+            if(gubun.equals("")){
+                Toast.makeText(this, "직업을 선택해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                if (adult_isSelected){ // 성인 선택
+                    val intent = Intent(this, PersonalSignUpDoneActivity::class.java)
 
-                intent.putExtra("personal_name", personal_name)
-                intent.putExtra("personal_email", personal_email)
-                intent.putExtra("personal_id", personal_id)
-                intent.putExtra("personal_passwd", personal_passwd)
-                intent.putExtra("profile", profile)
-                intent.putExtra("job", "성인")
+                    intent.putExtra("personal_name", personal_name)
+                    intent.putExtra("personal_email", personal_email)
+                    intent.putExtra("personal_id", personal_id)
+                    intent.putExtra("personal_passwd", personal_passwd)
+                    intent.putExtra("profile", profile)
+                    intent.putExtra("job", "성인")
 
-                startActivity(intent)
-                overridePendingTransition(0,0)
-            }
-            else{
-                val intent = Intent(this, PersonalSignUpSchoolActivity::class.java)
-                intent.putExtra("gubun", gubun)
+                    startActivity(intent)
+                    overridePendingTransition(0,0)
+                }
+                else{
+                    val intent = Intent(this, PersonalSignUpSchoolActivity::class.java)
+                    intent.putExtra("gubun", gubun)
 
-                intent.putExtra("personal_name", personal_name)
-                intent.putExtra("personal_email", personal_email)
-                intent.putExtra("personal_id", personal_id)
-                intent.putExtra("personal_passwd", personal_passwd)
-                intent.putExtra("profile", profile)
+                    intent.putExtra("personal_name", personal_name)
+                    intent.putExtra("personal_email", personal_email)
+                    intent.putExtra("personal_id", personal_id)
+                    intent.putExtra("personal_passwd", personal_passwd)
+                    intent.putExtra("profile", profile)
 
-                if(mid_isSelected)
-                    intent.putExtra("job", "중학생")
-                else if(high_isSelected)
-                    intent.putExtra("job", "고등학생")
-                else
-                    intent.putExtra("job", "대학생")
+                    if(mid_isSelected)
+                        intent.putExtra("job", "중학생")
+                    else if(high_isSelected)
+                        intent.putExtra("job", "고등학생")
+                    else
+                        intent.putExtra("job", "대학생")
 
-                startActivity(intent)
-                overridePendingTransition(0,0)
+                    startActivity(intent)
+                    overridePendingTransition(0,0)
+                }
             }
         }
-
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
 
     }
 }

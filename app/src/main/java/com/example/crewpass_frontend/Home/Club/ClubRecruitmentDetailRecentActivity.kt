@@ -51,6 +51,8 @@ class ClubRecruitmentDetailRecentActivity: AppCompatActivity(), RecruitmentGetDe
         binding.edittextTitle.text = data.title
         val content = data.content.replace("\\n", "\n")
         binding.edittextContent.text = content
+
+        Glide.with(this).load(data.image).into(binding.imageViewImage)
     }
 
     override fun recruitmentGetDetailFailure(code: Int) {

@@ -62,5 +62,5 @@ data class DetailResult(
     @SerializedName(value = "region2") val region2 : String,
     @SerializedName(value = "region1") val region1 : String,
     @SerializedName(value = "deadline") val deadLine : Timestamp,
-    @SerializedName(value = "image") val image : String,
+    @SerializedName(value = "image") val image : String
 )

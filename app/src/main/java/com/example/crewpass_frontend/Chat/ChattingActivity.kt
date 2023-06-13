@@ -80,6 +80,7 @@ class ChattingActivity : AppCompatActivity(), PersonalGetResult, ClubGetResult, 
 
         // 현재 로그인 유저 정보 불러오기
         val status = intent.getStringExtra("status")!! // 동아리인지 회원인지 가져오기
+        Log.d("status : ", status)
         login_status = status
         if (status.equals("Club")) {
             val clubService = ClubService()
@@ -89,6 +90,17 @@ class ChattingActivity : AppCompatActivity(), PersonalGetResult, ClubGetResult, 
             val personalService = PersonalService()
             personalService.setPersonalGetResult(this)
             personalService.getPersonal(logined_id.toString())
+        }
+
+        // lastChat 갱신
+        if (login_status.equals("Club")) {
+            val chatService = ChatService()
+            chatService.setPutLastChatClubResult(this)
+            chatService.putLastChatClub(logined_id, chatRoom_id_get)
+        } else {
+            val chatService = ChatService()
+            chatService.setPutLastChatPersonalResult(this)
+            chatService.putLastChatPersonal(logined_id, chatRoom_id_get)
         }
 
         // 채팅방 정보 가져오기
@@ -319,16 +331,16 @@ class ChattingActivity : AppCompatActivity(), PersonalGetResult, ClubGetResult, 
             chatRVAdapter.notifyDataSetChanged()
         }
 
-        // lastChat 갱신
-        if (login_status.equals("Club")) {
-            val chatService = ChatService()
-            chatService.setPutLastChatClubResult(this)
-            chatService.putLastChatClub(logined_id, chatRoom_id_get)
-        } else {
-            val chatService = ChatService()
-            chatService.setPutLastChatPersonalResult(this)
-            chatService.putLastChatPersonal(logined_id, chatRoom_id_get)
-        }
+//        // lastChat 갱신
+//        if (login_status.equals("Club")) {
+//            val chatService = ChatService()
+//            chatService.setPutLastChatClubResult(this)
+//            chatService.putLastChatClub(logined_id, chatRoom_id_get)
+//        } else {
+//            val chatService = ChatService()
+//            chatService.setPutLastChatPersonalResult(this)
+//            chatService.putLastChatPersonal(logined_id, chatRoom_id_get)
+//        }
     }
 
     // 로그인 계정 정보 가져오기
@@ -401,17 +413,6 @@ class ChattingActivity : AppCompatActivity(), PersonalGetResult, ClubGetResult, 
             }
         }
         chatRVAdapter.notifyDataSetChanged()
-
-        // lastChat 갱신
-        if (login_status.equals("Club")) {
-            val chatService = ChatService()
-            chatService.setPutLastChatClubResult(this)
-            chatService.putLastChatClub(crewId_get, chatRoom_id_get)
-        } else {
-            val chatService = ChatService()
-            chatService.setPutLastChatPersonalResult(this)
-            chatService.putLastChatPersonal(crewId_get, chatRoom_id_get)
-        }
     }
 
     override fun getChatAllFailure(code: Int) {

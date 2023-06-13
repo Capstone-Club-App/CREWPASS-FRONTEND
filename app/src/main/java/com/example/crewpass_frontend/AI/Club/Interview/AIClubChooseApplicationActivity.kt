@@ -62,7 +62,7 @@ class AIClubChooseApplicationActivity : AppCompatActivity(), ApplicationGetResul
     }
 
     fun initRecyclerView(data: ArrayList<ApplicationData>) {
-        aiApplicationRVAdapter = AIApplicationRVAdapter(data)
+        aiApplicationRVAdapter = AIApplicationRVAdapter(data, this)
         binding.announcementListRv.adapter = aiApplicationRVAdapter
         binding.announcementListRv.layoutManager = LinearLayoutManager(context)
         aiApplicationRVAdapter.setItemClickListener(object :

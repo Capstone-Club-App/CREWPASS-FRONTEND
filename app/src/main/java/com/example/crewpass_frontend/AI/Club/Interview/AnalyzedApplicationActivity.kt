@@ -72,7 +72,7 @@ class AnalyzedApplicationActivity: AppCompatActivity(), AnalyzeApplicationResult
     }
 
     fun initActionBar() {
-        binding.innerPageTop.appbarBackBtn.visibility = View.INVISIBLE
+        binding.innerPageTop.appbarBackBtn.visibility = View.VISIBLE
         binding.innerPageTop.appbarPageNameLeftTv.visibility = View.VISIBLE
         binding.innerPageTop.appbarPageNameLeftTv.text = "지원서 분석 결과"
 

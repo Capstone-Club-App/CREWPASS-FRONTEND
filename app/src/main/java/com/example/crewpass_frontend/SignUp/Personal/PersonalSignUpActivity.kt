@@ -13,7 +13,9 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.util.Patterns
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.Login.logined_id
@@ -22,6 +24,7 @@ import com.example.crewpass_frontend.Retrofit.Personal.SignUp.CheckDuplicateEmai
 import com.example.crewpass_frontend.Retrofit.Personal.SignUp.CheckDuplicateIDResult
 import com.example.crewpass_frontend.Retrofit.Personal.SignUp.SignUpResult
 import com.example.crewpass_frontend.Retrofit.Personal.SignUp.SignUpService
+import com.example.crewpass_frontend.SignUp.Club.ClubSignUpRegionActivity
 import com.example.crewpass_frontend.databinding.ActivityPersonalSignupBinding
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -52,9 +55,13 @@ class PersonalSignUpActivity : AppCompatActivity(), CheckDuplicateIDResult, Chec
         }
 
         binding.btnEmailCompare.setOnClickListener {
-            val signUpService = SignUpService()
-            signUpService.setCheckDuplicateEmailResult(this)
-            signUpService.checkDuplicateEmail(binding.edittextEmail.text.toString())
+            if(!Patterns.EMAIL_ADDRESS.matcher(binding.edittextEmail.text.toString()).matches()){
+                Toast.makeText(this, "이메일이 형식에 맞지 않습니다.", Toast.LENGTH_SHORT).show()
+            }else{
+                val signUpService = SignUpService()
+                signUpService.setCheckDuplicateEmailResult(this)
+                signUpService.checkDuplicateEmail(binding.edittextEmail.text.toString())
+            }
         }
 
 
@@ -77,19 +84,66 @@ class PersonalSignUpActivity : AppCompatActivity(), CheckDuplicateIDResult, Chec
         })
 
         binding.btnNext.setOnClickListener {
-            val intent = Intent(this, PersonalSignUpChooseActivity::class.java)
-            intent.putExtra("personal_name", binding.edittextName.text.toString())
-            intent.putExtra("personal_email", binding.edittextEmail.text.toString())
-            intent.putExtra("personal_id", binding.edittextId.text.toString())
-            intent.putExtra("personal_passwd", binding.edittextPassword.text.toString())
-            if(profile_uri == null){
-                profile_uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.img_basic_profile);
-            }else{
-                intent.putExtra("profile", profile_uri)
-            }
+            if(picture == null){
+                Toast.makeText(this, "사진을 선택해주세요.", Toast.LENGTH_SHORT).show()
+            }else {
+                if (binding.edittextName.text.toString().trim().isEmpty()){
+                    Toast.makeText(this, "회원 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                } else{
+                    if(binding.edittextId.text.toString().trim().isEmpty()){
+                        Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    }else{
+                        if(binding.txtIdUnusable.visibility == View.INVISIBLE && binding.txtIdUsable.visibility == View.INVISIBLE){
+                            Toast.makeText(this, "아이디 중복확인검사를 진행해주세요.", Toast.LENGTH_SHORT).show()
+                        }else{
+                            if(binding.txtIdUnusable.visibility == View.VISIBLE){
+                                Toast.makeText(this, "중복된 아이디입니다. 다른 아이디로 변경해주세요.", Toast.LENGTH_SHORT).show()
+                            }else{
+                                if (binding.edittextPassword.text.toString().trim().isEmpty()){
+                                    Toast.makeText(this, "패스워드를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                                }else{
+                                    if(binding.edittextPasswordCheck.text.toString().trim().isEmpty()){
+                                        Toast.makeText(this, "패스워드 확인을 진행해주세요.", Toast.LENGTH_SHORT).show()
+                                    }else {
+                                        if (binding.txtPwNotCorrect.visibility == View.VISIBLE){
+                                            Toast.makeText(this, "패스워드가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                                        }else{
+                                            if (binding.edittextEmail.text.toString().trim().isEmpty()) {
+                                                Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT)
+                                                    .show()
+                                            } else {
+                                                if(binding.txtEmailUsable.visibility == View.INVISIBLE && binding.txtEmailUnusable.visibility == View.INVISIBLE){
+                                                    Toast.makeText(this, "이메일 중복확인검사를 진행해주세요.", Toast.LENGTH_SHORT).show()
+                                                }else{
+                                                    if(binding.txtEmailUnusable.visibility == View.VISIBLE){
+                                                        Toast.makeText(this, "중복된 이메일입니다. 다른 이메일로 변경해주세요.", Toast.LENGTH_SHORT).show()
+                                                    }else{
+                                                        val intent =
+                                                            Intent(this, PersonalSignUpChooseActivity::class.java)
+                                                        intent.putExtra("personal_name", binding.edittextName.text.toString())
+                                                        intent.putExtra("personal_email", binding.edittextEmail.text.toString())
+                                                        intent.putExtra("personal_id", binding.edittextId.text.toString())
+                                                        intent.putExtra("personal_passwd", binding.edittextPassword.text.toString())
+                                                        if (profile_uri == null) {
+                                                            profile_uri =
+                                                                Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.img_basic_profile);
+                                                        } else {
+                                                            intent.putExtra("profile", profile_uri)
+                                                        }
 
-            startActivity(intent)
-            overridePendingTransition(0,0)
+                                                        startActivity(intent)
+                                                        overridePendingTransition(0, 0)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     fun checkPassword():Boolean{

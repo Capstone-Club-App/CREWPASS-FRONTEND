@@ -74,8 +74,13 @@ class ChatRoomRVAdapter (private val chatRoom_list: ArrayList<ChatRoomData>, pri
                 val sendTime = data[data.count() - 1].sendTime.substring(11 until 16)
                 val hour = sendTime.substring(0 until 2)
                 val minute = sendTime.subSequence(3 until 5)
+
+//                val format = SimpleDateFormat("HH:mm")
+//                val time = System.currentTimeMillis()
+//                val time_to_timestamp = Timestamp(time)
+//                var hour = format.format(time_to_timestamp)
                 if(hour.toInt() > 12) {
-                    binding.itemDateTxt.text = "오후 ${hour.toInt() - 12}:${minute}"
+                    binding.itemDateTxt.text = "오후 ${hour.toInt()-12}:${minute}"
                 }
                 else
                     binding.itemDateTxt.text = "오전 ${hour}:${minute}"

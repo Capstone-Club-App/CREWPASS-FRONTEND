@@ -69,6 +69,8 @@ class RecruitmentDetailActivity : AppCompatActivity(), RecruitmentGetDetailResul
         binding.edittextContent.text = content
 
         question_id = data.question_id
+
+        Glide.with(this).load(data.image).into(binding.imageViewImage)
     }
 
     override fun recruitmentGetDetailFailure(code: Int) {

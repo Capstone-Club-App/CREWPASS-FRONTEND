@@ -178,20 +178,28 @@ class ClubSignUpFieldActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            val intent = Intent(this, ClubSignUpEmailActivity::class.java)
-            intent.putExtra("club_name", club_name)
-            intent.putExtra("club_id", club_id)
-            intent.putExtra("club_passwd", club_passwd)
-            intent.putExtra("region1", region1)
-            intent.putExtra("region2", region2)
-            intent.putExtra("field1", field_list[0])
-            if(field_list.size != 1)
-                intent.putExtra("field2", field_list[1])
-            else
-                intent.putExtra("field2", "null")
-            intent.putExtra("profile", profile)
-            startActivity(intent)
-            overridePendingTransition(0,0)
+            if(field_list.size == 0){
+                Toast.makeText(this, "분야를 선택해주세요(최소 1개, 최대 2개)", Toast.LENGTH_SHORT).show()
+            }else{
+                val intent = Intent(this, ClubSignUpEmailActivity::class.java)
+                intent.putExtra("club_name", club_name)
+                intent.putExtra("club_id", club_id)
+                intent.putExtra("club_passwd", club_passwd)
+                intent.putExtra("region1", region1)
+                intent.putExtra("region2", region2)
+                intent.putExtra("field1", field_list[0])
+                if(field_list.size != 1)
+                    intent.putExtra("field2", field_list[1])
+                else
+                    intent.putExtra("field2", "null")
+                intent.putExtra("profile", profile)
+                startActivity(intent)
+                overridePendingTransition(0,0)
+            }
+        }
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
         }
     }
 }

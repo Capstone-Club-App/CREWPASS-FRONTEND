@@ -14,7 +14,7 @@ class ClubIDPWFindActivity : AppCompatActivity(),
     lateinit var binding: ActivityClubIdPwFindBinding
     lateinit var findIDPWService: FindIDPWService
     var certificateNumberGet = -1
-    var id_clicked = false
+    var id_clicked = true
     var pw_clicked = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +63,31 @@ class ClubIDPWFindActivity : AppCompatActivity(),
 
         // 아이디 찾기
         binding.btnSendNumberId.setOnClickListener {
-            findIdSendEmail()
+            if (binding.edittextClubName.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "동아리명을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                if(binding.edittextEmailId.text.toString().trim().isEmpty()){
+                    Toast.makeText(this, "동아리 이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                }else{
+                    findIdSendEmail()
+                }
+            }
         }
 
         binding.btnFindId.setOnClickListener {
-            findId()
+            if (binding.edittextClubName.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "동아리명을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                if(binding.edittextEmailId.text.toString().trim().isEmpty()){
+                    Toast.makeText(this, "동아리 이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                }else{
+                    if (binding.edittextNumberId.text.toString().trim().isEmpty()){
+                        Toast.makeText(this, "전송된 인증번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    }else{
+                        findId()
+                    }
+                }
+            }
         }
 
 
@@ -96,10 +116,12 @@ class ClubIDPWFindActivity : AppCompatActivity(),
 
     override fun findIdEmailClubNameSuccess(code: Int, data: ResultEmail) {
         Log.d("certificateNumberGet : ${data.certificateNumb}", "")
+        Toast.makeText(this, "인증번호가 전송되었습니다. 이메일을 확인해주세요.", Toast.LENGTH_SHORT).show()
         certificateNumberGet = data.certificateNumb
     }
 
     override fun findIdEmailClubNameFailure(code: Int) {
+        Toast.makeText(this, "인증번호가 전송에 실패하였습니다. 정확한 정보를 입력했는지 확인해주시길 바랍니다.", Toast.LENGTH_SHORT).show()
         Log.d("아이디 이메일 인증번호 전송 실패", "")
     }
 
@@ -135,10 +157,12 @@ class ClubIDPWFindActivity : AppCompatActivity(),
     }
 
     override fun findIdPWSuccess(code: Int, data: ResultEmail) {
+        Toast.makeText(this, "인증번호가 전송되었습니다. 이메일을 확인해주세요.", Toast.LENGTH_SHORT).show()
         certificateNumberGet = data.certificateNumb
     }
 
     override fun findIdPWFailure(code: Int) {
+        Toast.makeText(this, "인증번호가 전송에 실패하였습니다. 정확한 정보를 입력했는지 확인해주시길 바랍니다.", Toast.LENGTH_SHORT).show()
         Log.d("비밀번호 이메일 인증번호 전송 실패", "")
     }
 
@@ -162,7 +186,7 @@ class ClubIDPWFindActivity : AppCompatActivity(),
 
     override fun findNumbPWFailure(code: Int) {
         Log.d("비밀번호 찾기 실패", "")
-        Toast.makeText(this, "인증번호가 맞지 않습니다", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "인증번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
     }
 
 }

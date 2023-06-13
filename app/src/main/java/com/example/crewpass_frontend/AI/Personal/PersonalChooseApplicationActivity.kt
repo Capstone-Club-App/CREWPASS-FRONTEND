@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crewpass_frontend.Login.logined_id
@@ -24,17 +25,21 @@ class PersonalChooseApplicationActivity:AppCompatActivity(), ApplicationGetListR
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
-
-        getApplicationList()
-
         binding = ActivityPersonalChooseAnnouncementBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        initActionBar()
 
         binding.btnNext.setOnClickListener {
             val intent = Intent(this, PersonalPrepareInterviewActivity::class.java)
             intent.putExtra("application_id", aiApplicationRVAdapter.application_id_selected)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getApplicationList()
     }
 
     fun getApplicationList(){
@@ -44,7 +49,7 @@ class PersonalChooseApplicationActivity:AppCompatActivity(), ApplicationGetListR
     }
 
     fun initRecyclerView(data : ArrayList<Application>) {
-        aiApplicationRVAdapter = AIApplicationRVAdapter(data)
+        aiApplicationRVAdapter = AIApplicationRVAdapter(data, this)
         binding.announcementListRv.adapter = aiApplicationRVAdapter
         binding.announcementListRv.layoutManager = LinearLayoutManager(context)
         aiApplicationRVAdapter.setItemClickListener(object :
@@ -56,6 +61,11 @@ class PersonalChooseApplicationActivity:AppCompatActivity(), ApplicationGetListR
             }
         })
 
+    }
+
+    fun initActionBar(){
+        binding.innerPageTop.appbarBackBtn.visibility = View.VISIBLE
+        binding.innerPageTop.appbarBackBtn.setOnClickListener{onBackPressed()}
     }
 
     override fun applicationGetListSuccess(

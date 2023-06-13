@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.Retrofit.Club.Application.ApplicationData
 import com.example.crewpass_frontend.Retrofit.FindSchool.Data
 import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationGetResult
@@ -13,7 +14,7 @@ import com.example.crewpass_frontend.Retrofit.Personal.Application.ApplicationSe
 import com.example.crewpass_frontend.Timestamp_to_SDF
 import com.example.crewpass_frontend.databinding.ItemClubApplicationCheckboxBinding
 
-class AIApplicationRVAdapter (private val application_list: ArrayList<ApplicationData>) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
+class AIApplicationRVAdapter (private val application_list: ArrayList<ApplicationData>, private val context: Context) : RecyclerView.Adapter<AIApplicationRVAdapter.ViewHolder>() {
 
     private var items : List<ApplicationData> = ArrayList()
     var user_name = ""
@@ -58,6 +59,10 @@ class AIApplicationRVAdapter (private val application_list: ArrayList<Applicatio
             val applicationService = ApplicationService()
             applicationService.setApplicationGetResult(this)
             applicationService.getApplication(application.application_id)
+
+            Glide.with(context).load(application.user_profile)
+                .circleCrop()
+                .into(binding.itemProfileImg)
 
             val timestampToSdf = Timestamp_to_SDF()
             binding.itemDateTxt.text = timestampToSdf.convert(application.submit_time)
