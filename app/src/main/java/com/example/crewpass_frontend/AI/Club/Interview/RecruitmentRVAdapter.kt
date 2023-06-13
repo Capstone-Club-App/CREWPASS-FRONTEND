@@ -42,7 +42,7 @@ class RecruitmentRVAdapter (private val recruitment_list: ArrayList<RecruitmentD
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(recruitment_list[position])
         holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(items[position])
+            itemClickListener.onItemClick(recruitment_list[position])
             notifyItemChanged(position)
         }
     }
