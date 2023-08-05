@@ -1,102 +1,713 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/whole_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/inner_page_top"
-        layout="@layout/acttionbar_inner_page_top"/>
-
-    <ImageView
-        android:id="@+id/img_shine"
-        android:layout_width="28dp"
-        android:layout_height="32dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inner_page_top"
-        app:layout_constraintEnd_toStartOf="@id/txt_crewpass_ai"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/img_shine"
-        app:layout_constraintHorizontal_chainStyle="packed"/>
-    <TextView
-        android:id="@+id/txt_crewpass_ai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CrewPass AI"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inner_page_top"
-        android:layout_marginTop="36dp"
-        app:layout_constraintStart_toEndOf="@id/img_shine"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/item_ai_btn_container"
-        android:layout_width="341dp"
-        android:layout_height="113dp"
-        android:background="@drawable/round_square_light_gray"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="145dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txt_announce"
-        android:text="선택하신 (활동분야) 동아리에서)\n자주 사용되는 면접 질문입니다."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@id/item_ai_btn_container"
-        app:layout_constraintEnd_toEndOf="@id/item_ai_btn_container"
-        app:layout_constraintTop_toTopOf="@id/item_ai_btn_container"
-        app:layout_constraintBottom_toBottomOf="@id/item_ai_btn_container"
-        />
+            <include
+                android:id="@+id/inner_page_top"
+                layout="@layout/acttionbar_inner_page_top"/>
 
-    <TextView
-        android:id="@+id/txt_question_predict"
-        android:text="면접 질문 추천"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/edittext_question"
-        app:layout_constraintTop_toBottomOf="@id/item_ai_btn_container"
-        android:layout_marginTop="30dp"
-        android:textStyle="bold"/>
+            <ImageView
+                android:id="@+id/img_shine"
+                android:layout_width="28dp"
+                android:layout_height="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inner_page_top"
+                app:layout_constraintEnd_toStartOf="@id/txt_crewpass_ai"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/img_shine"
+                app:layout_constraintHorizontal_chainStyle="packed"/>
+            <TextView
+                android:id="@+id/txt_crewpass_ai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CrewPass AI"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inner_page_top"
+                android:layout_marginTop="36dp"
+                app:layout_constraintStart_toEndOf="@id/img_shine"/>
+
+            <View
+                android:id="@+id/item_ai_btn_container"
+                android:layout_width="341dp"
+                android:layout_height="113dp"
+                android:background="@drawable/round_square_light_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="145dp"/>
+
+            <TextView
+                android:id="@+id/txt_announce1"
+                android:text="선택하신 지원서에 대한\n면접질문 추천과 모범답안입니다."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/item_ai_btn_container"
+                app:layout_constraintEnd_toEndOf="@id/item_ai_btn_container"
+                app:layout_constraintTop_toTopOf="@id/item_ai_btn_container"
+                app:layout_constraintBottom_toBottomOf="@id/item_ai_btn_container"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintVertical_chainStyle="packed"
+                />
 
 
-    <EditText
-        android:id="@+id/edittext_question"
-        android:layout_width="322dp"
-        android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="top"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_question_predict"
-        android:layout_marginTop="10dp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/item_ai_btn_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-    <!--다음-->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_done"
-        android:layout_width="284dp"
-        android:layout_height="39dp"
-        android:text="완료"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:background="@drawable/round_square_main_blue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="60dp"/>
+
+                <TextView
+                    android:id="@+id/txt_question_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/view_question_get1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="질문 1"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="60dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/view_question_get1"
+                    android:layout_width="321dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/txt_question_1"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/txt_question_1_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="예상 질문"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_question_1_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_1_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 추천된 예상질문 내용입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_1_quesiton"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_1_blue"
+                        android:layout_marginTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_1_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edittext_question_1_quesiton"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="모범답안"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_1_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_1_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 예상질문에 대한 모범답안입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_1_answer"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_1_blue"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+
+                <TextView
+                    android:id="@+id/txt_question_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/view_question_get2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="질문 2"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="60dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/view_question_get2"
+                    android:layout_width="321dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/txt_question_2"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/txt_question_2_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="예상 질문"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_question_2_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_2_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 추천된 예상질문 내용입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_2_quesiton"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_2_blue"
+                        android:layout_marginTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_2_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edittext_question_2_quesiton"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="모범답안"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_2_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_2_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 예상질문에 대한 모범답안입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_2_answer"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_2_blue"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+
+                <TextView
+                    android:id="@+id/txt_question_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/view_question_get3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="질문 3"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="60dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/view_question_get3"
+                    android:layout_width="321dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/txt_question_3"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/txt_question_3_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="예상 질문"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_question_3_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_3_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 추천된 예상질문 내용입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_3_quesiton"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_3_blue"
+                        android:layout_marginTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_3_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edittext_question_3_quesiton"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="모범답안"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_3_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_3_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 예상질문에 대한 모범답안입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_3_original"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_3_blue"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+
+                <TextView
+                    android:id="@+id/txt_question_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/view_question_get4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="질문 4"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="60dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/view_question_get4"
+                    android:layout_width="321dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/txt_question_4"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/txt_question_4_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="예상 질문"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_question_4_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_4_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 추천된 예상질문 내용입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_4_quesiton"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_4_blue"
+                        android:layout_marginTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_4_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edittext_question_4_quesiton"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="모범답안"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_4_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_4_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 예상질문에 대한 모범답안입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_4_answer"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_4_blue"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_question5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_question4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+
+                <TextView
+                    android:id="@+id/txt_question_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/view_question_get5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="질문 5"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="60dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/view_question_get5"
+                    android:layout_width="321dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/txt_question_5"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_text_box"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/txt_question_5_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="예상 질문"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_question_5_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_5_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 추천된 예상질문 내용입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_5_quesiton"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_question_5_blue"
+                        android:layout_marginTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_5_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edittext_question_5_quesiton"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:text="모범답안"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_answer_5_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_5_bold"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="15dp"
+                        android:text="다음은 예상질문에 대한 모범답안입니다."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/main_blue"
+                        />
+
+                    <TextView
+                        android:id="@+id/edittext_question_5_answer"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_answer_5_blue"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:background="@drawable/round_square_dark_gray"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--다음-->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_pdf"
+                android:layout_width="284dp"
+                android:layout_height="39dp"
+                android:text="PDF 추출"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:background="@drawable/round_square_main_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_question5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,11 +16,29 @@ interface ApplicationRetrofitInterfaces {
         @Path("questionId") questionId: Int
     ): Call<ApplicationGetResponse>
 
+//    @Multipart
+//    @POST("/notice")
+//    fun postPassNpass(
+//        @Part("crewName") crewName : String,
+//        @Part("userId") userId : ArrayList<Int>,
+//        @Part("msg") msg : String
+//    ): Call<PassNpassResponse>
+
     @Multipart
-    @POST("/notice")
-    fun postPassNpass(
+    @POST("/notice/pass")
+    fun postPass(
+        @Part("recruitmentId") recruitmentId : Int,
         @Part("crewName") crewName : String,
-        @Part("userId") userId : String,
+        @Part("userId") userId : ArrayList<Int>,
+        @Part("msg") msg : String
+    ): Call<PassNpassResponse>
+
+    @Multipart
+    @POST("/notice/non-pass")
+    fun postNpass(
+        @Part("recruitmentId") recruitmentId : Int,
+        @Part("crewName") crewName : String,
+        @Part("userId") userId : ArrayList<Int>,
         @Part("msg") msg : String
     ): Call<PassNpassResponse>
 }

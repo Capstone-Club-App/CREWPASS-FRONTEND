@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="271dp"
+    android:layout_height="454dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/style_dlg_pass">
+
+    <TextView
+        android:id="@+id/text_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="합격 통보"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        />
+
+    <EditText
+        android:id="@+id/edittext_pass"
+        android:layout_width="225dp"
+        android:layout_height="326dp"
+        android:paddingTop="20dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="20dp"
+        android:gravity="top"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_pass"
+        android:background="@drawable/style_edittext_dlg_pass"
+        android:layout_marginTop="15dp"/>
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_send_pass_dlg"
+        android:layout_width="178dp"
+        android:layout_height="36dp"
+        android:background="@drawable/round_square_main_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_pass"
+        android:layout_marginTop="18dp"
+        android:text="전송하기"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

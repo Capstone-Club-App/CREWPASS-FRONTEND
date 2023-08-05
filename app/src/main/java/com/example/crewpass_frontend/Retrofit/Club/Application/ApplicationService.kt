@@ -55,14 +55,15 @@ class ApplicationService {
         this.passNpassResult = passNpassResult
     }
 
-    fun postPassNpass(
+    fun postPass(
+        recruitmentId : Int,
         crewName: String,
-        userId: String,
+        user_list: ArrayList<Int>,
         msg: String
     ) {
         val authService = getRetrofit().create(ApplicationRetrofitInterfaces::class.java)
-        authService.postPassNpass(
-            crewName, userId, msg
+        authService.postPass(
+            recruitmentId, crewName, user_list, msg
         ).enqueue(object :
             Callback<PassNpassResponse> {
             override fun onResponse(
@@ -70,7 +71,7 @@ class ApplicationService {
                 response: Response<PassNpassResponse>,
             ) {
                 if (response.body() != null) {
-                    Log.d("PASSNPASS-SUCCESS", response.toString())
+                    Log.d("PASSPASS-SUCCESS", response.toString())
                     val resp: PassNpassResponse = response.body()!!
                     when (resp.statusCode) {
                         200 -> {
@@ -81,12 +82,45 @@ class ApplicationService {
                         }
                     }
                 } else
-                    Log.d("PASSNPASS-FAILURE", "NULL")
-
+                    Log.d("PASSPASS-FAILURE", "NULL")
             }
-
             override fun onFailure(call: Call<PassNpassResponse>, t: Throwable) {
-                Log.d("PASSNPASS-FAILURE", t.message.toString())
+                Log.d("PASSPASS-FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    fun postNpass(
+        recruitmentId : Int,
+        crewName: String,
+        user_list: ArrayList<Int>,
+        msg: String
+    ) {
+        val authService = getRetrofit().create(ApplicationRetrofitInterfaces::class.java)
+        authService.postNpass(
+            recruitmentId, crewName, user_list, msg
+        ).enqueue(object :
+            Callback<PassNpassResponse> {
+            override fun onResponse(
+                call: Call<PassNpassResponse>,
+                response: Response<PassNpassResponse>,
+            ) {
+                if (response.body() != null) {
+                    Log.d("NPASS-SUCCESS", response.toString())
+                    val resp: PassNpassResponse = response.body()!!
+                    when (resp.statusCode) {
+                        200 -> {
+                            passNpassResult.passNpassSuccess(resp.statusCode)
+                        }
+                        else -> {
+                            passNpassResult.passNpassFailure(resp.statusCode)
+                        }
+                    }
+                } else
+                    Log.d("NPASS-FAILURE", "NULL")
+            }
+            override fun onFailure(call: Call<PassNpassResponse>, t: Throwable) {
+                Log.d("NPASS-FAILURE", t.message.toString())
             }
         })
     }

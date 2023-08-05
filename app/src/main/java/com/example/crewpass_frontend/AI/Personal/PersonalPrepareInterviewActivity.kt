@@ -78,15 +78,27 @@ class PersonalPrepareInterviewActivity : AppCompatActivity(), AnalyzeApplication
         data: com.example.crewpass_frontend.Retrofit.Personal.AI.AnalyzeResult
     ) {
         progressOFF()
-        val questionList = data.interview
-        var question_string = ""
-        questionList.forEachIndexed { index, item ->
-            if(index != questionList.size - 1)
-                question_string += item + "<br>"
-            else
-                question_string += item
-        }
-        binding.edittextQuestion.text = Html.fromHtml(question_string)
+//        val questionList = data.interview
+//        var question_string = ""
+//        questionList.forEachIndexed { index, item ->
+//            if(index != questionList.size - 1)
+//                question_string += item + "<br>"
+//            else
+//                question_string += item
+//        }
+//        binding.edittextQuestion.text = Html.fromHtml(question_string)
+
+        Log.d("interview size ::", data.interview.size.toString())
+        Log.d("summary size ::", data.summary.size.toString())
+
+        binding.edittextQuestion1Quesiton.text = data.interview[0]
+        binding.edittextQuestion1Answer.text = data.summary[0]
+
+        binding.edittextQuestion2Quesiton.text = data.interview[1]
+        binding.edittextQuestion2Answer.text = data.summary[1]
+
+        binding.edittextQuestion3Quesiton.text = data.interview[2]
+        binding.edittextQuestion3Answer.text = data.summary[2]
     }
 
     override fun analyzeApplicationFailure(code: Int) {

@@ -90,7 +90,7 @@ class ClubSignUpActivity : AppCompatActivity(), CheckDuplicateCrewNameResult, Ch
                        Toast.makeText(this, "이름 중복확인검사를 진행해주세요.", Toast.LENGTH_SHORT).show()
                    }else{
                        if(binding.txtIdUnusable.visibility == View.VISIBLE){
-                           Toast.makeText(this, "중복된 이름입니다. 다른 이름으로 변행해주세요.", Toast.LENGTH_SHORT).show()
+                           Toast.makeText(this, "중복된 이름입니다. 다른 이름으로 변경해주세요.", Toast.LENGTH_SHORT).show()
                        }else{
                            if(binding.edittextId.text.toString().trim().isEmpty()){
                                Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -107,11 +107,10 @@ class ClubSignUpActivity : AppCompatActivity(), CheckDuplicateCrewNameResult, Ch
                                            if(binding.edittextPasswordCheck.text.toString().trim().isEmpty()){
                                                Toast.makeText(this, "패스워드 확인을 진행해주세요.", Toast.LENGTH_SHORT).show()
                                            }else{
-                                               if(binding.txtPwNotCorrect.visibility != View.VISIBLE){
+                                               if(binding.txtPwNotCorrect.visibility == View.VISIBLE){
                                                    Toast.makeText(this, "패스워드가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                                                }else{
                                                    val intent = Intent(this, ClubSignUpRegionActivity::class.java)
-
                                                    intent.putExtra("club_name", binding.edittextName.text.toString())
                                                    intent.putExtra("club_id", binding.edittextId.text.toString())
                                                    intent.putExtra("club_passwd", binding.edittextPassword.text.toString())
@@ -149,7 +148,6 @@ class ClubSignUpActivity : AppCompatActivity(), CheckDuplicateCrewNameResult, Ch
             return false
         }
     }
-
 
     // 이미지 가져오기
     fun getImage() {

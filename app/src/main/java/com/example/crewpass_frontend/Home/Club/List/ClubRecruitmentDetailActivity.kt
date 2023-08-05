@@ -38,6 +38,7 @@ class ClubRecruitmentDetailActivity: AppCompatActivity(), RecruitmentGetDetailRe
             val intent = Intent(this, CheckApplicationActivity::class.java)
             intent.putExtra("question_id", question_id)
             intent.putExtra("crew_name", crew_name)
+            intent.putExtra("recruitment_id", recruitment_id)
             startActivity(intent) // 지원서 작성으로 이동
         }
     }

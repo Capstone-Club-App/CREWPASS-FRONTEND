@@ -69,6 +69,7 @@ class ChatFragment : Fragment(), ChatRoomResult {
                 intent.putExtra("crew_name", chatRoom.crew_name)
                 intent.putExtra("crewId", chatRoom.crew_id)
                 intent.putExtra("status", status)
+                intent.putExtra("is_connected", !chatRoom.is_connected)
                 startActivity(intent) // 지원서 작성으로 이동
             }
         })
