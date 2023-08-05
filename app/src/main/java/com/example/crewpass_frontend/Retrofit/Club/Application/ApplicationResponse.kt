@@ -9,6 +9,7 @@ data class ApplicationGetResponse (
 )
 
 data class ApplicationData(
+    @SerializedName("is_pass") val is_pass : Int?,
     @SerializedName("submit_time") val submit_time : Timestamp,
     @SerializedName("application_id") val application_id : Int,
     @SerializedName("user_id") val user_id : Int,

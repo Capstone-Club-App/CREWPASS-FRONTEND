@@ -15,7 +15,8 @@ data class ChatRoomData(
     @SerializedName(value = "crew_name") val crew_name : String,
     @SerializedName(value = "crew_profile") val crew_profile : String,
     @SerializedName(value ="crew_id") val crew_id : Int,
-    @SerializedName(value ="chat_room_id") val chat_room_id : Int
+    @SerializedName(value ="chat_room_id") val chat_room_id : Int,
+    val is_connected : Boolean = false
 )
 
 data class ChatRoomInfoResponse (

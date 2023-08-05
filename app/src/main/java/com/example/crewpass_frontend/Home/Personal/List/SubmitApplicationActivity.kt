@@ -190,7 +190,7 @@ class SubmitApplicationActivity : AppCompatActivity(), QuestionGetResult, Applic
                     if(binding.edittextItemAnswer3.text.toString().trim().isEmpty()){
                         Toast.makeText(this, "질문3 답번을 작성해주세요.", Toast.LENGTH_SHORT).show()
                     }else{
-                        if(binding.edittextItemAnswer3.visibility == View.VISIBLE && binding.edittextItemAnswer4.text.toString().trim().isEmpty()){
+                        if(binding.edittextItemAnswer4.visibility == View.VISIBLE && binding.edittextItemAnswer4.text.toString().trim().isEmpty()){
                             Toast.makeText(this, "질문4 답번을 작성해주세요.", Toast.LENGTH_SHORT).show()
                         }else{
                             if(binding.edittextItemAnswer5.visibility == View.VISIBLE && binding.edittextItemAnswer5.text.toString().trim().isEmpty()){

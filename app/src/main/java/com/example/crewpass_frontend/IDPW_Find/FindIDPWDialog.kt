@@ -36,13 +36,11 @@ class FindIDPWDialog(context: Context, Interface: FindIDPWDialogInterface) : Dia
 
 
         btn_personal_dlg.setOnClickListener {
-            // 정보 보내주기
             dlg.dismiss()
             findIDPWDialogInterface.onFindPersonalButtonClicked()
         }
 
         btn_club_dlg.setOnClickListener {
-            // 정보 보내주기
             dlg.dismiss()
             findIDPWDialogInterface.onFindClubButtonClicked()
         }

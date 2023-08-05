@@ -84,6 +84,7 @@ data class ApplicationGetListResponse(
 )
 
 data class Application(
+    @SerializedName("is_pass") val is_pass : Int?,
     @SerializedName("user_user_id") val user_user_id : Int,
     @SerializedName("crew_name") val crew_name : String,
     @SerializedName("application_id") val application_id : Int,

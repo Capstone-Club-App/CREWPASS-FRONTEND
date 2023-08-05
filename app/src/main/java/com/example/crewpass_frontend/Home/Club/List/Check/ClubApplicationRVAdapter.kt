@@ -2,6 +2,7 @@ package com.example.crewpass_frontend.Home.Club.List.Check
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -41,14 +42,15 @@ class ClubApplicationRVAdapter  (private val application_list: ArrayList<Applica
         }
         holder.binding.itemCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                check_list.add(application_list[position].user_id.toString())
+                // 리스트 삽입
+                check_list.add(application_list[position].user_id)
                 Toast.makeText(
                     context,
                     "${application_list[position].user_name} 지원자 선택",
                     Toast.LENGTH_LONG
                 )
             } else {
-                check_list.remove(application_list[position].user_id.toString())
+                check_list.remove(application_list[position].user_id)
             }
         }
     }
@@ -61,6 +63,17 @@ class ClubApplicationRVAdapter  (private val application_list: ArrayList<Applica
 
             val timestampToSdf = Timestamp_to_SDF()
             binding.itemDateTxt.text = timestampToSdf.convert(application.submit_time)
+
+            // 합격 체크 리스트에 있는지 체크
+            if(application.is_pass == 1){
+                binding.itemApplyCurrIv.setBackgroundResource((R.drawable.style_application_pass))
+                binding.itemDateTxt.setTextColor(Color.parseColor("#FFFFFF"))
+                binding.txtClubName.setTextColor(Color.parseColor("#FFFFFF"))
+            }else if(application.is_pass == 0){
+                binding.itemApplyCurrIv.setBackgroundResource((R.drawable.style_application_npass))
+                binding.itemDateTxt.setTextColor(Color.parseColor("#FFFFFF"))
+                binding.txtClubName.setTextColor(Color.parseColor("#FFFFFF"))
+            }
 
 //            binding.itemCheckBox.setOnClickListener {
 //                //binding.itemCheckBox.isChecked = !binding.itemCheckBox.isChecked
@@ -92,23 +105,6 @@ class ClubApplicationRVAdapter  (private val application_list: ArrayList<Applica
         this.itemClickListener = onItemClickListener
     }
 
-    fun checkPass(check_list : ArrayList<String>){
-        for (application in application_list) {
-            if(check_list.contains(application.user_id.toString())){
-                var position = findItemPositionByName(application.user_id) // 해당값의 위치를 찾아줌
-                position_list.add(position)
-            }
-        }
-    }
-
-    fun findItemPositionByName(user_id: Int): Int {
-        for (i in application_list.indices) {
-            if (application_list[i].user_id == user_id) {
-                return i
-            }
-        }
-        return -1 // 해당 아이템을 찾지 못한 경우 -1을 반환합니다.
-    }
 
     var position_list = ArrayList<Int>()
     private lateinit var itemClickListener: OnItemClickListener

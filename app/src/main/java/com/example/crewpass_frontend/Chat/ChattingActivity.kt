@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crewpass_frontend.Data.Chat
@@ -92,15 +93,21 @@ class ChattingActivity : AppCompatActivity(), PersonalGetResult, ClubGetResult, 
             personalService.getPersonal(logined_id.toString())
         }
 
+        val is_connected = intent.getBooleanExtra("is_connected", false)
+        Log.d("is_connected ::", is_connected.toString())
         // lastChat 갱신
         if (login_status.equals("Club")) {
-            val chatService = ChatService()
-            chatService.setPutLastChatClubResult(this)
-            chatService.putLastChatClub(logined_id, chatRoom_id_get)
+            if(is_connected){
+                val chatService = ChatService()
+                chatService.setPutLastChatClubResult(this)
+                chatService.putLastChatClub(logined_id, chatRoom_id_get)
+            }
         } else {
-            val chatService = ChatService()
-            chatService.setPutLastChatPersonalResult(this)
-            chatService.putLastChatPersonal(logined_id, chatRoom_id_get)
+            if(is_connected) {
+                val chatService = ChatService()
+                chatService.setPutLastChatPersonalResult(this)
+                chatService.putLastChatPersonal(logined_id, chatRoom_id_get)
+            }
         }
 
         // 채팅방 정보 가져오기
@@ -251,24 +258,28 @@ class ChattingActivity : AppCompatActivity(), PersonalGetResult, ClubGetResult, 
         }
 
         binding.btnSubmit.setOnClickListener {
-            if (login_status.equals("Club"))
-                sendStomp(
-                    logined_name,
-                    binding.editMessage.text.toString(),
-                    chatRoom_id_get,
-                    logined_id,
-                    null
-                )
-            else
-                sendStomp(
-                    logined_name,
-                    binding.editMessage.text.toString(),
-                    chatRoom_id_get,
-                    null,
-                    logined_id
-                )
-            binding.recyclerMessages.layoutManager = LinearLayoutManager(this).apply {
-                this.stackFromEnd = true // 가장 최근의 대화를 표시하기 위해 맨 아래로 정렬.
+            if(binding.editMessage.text.toString().trim().isEmpty()){
+                Toast.makeText(this, "메세지를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                if (login_status.equals("Club"))
+                    sendStomp(
+                        logined_name,
+                        binding.editMessage.text.toString(),
+                        chatRoom_id_get,
+                        logined_id,
+                        null
+                    )
+                else
+                    sendStomp(
+                        logined_name,
+                        binding.editMessage.text.toString(),
+                        chatRoom_id_get,
+                        null,
+                        logined_id
+                    )
+                binding.recyclerMessages.layoutManager = LinearLayoutManager(this).apply {
+                    this.stackFromEnd = true // 가장 최근의 대화를 표시하기 위해 맨 아래로 정렬.
+                }
             }
         }
     }

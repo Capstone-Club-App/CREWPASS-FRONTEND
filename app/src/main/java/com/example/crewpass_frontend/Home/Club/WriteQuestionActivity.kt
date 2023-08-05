@@ -31,7 +31,7 @@ import okhttp3.RequestBody
 import java.io.File
 
 class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, QuestionPostResult {
-    var add_count = 4
+    var add_count = 3
     lateinit var binding: ActivityWriteQuestionBinding
     var question1Limit: Int = 0
     var question2Limit: Int = 0
@@ -105,7 +105,7 @@ class WriteQuestionActivity : AppCompatActivity(), RecruitmentPostResult, Questi
                     if(binding.edittextQuestion3.text.toString().trim().isEmpty()){
                         Toast.makeText(this, "질문3을 입력해주세요.", android.widget.Toast.LENGTH_SHORT).show()
                     }else{
-                        if(binding.edittextQuestion4.text.toString().trim().isEmpty()){
+                        if(binding.edittextQuestion4.visibility == View.VISIBLE && binding.edittextQuestion4.text.toString().trim().isEmpty()){
                             Toast.makeText(this, "질문4를 입력해주세요.", Toast.LENGTH_SHORT).show()
                         }else{
                             if(binding.edittextQuestion5.visibility == View.VISIBLE && binding.edittextQuestion5.text.toString().trim().isEmpty()){

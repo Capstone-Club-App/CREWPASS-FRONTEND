@@ -11,6 +11,6 @@ data class AnalyzeApplicationResponse (
 data class AnalyzeResult(
     @SerializedName("questionCount") val questionCount : Int?,
     @SerializedName("questionAnswerHashMap") val questionAnswerHashMap : HashMap<Int, ArrayList<String>>?,
-    @SerializedName("summary") val summary : ArrayList<String>?,
+    @SerializedName("summary") val summary : ArrayList<String>,
     @SerializedName("interview") val interview : ArrayList<String>,
 )

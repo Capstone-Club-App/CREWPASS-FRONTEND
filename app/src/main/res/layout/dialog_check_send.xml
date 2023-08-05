@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="291dp"
+    android:layout_height="161dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/round_square_light_blue">
+
+    <TextView
+        android:id="@+id/text_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="결과를 전송하시겠습니까?"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        />
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_send_ok_dlg"
+        android:layout_width="121dp"
+        android:layout_height="29dp"
+        android:background="@drawable/round_square_main_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_send_cancel_dlg"
+        app:layout_constraintTop_toBottomOf="@id/text_login"
+        android:layout_marginTop="30dp"
+        android:text="확인"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_send_cancel_dlg"
+        android:layout_width="121dp"
+        android:layout_height="29dp"
+        android:background="@drawable/round_square_main_blue"
+        app:layout_constraintStart_toEndOf="@id/btn_send_ok_dlg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_login"
+        android:layout_marginTop="30dp"
+        android:text="취소"
+        android:textColor="@color/black"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

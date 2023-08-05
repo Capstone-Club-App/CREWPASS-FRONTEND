@@ -2,6 +2,7 @@ package com.example.crewpass_frontend.MyPage.Personal
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -44,6 +45,12 @@ class ApplicationRVAdapter (private val application_list: ArrayList<Application>
             var sdf = SimpleDateFormat("yyyy.MM.dd HH:mm")
             var date = sdf.format(application.submit_time)
             binding.itemDateTimeTxt.text = date
+
+            if(application.is_pass == 1){
+                binding.viewPassNpass.setBackgroundColor(Color.parseColor("#FF5252"))
+            }else if(application.is_pass == 0){
+                binding.viewPassNpass.setBackgroundColor(Color.parseColor("#CCFF5252"))
+            }
 
             Glide.with(context).load(application.crew_profile)
                 .circleCrop()

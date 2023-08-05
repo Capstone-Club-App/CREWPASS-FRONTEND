@@ -12,11 +12,11 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="wrap_content"
-        android:layout_height="332dp"
+        android:layout_height="400dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inner_page_top"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:scrollbars="none">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -40,16 +40,6 @@
         app:layout_constraintEnd_toEndOf="@id/scrollView"
         app:layout_constraintBottom_toTopOf="@id/scrollView"/>
 
-    <EditText
-        android:id="@+id/edittext_pass"
-        android:layout_width="321dp"
-        android:layout_height="82dp"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scrollView"
-        android:layout_marginTop="10dp"/>
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_pass"
         android:layout_width="284dp"
@@ -59,20 +49,11 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         android:background="@drawable/round_square_main_blue"
-        app:layout_constraintTop_toBottomOf="@id/edittext_pass"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="30dp"/>
 
-    <EditText
-        android:id="@+id/edittext_fail"
-        android:layout_width="321dp"
-        android:layout_height="82dp"
-        android:background="@drawable/edit_text_box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_pass"
-        android:layout_marginTop="10dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_fail"
@@ -83,10 +64,10 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         android:background="@drawable/round_square_red"
-        app:layout_constraintTop_toBottomOf="@id/edittext_fail"
+        app:layout_constraintTop_toBottomOf="@id/btn_pass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="30dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
