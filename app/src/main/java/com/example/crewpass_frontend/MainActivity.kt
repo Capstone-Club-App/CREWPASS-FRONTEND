@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import com.example.crewpass_frontend.Home.ClubHomeFragment
 import com.example.crewpass_frontend.Home.PersonalHomeFragment
-import com.example.crewpass_frontend.SignUp.MyPageFragment
 import com.example.crewpass_frontend.databinding.ActivityMainBinding
 
 

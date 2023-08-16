@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
+import android.telephony.VisualVoicemailSms
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -109,6 +110,34 @@ class LoginActivity : AppCompatActivity(), MyCustomDialogInterface,
             findIDPWDialog.start()
         }
 
+        // 자동로그인
+        val pref = getSharedPreferences("loginId", MODE_PRIVATE)
+        val savedId = pref.getString("id", "").toString()
+        val logined_id_get = pref.getInt("logined_id", -1)
+
+        if(logined_id_get == -1){
+
+        }else{
+            logined_id = logined_id_get
+        }
+        Log.d("저장된 값", savedId)
+
+        if(savedId.equals("")){
+
+        }else{
+            val intent = Intent(this, MainActivity::class.java)
+            val type = savedId.substring(savedId.length-1)
+            Log.d("현재 로그인 타입 : ", type)
+            if(type.equals("c")){
+                intent.putExtra("Key", "Club")
+            }else{
+                intent.putExtra("Key", "Personal")
+            }
+            Toast.makeText(this, "로그인 하였습니다", Toast.LENGTH_SHORT).show()
+            finish()
+            startActivity(intent)
+        }
+
     }
 
     override fun onbtnGotoMainClicked() {
@@ -131,6 +160,7 @@ class LoginActivity : AppCompatActivity(), MyCustomDialogInterface,
     override fun clubLoginSuccess(code: Int, data: ClubData) {
 //        get_club()
         logined_id = data.crew_user_id
+        saveData(data.loginId, "c", logined_id)
         Log.d("logined_id : ", logined_id.toString())
         val dlg = MyCustomDialog(this, this)
         dlg.show()
@@ -146,6 +176,7 @@ class LoginActivity : AppCompatActivity(), MyCustomDialogInterface,
         data: Data
     ) {
         logined_id = data.crew_user_id
+        saveData(data.loginId, "p", logined_id)
         val dlg = MyCustomDialog(this, this)
         dlg.show()
     }
@@ -162,6 +193,15 @@ class LoginActivity : AppCompatActivity(), MyCustomDialogInterface,
     override fun onFindClubButtonClicked() {
         val intent = Intent(this, ClubIDPWFindActivity::class.java)
         startActivity(intent)
+    }
+
+    fun saveData(loginId : String, type : String, logined_id : Int){
+        val pref = getSharedPreferences("loginId", MODE_PRIVATE)
+        val edit = pref.edit() // 수정모드
+
+        edit.putString("id", loginId + type)
+        edit.putInt("logined_id", logined_id)
+        edit.apply()
     }
 }
 

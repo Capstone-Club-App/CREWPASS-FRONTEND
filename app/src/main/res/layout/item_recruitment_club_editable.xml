@@ -87,6 +87,7 @@
         android:background="@drawable/icon_close"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_edit"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@drawable/icon_edit_blue"

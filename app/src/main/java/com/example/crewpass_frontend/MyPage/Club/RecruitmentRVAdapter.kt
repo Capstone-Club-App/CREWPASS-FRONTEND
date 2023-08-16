@@ -5,6 +5,7 @@ import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.crewpass_frontend.Retrofit.Club.Recruitment.RecruitmentData
@@ -73,6 +74,13 @@ class RecruitmentRVAdapter (private val recruitment_list: ArrayList<RecruitmentD
             Glide.with(context).load(recruitment.crew_profile)
                 .circleCrop()
                 .into(binding.profileImg)
+
+            binding.btnDelete.setOnClickListener {
+                Toast.makeText(context, "아직 미완성인 기능으로, 추후에 개발예정입니다.", Toast.LENGTH_SHORT).show()
+            }
+            binding.btnEdit.setOnClickListener {
+                Toast.makeText(context, "아직 미완성인 기능으로, 추후에 개발예정입니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
