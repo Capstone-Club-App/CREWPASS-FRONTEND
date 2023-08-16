@@ -60,6 +60,7 @@ class PersonalScrapActivity : AppCompatActivity(), ScrapGetAllResult {
             override fun onItemClick(recruitment: getResult) {
                 val intent = Intent(context, RecruitmentDetailActivity::class.java)
                 intent.putExtra("scrap", true)
+                intent.putExtra("scrap_id", recruitment.scrap_id)
                 intent.putExtra("recruitment_id", recruitment.recruitment_id)
                 startActivity(intent) // 지원서 작성으로 이동
             }
